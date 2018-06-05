@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="progressbar_margin_bot">140dp</dimen>
+    <dimen name="progressbar_width">30dp</dimen>
+    <dimen name="progressbar_height">30dp</dimen>
+    <dimen name="radius_button_corner">10dp</dimen>
+</resources>

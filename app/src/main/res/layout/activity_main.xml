@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.MainPageActivity">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dl_MainPageLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/tb_MainPage"
+                layout="@layout/layout_toolbar"></include>
+            <ImageView
+                android:scaleType="center"
+                android:src="@raw/logo"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
+            <LinearLayout
+                android:background="@color/my_blur_orange"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:clickable="true"
+                    android:id="@+id/txt_NewProduct"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/my_white"
+                    android:textSize="20sp"
+                    android:layout_gravity="center"
+                    android:text="@string/new_product"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_NewProducts"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </LinearLayout>
+        <android.support.design.widget.NavigationView
+            android:background="@color/my_menu_background"
+            android:layout_gravity="start"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/lv_Menu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></ListView>
+        </android.support.design.widget.NavigationView>
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
