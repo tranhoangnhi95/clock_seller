@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="180dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_gravity="top|center"
+                    android:scaleType="fitXY"
+                    android:id="@+id/img_HPImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/democlock" />
+
+                <TextView
+                    android:id="@+id/txt_HPName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="Casio huyền thoại"
+                    android:textColor="@color/my_Black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txt_HPPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="200000 Đ"
+                    android:textColor="@color/product_name"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/txt_HPDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:text="Đồng hồ bao bền"
+                    android:textColor="@color/my_Black"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <ImageButton
+                            android:id="@+id/btn_HPAddToCart"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/radius_button_selector"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/icon_add" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:weightSum="4">
+
+                        <ImageButton
+                            android:scaleType="center"
+                            android:src="@drawable/sub"
+                            android:id="@+id/btn_HPDecrease"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="-"
+                            android:textColor="@color/my_Black"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <Button
+                            android:id="@+id/btn_HPQuantity"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@null"
+                            android:text="1"
+                            android:textColor="@color/my_Black"
+                            android:textStyle="bold" />
+
+                        <ImageButton
+                            android:scaleType="center"
+                            android:src="@drawable/plus"
+                            android:id="@+id/btn_HPIncrease"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="+"
+                            android:textColor="@color/my_Black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="top|right"
+                android:src="@drawable/hot" />
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

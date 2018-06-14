@@ -13,29 +13,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.immortal.clock_seller.Activity.CartActivity;
+import com.bumptech.glide.Glide;
 import com.example.immortal.clock_seller.Activity.MainPageActivity;
 import com.example.immortal.clock_seller.Activity.ProducstActivity;
 import com.example.immortal.clock_seller.Activity.ProductDetailActivity;
 import com.example.immortal.clock_seller.Model.Cart;
 import com.example.immortal.clock_seller.Model.Clock;
+import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-public class ClockAdapter extends BaseAdapter {
+public class ModelAdapter extends BaseAdapter {
     Context context;
     int resource;
-    ArrayList<Clock> objects;
+    ArrayList<Model> models;
 
-    public ClockAdapter(Context context, int resource, ArrayList<Clock> objects) {
+    public ModelAdapter(Context context, int resource, ArrayList<Model> models) {
         this.context = context;
         this.resource = resource;
-        this.objects = objects;
+        this.models = models;
     }
-
 
     public class ViewHolder {
         public ImageView img_Image;
@@ -44,15 +43,14 @@ public class ClockAdapter extends BaseAdapter {
         public ImageButton btn_AddToCart;
 
     }
-
     @Override
     public int getCount() {
-        return objects.size();
+        return models.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return objects.get(i);
+        return models.get(i);
     }
 
     @Override
@@ -79,20 +77,26 @@ public class ClockAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        final Clock product = (Clock) getItem(i);
-        viewHolder.txt_Name.setText(product.getName());
+        final Model model = (Model) getItem(i);
+        viewHolder.txt_Name.setText(model.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txt_Price.setText("Giá : " + decimalFormat.format(product.getPrice()) + " Đ");
+        viewHolder.txt_Price.setText("Giá : " + decimalFormat.format(model.getPrice()) + " Đ");
         viewHolder.txt_Detail.setMaxLines(2);
         viewHolder.txt_Detail.setEllipsize(TextUtils.TruncateAt.END);
-        viewHolder.txt_Detail.setText(product.getDes());
-        viewHolder.img_Image.setImageResource(product.getImg());
-        final ViewHolder finalViewHolder = viewHolder;
+        viewHolder.txt_Detail.setText(model.getDetail());
+        Glide.with(context).load(model.getImage())
+                .placeholder(R.drawable.noimage)
+                .error(R.drawable.noimage)
+                .centerCrop()
+                .override(150,150)
+                .into(viewHolder.img_Image);
+//        viewHolder.img_Image.setImageResource(product.getImg());
+        final ModelAdapter.ViewHolder finalViewHolder = viewHolder;
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i_ToProductDetail = new Intent(context,ProductDetailActivity.class);
-                i_ToProductDetail.putExtra(ProducstActivity.intent_product_key,product);
+                i_ToProductDetail.putExtra(ProducstActivity.intent_product_key,model);
                 context.startActivity(i_ToProductDetail);
             }
         });
@@ -127,28 +131,28 @@ public class ClockAdapter extends BaseAdapter {
                     int quantity1 = Integer.parseInt(finalViewHolder.btn_Quantity.getText().toString());
                     boolean exist = false;
                     for (int i = 0; i < MainPageActivity.carts.size(); i++) {
-                        if (MainPageActivity.carts.get(i).getName().equals(product.getName())) {
+                        if (MainPageActivity.carts.get(i).getName().equals(model.getName())) {
                             MainPageActivity.carts.get(i).setQuantity(MainPageActivity.carts.get(i).getQuantity() + quantity1);
                             if (MainPageActivity.carts.get(i).getQuantity() >= 10) {
                                 MainPageActivity.carts.get(i).setQuantity(10);
                             }
-                            MainPageActivity.carts.get(i).setTotal(product.getPrice() * MainPageActivity.carts.get(i).getQuantity());
+                            MainPageActivity.carts.get(i).setTotal(model.getPrice() * MainPageActivity.carts.get(i).getQuantity());
                             exist = true;
                         }
                     }
                     if (!exist) {
                         int quantity = Integer.parseInt(finalViewHolder.btn_Quantity.getText().toString());
-                        long total = quantity * product.getPrice();
-                        MainPageActivity.carts.add(new Cart(product.getName(),product.getPrice(),(int) total,
-                                "https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/Rolex_AutomaticR140.jpg?alt=media&token=460b21df-ef45-4c93-96b9-2208ae77348d",
+                        long total = quantity * model.getPrice();
+                        MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
+                                model.getImage(),
                                 quantity
-                                ));
+                        ));
                     }
                 } else {
                     int quantity = Integer.parseInt(finalViewHolder.btn_Quantity.getText().toString());
-                    long total = quantity * product.getPrice();
-                    MainPageActivity.carts.add(new Cart(product.getName(),product.getPrice(),(int) total,
-                            "https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/Rolex_AutomaticR140.jpg?alt=media&token=460b21df-ef45-4c93-96b9-2208ae77348d",
+                    long total = quantity * model.getPrice();
+                    MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
+                            model.getImage(),
                             quantity
                     ));
                 }

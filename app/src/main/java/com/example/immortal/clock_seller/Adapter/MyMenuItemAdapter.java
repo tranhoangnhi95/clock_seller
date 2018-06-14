@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.immortal.clock_seller.Model.MyMenuItem;
 import com.example.immortal.clock_seller.R;
 
@@ -58,7 +59,12 @@ public class MyMenuItemAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         MyMenuItem item = (MyMenuItem) getItem(i);
-        viewHolder.img_Image.setImageResource(item.getImage());
+        Glide.with(context).load(item.getImage())
+                .placeholder(R.drawable.noimage)
+                .error(R.drawable.noimage)
+                .fitCenter()
+                .override(70,70)
+                .into(viewHolder.img_Image);
         viewHolder.txt_Name.setText(item.getName());
         return view;
     }

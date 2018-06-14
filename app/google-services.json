@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "330783201836",
+    "firebase_url": "https://clockseller-5de25.firebaseio.com",
+    "project_id": "clockseller-5de25",
+    "storage_bucket": "clockseller-5de25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330783201836:android:9fb26f3b312436ad",
+        "android_client_info": {
+          "package_name": "com.example.immortal.clock_seller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330783201836-aqm64touae51lt5i7r2mjuh0mijlkjao.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.immortal.clock_seller",
+            "certificate_hash": "152b63a04a806dede7137cf8e321248fcfaca612"
+          }
+        },
+        {
+          "client_id": "330783201836-ekngsvsuf4he4vak2sg1qar52f2p9fu8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "330783201836-ekngsvsuf4he4vak2sg1qar52f2p9fu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDl2L6Qdnqm-AvMMW7mqXgfO9_-NCWjsIQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "330783201836-ekngsvsuf4he4vak2sg1qar52f2p9fu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

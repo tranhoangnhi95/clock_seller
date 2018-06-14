@@ -1,20 +1,26 @@
 package com.example.immortal.clock_seller.Model;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 
 public class Cart implements Serializable{
     private String name;
+    private Integer price;
     private Integer total;
-    private int image;
+    private String image;
     private int quantity;
 
-    public Cart(String name, Integer total, int image, int quantity) {
+    public Cart() {
+    }
+
+    public Cart(String name, Integer price, Integer total, String image, int quantity) {
         this.name = name;
+        this.price = price;
         this.total = total;
         this.image = image;
         this.quantity = quantity;
     }
-
 
     public String getName() {
         return name;
@@ -22,6 +28,14 @@ public class Cart implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public Integer getTotal() {
@@ -32,11 +46,11 @@ public class Cart implements Serializable{
         this.total = total;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

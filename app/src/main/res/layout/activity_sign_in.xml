@@ -11,26 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_margin="10dp"
-        android:scaleType="center"
-        android:src="@raw/logo" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/clockseller" />
+
     <android.support.design.widget.TabLayout
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        app:tabIndicatorColor="@color/product_price"
-        app:tabSelectedTextColor="@color/product_price"
-        app:tabTextColor="@color/my_white"
-        android:background="@color/my_orange"
         android:id="@+id/tl_SISliding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="fixed"></android.support.design.widget.TabLayout>
-
-    <android.support.v4.view.ViewPager
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:background="@color/my_orange"
+        app:tabIndicatorColor="@color/product_price"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/product_price"
+        app:tabTextColor="@color/my_white"></android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
         android:id="@+id/vp_SIViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
     </android.support.v4.view.ViewPager>
 

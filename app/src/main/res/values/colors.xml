@@ -14,4 +14,6 @@
     <color name="product_name">#3eb69d</color>
     <color name="product_price">#51edcc</color>
     <color name="my_menu_background">#d1fff5</color>
+    <color name="main_background_color">#94f1db</color>
+    <color name="line">#2d8674</color>
 </resources>

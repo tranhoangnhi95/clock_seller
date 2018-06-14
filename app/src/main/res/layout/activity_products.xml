@@ -11,6 +11,7 @@
         android:id="@+id/tb_Products">
     </include>
     <ListView
+        android:longClickable="true"
         android:listSelector="#FFEE58"
         android:id="@+id/lv_PsProducts"
         android:layout_width="match_parent"

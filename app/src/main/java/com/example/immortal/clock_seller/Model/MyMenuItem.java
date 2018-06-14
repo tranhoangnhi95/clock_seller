@@ -3,17 +3,17 @@ package com.example.immortal.clock_seller.Model;
 import java.io.Serializable;
 
 public class MyMenuItem implements Serializable{
-    private int Image;
+    private String Image;
     private String Name;
 
     public MyMenuItem() {
     }
 
-    public int getImage() {
+    public String getImage() {
         return Image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         Image = image;
     }
 

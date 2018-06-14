@@ -17,6 +17,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:scaleType="fitCenter"
             android:id="@+id/img_CIImage"
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -42,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Đồng hồ casio huyền thoại"
-                android:textColor="@color/product_name"
+                android:textColor="@color/my_Black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -58,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Giá: 100000000 Đ"
-                android:textColor="@color/product_price"
+                android:textColor="@color/product_name"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 

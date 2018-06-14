@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">clock_seller</string>
     <string name="hint_user_name">Tên đăng nhập</string>
-    <string name="hint_phone">Số điện thoại</string>
+    <string name="hint_email">Email</string>
     <string name="hint_pass_word">Mật khẩu</string>
     <string name="sign_in">Đăng nhập</string>
     <string name="sign_up">Đăng ký</string>
@@ -10,5 +10,6 @@
     <string name="phone">Số điện thoại</string>
     <string name="address">Địa chỉ</string>
     <string name="password">Mật khẩu</string>
-    <string name="new_product">Sản phẩm mới</string>
+    <string name="hot_product">Sản phẩm bán chạy</string>
+    <string name="sign_out">Đăng xuất</string>
 </resources>

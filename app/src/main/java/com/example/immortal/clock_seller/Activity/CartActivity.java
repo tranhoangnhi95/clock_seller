@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,6 +48,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         cartAdapter = new CartAdapter(CartActivity.this,R.layout.layout_cart_item,MainPageActivity.carts);
         lv_Cart.setAdapter(cartAdapter);
+        getCartTotal();
     }
 
     private void loadingActionBar() {

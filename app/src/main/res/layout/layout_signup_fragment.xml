@@ -2,73 +2,99 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="10"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
+        android:layout_weight="8"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+        android:layout_height="0dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-            <EditText
-                android:id="@+id/txt_SUName"
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/usero"
-                android:hint="@string/name" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+                android:layout_height="wrap_content">
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/txt_SUName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/usero"
+                    android:hint="@string/name" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-            <EditText
-                android:id="@+id/txt_SUPhone"
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/phone"
-                android:hint="@string/phone"
-                android:inputType="phone" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+                android:layout_height="wrap_content">
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/txt_SUPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/phone"
+                    android:hint="@string/phone" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-            <EditText
-                android:id="@+id/txt_SUAddress"
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/address"
-                android:hint="@string/address" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+                android:layout_height="wrap_content">
 
-        <com.wrapp.floatlabelededittext.FloatLabeledEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/txt_SUEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/email"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-            <EditText
-                android:id="@+id/txt_SUPass"
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/pass"
-                android:hint="@string/password"
-                android:inputType="textPassword" />
-        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
-    </LinearLayout>
+                android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_SUSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/radius_button_selector"
-        android:text="@string/sign_up"
-        android:textColor="@color/my_white" />
+                <EditText
+                    android:id="@+id/txt_SUAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/address"
+                    android:hint="@string/address" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/txt_SUPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/pass"
+                    android:hint="@string/password"
+                    android:inputType="textPassword" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+        </LinearLayout>
+    </ScrollView>
+
+   <LinearLayout
+       android:gravity="center"
+       android:layout_weight="2"
+       android:layout_width="match_parent"
+       android:layout_height="0dp">
+       <Button
+           android:id="@+id/btn_SUSignUp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_gravity="center"
+           android:layout_marginBottom="5dp"
+           android:background="@drawable/radius_button_selector"
+           android:text="@string/sign_up"
+           android:textColor="@color/my_white" />
+   </LinearLayout>
+
 
 </LinearLayout>

@@ -7,25 +7,37 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
+import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
 
 public class ProfileActivity extends AppCompatActivity {
     Toolbar tb_Profile;
-    TextView txt_Name, txt_Phone, txt_Address;
+    TextView txt_Name,txt_Phone, txt_Email, txt_Address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         inits();
+        controls();
+    }
+
+    private void controls() {
+
     }
 
     private void inits() {
         tb_Profile = findViewById(R.id.tb_Profile);
         txt_Name = findViewById(R.id.txt_PfName);
         txt_Phone = findViewById(R.id.txt_PfPhone);
+        txt_Email = findViewById(R.id.txt_PfEmail);
         txt_Address = findViewById(R.id.txt_PfAdrress);
+        txt_Name.setText(SignInActivity.user.getName());
+        txt_Phone.setText(SignInActivity.user.getPhone());
+        txt_Email.setText(SignInActivity.user.getEmail());
+        txt_Address.setText(SignInActivity.user.getAddress());
         setSupportActionBar(tb_Profile);
         loadingActionBar();
         setTitle("Tài khoản của bạn");

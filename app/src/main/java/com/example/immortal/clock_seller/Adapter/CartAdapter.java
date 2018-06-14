@@ -1,6 +1,9 @@
 package com.example.immortal.clock_seller.Adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.immortal.clock_seller.Model.Cart;
 import com.example.immortal.clock_seller.R;
 
@@ -40,7 +44,8 @@ public class CartAdapter extends BaseAdapter {
     public long getItemId(int i) {
         return i;
     }
-    public class ViewHolder{
+
+    public class ViewHolder {
         public TextView txt_Name, txt_Total;
         public ImageView img_Image;
         public Button btn_Increase, btn_Decrease, btn_Quantity;
@@ -49,10 +54,10 @@ public class CartAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
-        if (view == null){
+        if (view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.layout_cart_item,null);
+            view = inflater.inflate(R.layout.layout_cart_item, null);
             viewHolder.txt_Name = view.findViewById(R.id.txt_CIProductName);
             viewHolder.txt_Total = view.findViewById(R.id.txt_CIProductTotal);
             viewHolder.img_Image = view.findViewById(R.id.img_CIImage);
@@ -60,15 +65,85 @@ public class CartAdapter extends BaseAdapter {
             viewHolder.btn_Decrease = view.findViewById(R.id.btn_CIDecrease);
             viewHolder.btn_Quantity = view.findViewById(R.id.btn_CIQuantity);
             view.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        Cart cart = (Cart) getItem(i);
+        final Cart cart = (Cart) getItem(i);
         viewHolder.txt_Name.setText(cart.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txt_Total.setText("Tổng: "+ decimalFormat.format(cart.getTotal())+" Đ");
-        viewHolder.img_Image.setImageResource(cart.getImage());
+        viewHolder.txt_Total.setText("Tổng: " + decimalFormat.format(cart.getTotal()) + " Đ");
+        Glide.with(context).load(cart.getImage())
+                .placeholder(R.drawable.noimage)
+                .error(R.drawable.noimage)
+                .into(viewHolder.img_Image);
+//        viewHolder.img_Image.setImageResource(cart.getImage());
         viewHolder.btn_Quantity.setText(String.valueOf(cart.getQuantity()));
+        final Cart cart1 = cart;
+        final ViewHolder finalViewHolder = viewHolder;
+        viewHolder.btn_Decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Integer.valueOf(finalViewHolder.btn_Quantity.getText().toString()) <= 1) {
+                    carts.remove(carts.indexOf(cart1));
+                    notifyDataSetChanged();
+                } else {
+                    int quantity = Integer.valueOf(finalViewHolder.btn_Quantity.getText().toString()) - 1;
+                    finalViewHolder.btn_Quantity.setText(String.valueOf(quantity));
+                            carts.get(carts.indexOf(cart1)).setQuantity(quantity);
+                            notifyDataSetChanged();
+
+                }
+            }
+        });
+
+        viewHolder.btn_Increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Integer.valueOf(finalViewHolder.btn_Quantity.getText().toString()) >= 10) {
+                    finalViewHolder.btn_Quantity.setText(String.valueOf(10));
+                    carts.get(carts.indexOf(cart1)).setQuantity(10);
+                    notifyDataSetChanged();
+                } else {
+                    int quantity = Integer.valueOf(finalViewHolder.btn_Quantity.getText().toString()) + 1;
+                    finalViewHolder.btn_Quantity.setText(String.valueOf(quantity));
+                    carts.get(carts.indexOf(cart1)).setQuantity(quantity);
+                    notifyDataSetChanged();
+                }
+            }
+        });
+
+        view.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+                builder.setMessage("Bạn muốn xóa sản phẩm?");
+                builder.setCancelable(true);
+                builder.setPositiveButton(
+                        "Có",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                carts.remove(cart1);
+                                dialogInterface.cancel();
+                                notifyDataSetChanged();
+                            }
+                        }
+                );
+
+                builder.setNegativeButton(
+                        "Không",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }
+                );
+                android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+                return true;
+            }
+        });
         return view;
     }
 }

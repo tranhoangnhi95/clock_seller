@@ -21,23 +21,25 @@
                 android:id="@+id/tb_MainPage"
                 layout="@layout/layout_toolbar"></include>
             <ImageView
-                android:scaleType="center"
-                android:src="@raw/logo"
+                android:background="@color/main_background_color"
+                android:scaleType="fitCenter"
+                android:src="@drawable/clockseller"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
             <LinearLayout
-                android:background="@color/my_blur_orange"
+                android:background="@color/main_background_color"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <TextView
+                    android:layout_marginTop="10dp"
                     android:clickable="true"
                     android:id="@+id/txt_NewProduct"
                     android:layout_marginBottom="10dp"
-                    android:textColor="@color/my_white"
+                    android:textColor="@color/my_orange"
                     android:textSize="20sp"
                     android:layout_gravity="center"
-                    android:text="@string/new_product"
+                    android:text="@string/hot_product"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
                 <android.support.v7.widget.RecyclerView

@@ -11,11 +11,12 @@
         android:layout_marginRight="20dp">
 
         <EditText
-            android:id="@+id/txt_SIPhone"
+            android:inputType="textEmailAddress"
+            android:id="@+id/txt_SIEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/usero"
-            android:hint="@string/hint_phone" />
+            android:drawableLeft="@drawable/email"
+            android:hint="@string/hint_email" />
     </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
     <com.wrapp.floatlabelededittext.FloatLabeledEditText
@@ -45,10 +46,4 @@
         android:textAllCaps="false"
         android:textColor="@color/my_white" />
 
-    <CheckBox
-        android:layout_marginLeft="20dp"
-        android:id="@+id/btn_SIRemember"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/remember" />
 </LinearLayout>
