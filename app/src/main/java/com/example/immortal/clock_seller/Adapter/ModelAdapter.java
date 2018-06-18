@@ -14,11 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.immortal.clock_seller.Activity.MainPageActivity;
 import com.example.immortal.clock_seller.Activity.ProducstActivity;
 import com.example.immortal.clock_seller.Activity.ProductDetailActivity;
 import com.example.immortal.clock_seller.Model.Cart;
-import com.example.immortal.clock_seller.Model.Clock;
 import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.R;
 
@@ -84,11 +86,23 @@ public class ModelAdapter extends BaseAdapter {
         viewHolder.txt_Detail.setMaxLines(2);
         viewHolder.txt_Detail.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txt_Detail.setText(model.getDetail());
-        Glide.with(context).load(model.getImage())
-                .placeholder(R.drawable.noimage)
-                .error(R.drawable.noimage)
-                .centerCrop()
-                .override(150,150)
+//        Glide.with(context).load(model.getImage())
+//                .placeholder(R.drawable.noimage)
+//                .error(R.drawable.noimage)
+//                .centerCrop()
+//                .override(150,150)
+//                .into(viewHolder.img_Image);
+        Glide.with(context)
+                .load(model.getImage())
+                .apply(
+                        RequestOptions
+                                .overrideOf(100,100)
+                                .placeholder(R.drawable.noimage)
+                                .error(R.drawable.noimage)
+                                .formatOf(DecodeFormat.PREFER_RGB_565)
+                                .timeout(3000)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                )
                 .into(viewHolder.img_Image);
 //        viewHolder.img_Image.setImageResource(product.getImg());
         final ModelAdapter.ViewHolder finalViewHolder = viewHolder;

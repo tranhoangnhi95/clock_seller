@@ -23,10 +23,8 @@ import android.widget.Toast;
 import com.example.immortal.clock_seller.Adapter.HotProductAdapter;
 import com.example.immortal.clock_seller.Adapter.MyMenuItemAdapter;
 import com.example.immortal.clock_seller.Model.Cart;
-import com.example.immortal.clock_seller.Model.Clock;
 import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.MyMenuItem;
-import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -83,19 +81,19 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                 if (name.equals("Trang chính")) {
                     Intent i_ToMainPage = new Intent(MainPageActivity.this, MainPageActivity.class);
                     startActivity(i_ToMainPage);
-                } else if (name.equals("Thông tin tài khoản")) {
-                    Intent i_ToProfile = new Intent(MainPageActivity.this, ProfileActivity.class);
-                    startActivity(i_ToProfile);
-                } else if (name.equals("Đăng xuất")) {
-                    mAuth.signOut();
-                    SignInActivity.user = null;
-                    Intent i_ToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
-                    startActivity(i_ToSignIn);
-                } else {
-                    Intent i_ToProDuct = new Intent(MainPageActivity.this, ProducstActivity.class);
-                    i_ToProDuct.putExtra(manufaturer_name, item.getName());
-                    startActivity(i_ToProDuct);
-                }
+            } else if (name.equals("Thông tin tài khoản")) {
+                Intent i_ToProfile = new Intent(MainPageActivity.this, ProfileActivity.class);
+                startActivity(i_ToProfile);
+            } else if (name.equals("Đăng xuất")) {
+                mAuth.signOut();
+                SignInActivity.user = null;
+                Intent i_ToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
+                startActivity(i_ToSignIn);
+            } else {
+                Intent i_ToProDuct = new Intent(MainPageActivity.this, ProducstActivity.class);
+                i_ToProDuct.putExtra(manufaturer_name, item.getName());
+                startActivity(i_ToProDuct);
+            }
 
             }
         });
@@ -163,6 +161,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
         if (carts == null) {
             carts = new ArrayList<>();
+
         } else {
         }
 

@@ -2,22 +2,20 @@ package com.example.immortal.clock_seller.Model;
 
 import java.io.Serializable;
 
-public class Clock implements Serializable {
-    private int img;
-    private String name;
-    private Integer price;
-    private String detail;
-    private String date;
+public class Clock implements Serializable{
+    private String name, date, image;
+    private Integer price, quantity, total;
 
     public Clock() {
     }
 
-    public int getImg() {
-        return img;
-    }
-
-    public void setImg(int img) {
-        this.img = img;
+    public Clock(String name, String date, String image, Integer price, Integer quantity, Integer total) {
+        this.name = name;
+        this.date = date;
+        this.image = image;
+        this.price = price;
+        this.quantity = quantity;
+        this.total = total;
     }
 
     public String getName() {
@@ -28,6 +26,22 @@ public class Clock implements Serializable {
         this.name = name;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Integer getPrice() {
         return price;
     }
@@ -36,19 +50,19 @@ public class Clock implements Serializable {
         this.price = price;
     }
 
-    public String getDes() {
-        return detail;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setDes(String detail) {
-        this.detail = detail;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
-    public String getDate() {
-        return date;
+    public Integer getTotal() {
+        return total;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTotal(Integer total) {
+        this.total = total;
     }
 }

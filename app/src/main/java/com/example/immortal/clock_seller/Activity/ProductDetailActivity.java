@@ -18,8 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.immortal.clock_seller.Model.Cart;
-import com.example.immortal.clock_seller.Model.Clock;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.R;
 
@@ -138,9 +139,21 @@ public class ProductDetailActivity extends AppCompatActivity {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txt_Price.setText("Giá : " + decimalFormat.format(price) + " Đ");
         txt_Detail.setText(detail);
-        Glide.with(getApplicationContext()).load(img)
-                .placeholder(R.drawable.noimage)
-                .error(R.drawable.noimage)
+//        Glide.with(getApplicationContext()).load(img)
+//                .placeholder(R.drawable.noimage)
+//                .error(R.drawable.noimage)
+//                .into(img_Image);
+        Glide.with(getApplicationContext())
+                .load(img)
+                .apply(
+                        RequestOptions
+                                .overrideOf(150,150)
+                                .placeholder(R.drawable.noimage)
+                                .error(R.drawable.noimage)
+                                .formatOf(DecodeFormat.PREFER_RGB_565)
+                                .timeout(3000)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                )
                 .into(img_Image);
     }
 }

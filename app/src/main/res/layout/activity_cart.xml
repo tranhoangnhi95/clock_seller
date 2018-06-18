@@ -37,7 +37,7 @@
     <LinearLayout
         android:layout_margin="5dp"
         android:orientation="horizontal"
-        android:weightSum="3"
+        android:weightSum="10"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
@@ -46,18 +46,28 @@
             android:text="Thành tiền"
             android:textColor="@color/product_name"
             android:textSize="20sp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
         <TextView
             android:textColor="@color/product_name"
             android:textSize="20sp"
-            android:text="Đ"
+            android:text="0"
             android:gravity="right|center"
             android:id="@+id/txt_CTotal"
-            android:layout_weight="2"
+            android:layout_weight="6"
             android:layout_width="0dp"
             android:layout_height="match_parent" />
+        <TextView
+            android:paddingLeft="5dp"
+            android:textColor="@color/product_name"
+            android:textSize="20sp"
+            android:text="Đ"
+            android:gravity="left|center"
+            android:layout_weight="6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
     </LinearLayout>
     <Button
         android:id="@+id/btn_CPay"

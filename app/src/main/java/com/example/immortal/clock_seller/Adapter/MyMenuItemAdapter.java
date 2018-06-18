@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.immortal.clock_seller.Model.MyMenuItem;
 import com.example.immortal.clock_seller.R;
 
@@ -59,11 +62,23 @@ public class MyMenuItemAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         MyMenuItem item = (MyMenuItem) getItem(i);
-        Glide.with(context).load(item.getImage())
-                .placeholder(R.drawable.noimage)
-                .error(R.drawable.noimage)
-                .fitCenter()
-                .override(70,70)
+//        Glide.with(context).load(item.getImage())
+//                .placeholder(R.drawable.noimage)
+//                .error(R.drawable.noimage)
+//                .fitCenter()
+//                .override(70,70)
+//                .into(viewHolder.img_Image);
+        Glide.with(context)
+                .load(item.getImage())
+                .apply(
+                        RequestOptions
+                                .overrideOf(70,70)
+                                .placeholder(R.drawable.noimage)
+                                .error(R.drawable.noimage)
+                                .formatOf(DecodeFormat.PREFER_RGB_565)
+                                .timeout(3000)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                )
                 .into(viewHolder.img_Image);
         viewHolder.txt_Name.setText(item.getName());
         return view;

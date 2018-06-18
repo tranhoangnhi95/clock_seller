@@ -51,12 +51,12 @@
 
             <TextView
                 android:gravity="center"
-                android:id="@+id/txt_HITotal"
+                android:id="@+id/txt_HIPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Giá: 100000000 Đ"
-                android:textColor="@color/product_price"
+                android:text="Giá: 1000000000 Đ"
+                android:textColor="@color/my_Black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -67,24 +67,26 @@
 
             <TextView
                 android:gravity="center"
-                android:id="@+id/txt_HIDateOfPay"
+                android:id="@+id/txt_HITotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Thanh toán: 01/06/2018"
-                android:textColor="@color/my_Black"
+                android:text="Thành tiền: 2000000000 Đ"
+                android:textColor="@color/product_price"
                 android:textSize="20sp"
  />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/product_price" />
+
             <LinearLayout
                 android:weightSum="3"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:gravity="center"
                     android:textColor="@color/my_Black"
                     android:textSize="20sp"
                     android:text="Số lượng:"
@@ -96,11 +98,23 @@
                     android:gravity="center"
                     android:textColor="@color/my_Black"
                     android:textSize="20sp"
-                    android:text="1"
+                    android:text="2"
                     android:layout_weight="2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/product_price" />
+            <TextView
+                android:id="@+id/txt_HIDateOfPay"
+                android:gravity="center"
+                android:textColor="@color/my_Black"
+                android:textSize="20sp"
+                android:text="Thanh toán: 12/12/2016"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
     <TextView

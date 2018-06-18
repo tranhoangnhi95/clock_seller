@@ -54,10 +54,10 @@
 
         <activity
             android:name=".Activity.ProductDetailActivity"
-            android:parentActivityName=".Activity.ProducstActivity">
+            android:parentActivityName=".Activity.MainPageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.ProducstActivity" />
+                android:value=".Activity.MainPageActivity" />
         </activity>
     </application>
 

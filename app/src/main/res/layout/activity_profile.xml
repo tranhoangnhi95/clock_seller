@@ -37,6 +37,10 @@
             android:text="Trần Văn A"
             android:textSize="20sp" />
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/product_price" />
+        <TextView
             android:id="@+id/txt_PfPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

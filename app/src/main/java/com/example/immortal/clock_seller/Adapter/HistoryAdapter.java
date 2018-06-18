@@ -8,8 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.SoldClock;
 import com.example.immortal.clock_seller.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -41,7 +45,7 @@ public class HistoryAdapter extends BaseAdapter {
     }
     public class ViewHolder{
         public ImageView img_Image;
-        public TextView txt_Name, txt_Total, txt_DateOfPay, txt_Quantity;
+        public TextView txt_Name, txt_Total, txt_Price, txt_Quantity, txt_DateOfPay;
     }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
@@ -54,17 +58,19 @@ public class HistoryAdapter extends BaseAdapter {
             viewHolder.txt_Name = view.findViewById(R.id.txt_HIProductName);
             viewHolder.txt_Total = view.findViewById(R.id.txt_HITotal);
             viewHolder.txt_DateOfPay = view.findViewById(R.id.txt_HIDateOfPay);
+            viewHolder.txt_Price = view.findViewById(R.id.txt_HIPrice);
             viewHolder.txt_Quantity = view.findViewById(R.id.txt_HIQuantity);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        SoldClock soldClock = (SoldClock) getItem(i);
-        viewHolder.txt_Name.setText(soldClock.getName());
-        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txt_Total.setText("Tổng: "+ decimalFormat.format(soldClock.getPrice())+" Đ");
-        viewHolder.txt_DateOfPay.setText("Thanh toán: "+soldClock.getDateOfPay());
-        viewHolder.txt_Quantity.setText(String.valueOf(soldClock.getQuantity()));
+        Model clock = (Model) getItem(i);
+
+//        viewHolder.txt_Name.setText(clock.getName());
+//        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+//        viewHolder.txt_Total.setText("Tổng: "+ decimalFormat.format(soldClock.getPrice())+" Đ");
+//        viewHolder.txt_DateOfPay.setText("Thanh toán: "+soldClock.getDateOfPay());
+//        viewHolder.txt_Quantity.setText(String.valueOf(soldClock.getQuantity()));
         return view;
     }
 }

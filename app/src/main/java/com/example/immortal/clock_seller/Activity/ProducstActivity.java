@@ -17,7 +17,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Adapter.ModelAdapter;
-import com.example.immortal.clock_seller.Model.Clock;
 import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.R;
 import com.google.firebase.database.ChildEventListener;

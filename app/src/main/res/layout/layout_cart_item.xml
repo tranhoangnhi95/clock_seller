@@ -54,11 +54,25 @@
 
             <TextView
                 android:gravity="center"
-                android:id="@+id/txt_CIProductTotal"
+                android:id="@+id/txt_CIProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Giá: 100000000 Đ"
+                android:textColor="@color/product_name"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/product_price" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txt_CIProductTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Tổng: 100000000 Đ"
                 android:textColor="@color/product_name"
                 android:textSize="20sp"
                 android:textStyle="bold" />

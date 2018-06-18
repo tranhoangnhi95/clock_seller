@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Adapter.MyFragmentAdapter;
 import com.example.immortal.clock_seller.AnimViewPager.ZoomOutPageTransfomer;
+import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -62,7 +63,7 @@ public class SignInActivity extends AppCompatActivity {
         tl_Sliding.setupWithViewPager(vp_ViewPager);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-
+        user = new User();
     }
 
 
@@ -97,7 +98,7 @@ public class SignInActivity extends AppCompatActivity {
 //                            startActivity(i_ToMainPage);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(SignInActivity.this,"Đăng ký không thành công",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this,"Email đã trùng, vui lòng nhập email khác",Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -145,7 +146,9 @@ public class SignInActivity extends AppCompatActivity {
                             });
                             Toast.makeText(SignInActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
                             Intent i_ToMainPage = new Intent(SignInActivity.this,MainPageActivity.class);
-//                            i_ToMainPage.putExtra(email_key,SI_Email);
+//                            Model model = new Model("Test","Test","Test","Test",0,0);
+//
+//                            mDatabase.child("Cart").child(user.getPhone().toString()).setValue(model);
                             startActivity(i_ToMainPage);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -168,6 +171,7 @@ public class SignInActivity extends AppCompatActivity {
                     User userFB = dataSnapshot.getValue(User.class);
                     if (userFB.getEmail().equals(currentUser.getEmail())) {
                         user = userFB;
+
                     }
                 }
 
@@ -196,9 +200,10 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
+    private void updateUI(FirebaseUser user1) {
+        if (user1 != null) {
             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
+//            Toast.makeText(this,user.getPhone().toString(),Toast.LENGTH_SHORT).show();
 //            i_ToMainPage.putExtra(SignInActivity.email_key,user.getEmail());
             startActivity(i_ToMainPage);
 
