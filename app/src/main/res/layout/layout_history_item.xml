@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Thành tiền: 2000000000 Đ"
-                android:textColor="@color/product_price"
+                android:textColor="@color/product_name"
                 android:textSize="20sp"
  />
             <TextView

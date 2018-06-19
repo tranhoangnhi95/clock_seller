@@ -25,6 +25,7 @@ import com.example.immortal.clock_seller.Adapter.MyMenuItemAdapter;
 import com.example.immortal.clock_seller.Model.Cart;
 import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.MyMenuItem;
+import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -45,7 +46,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
     ArrayList<MyMenuItem> myMenuItems;
     MyMenuItemAdapter myMenuItemAdapter;
-    MyMenuItem mi_MainPage, mi_Profile, mi_SignOut;
+    MyMenuItem mi_MainPage, mi_Profile, mi_SignOut, mi_History;
 
     ArrayList<Model> models;
     HotProductAdapter hotProductAdapter;
@@ -81,19 +82,22 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                 if (name.equals("Trang chính")) {
                     Intent i_ToMainPage = new Intent(MainPageActivity.this, MainPageActivity.class);
                     startActivity(i_ToMainPage);
-            } else if (name.equals("Thông tin tài khoản")) {
-                Intent i_ToProfile = new Intent(MainPageActivity.this, ProfileActivity.class);
-                startActivity(i_ToProfile);
-            } else if (name.equals("Đăng xuất")) {
-                mAuth.signOut();
-                SignInActivity.user = null;
-                Intent i_ToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
-                startActivity(i_ToSignIn);
-            } else {
-                Intent i_ToProDuct = new Intent(MainPageActivity.this, ProducstActivity.class);
-                i_ToProDuct.putExtra(manufaturer_name, item.getName());
-                startActivity(i_ToProDuct);
-            }
+                } else if (name.equals("Thông tin tài khoản")) {
+                    Intent i_ToProfile = new Intent(MainPageActivity.this, ProfileActivity.class);
+                    startActivity(i_ToProfile);
+                } else if (name.equals("Đăng xuất")) {
+                    mAuth.signOut();
+                    SignInActivity.user = null;
+                    Intent i_ToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
+                    startActivity(i_ToSignIn);
+                } else if (name.equals("Lịch sử")) {
+                    Intent i_ToHistory = new Intent(MainPageActivity.this, HistoryActivity.class);
+                    startActivity(i_ToHistory);
+                } else {
+                    Intent i_ToProDuct = new Intent(MainPageActivity.this, ProducstActivity.class);
+                    i_ToProDuct.putExtra(manufaturer_name, item.getName());
+                    startActivity(i_ToProDuct);
+                }
 
             }
         });
@@ -103,18 +107,26 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
-                if (mi_Profile == null){
+                if (mi_Profile == null) {
                     mi_Profile = new MyMenuItem();
                     mi_Profile.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/profile.png?alt=media&token=1fda1b40-9620-4f1c-9266-b7d707df5256");
                     mi_Profile.setName("Thông tin tài khoản");
                     myMenuItems.add(mi_Profile);
                     myMenuItemAdapter.notifyDataSetChanged();
                 }
-                if (mi_SignOut == null){
+                if (mi_SignOut == null) {
                     mi_SignOut = new MyMenuItem();
                     mi_SignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
                     mi_SignOut.setName("Đăng xuất");
                     myMenuItems.add(mi_SignOut);
+                    myMenuItemAdapter.notifyDataSetChanged();
+                }
+
+                if (mi_History == null) {
+                    mi_History = new MyMenuItem();
+                    mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
+                    mi_History.setName("Lịch sử");
+                    myMenuItems.add(mi_History);
                     myMenuItemAdapter.notifyDataSetChanged();
                 }
             }
@@ -161,8 +173,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
         if (carts == null) {
             carts = new ArrayList<>();
-
-        } else {
+            loadCart();
         }
 
 
@@ -181,8 +192,42 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         loadHotModel();
         loadingActionBar();
         loadMenu();
-
     }
+
+    private void loadCart() {
+        Intent i_rc = getIntent();
+        String mail = i_rc.getStringExtra(SignInActivity.email_key);
+        mDatabase.child("Cart").child(mail).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Cart cart = dataSnapshot.getValue(Cart.class);
+                if ((!cart.getName().equals("Default")) &&(cart.getPrice() != 0)){
+                    carts.add(cart);
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 
     private void loadMenu() {
 
@@ -220,7 +265,6 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
                 }
             });
-
 
 
         }

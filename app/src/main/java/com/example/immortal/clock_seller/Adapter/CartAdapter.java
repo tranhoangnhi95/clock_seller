@@ -89,7 +89,7 @@ public class CartAdapter extends BaseAdapter {
                 .load(cart.getImage())
                 .apply(
                         RequestOptions
-                                .overrideOf(100,100)
+                                .overrideOf(100, 100)
                                 .placeholder(R.drawable.noimage)
                                 .error(R.drawable.noimage)
                                 .formatOf(DecodeFormat.PREFER_RGB_565)
@@ -163,6 +163,13 @@ public class CartAdapter extends BaseAdapter {
                                 carts.remove(cart1);
                                 dialogInterface.cancel();
                                 notifyDataSetChanged();
+
+                                long total = 0;
+                                for (int k = 0; k < MainPageActivity.carts.size(); k++) {
+                                    total += MainPageActivity.carts.get(k).getTotal();
+                                }
+                                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                                txt_CTotal.setText(decimalFormat.format(total));
                             }
                         }
                 );

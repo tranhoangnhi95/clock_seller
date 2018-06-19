@@ -9,21 +9,29 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DecodeFormat;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.immortal.clock_seller.Model.Clock;
 import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.SoldClock;
 import com.example.immortal.clock_seller.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HistoryAdapter extends BaseAdapter {
     Context context;
     int resource;
-    ArrayList<SoldClock> objects;
+    ArrayList<Clock> objects;
 
-    public HistoryAdapter(Context context, int resource, ArrayList<SoldClock> objects) {
+    public HistoryAdapter(Context context, int resource, ArrayList<Clock> objects) {
         this.context = context;
         this.resource = resource;
         this.objects = objects;
@@ -64,13 +72,28 @@ public class HistoryAdapter extends BaseAdapter {
         }else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        Model clock = (Model) getItem(i);
+        Clock clock = (Clock) getItem(i);
 
-//        viewHolder.txt_Name.setText(clock.getName());
-//        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        viewHolder.txt_Total.setText("Tổng: "+ decimalFormat.format(soldClock.getPrice())+" Đ");
-//        viewHolder.txt_DateOfPay.setText("Thanh toán: "+soldClock.getDateOfPay());
-//        viewHolder.txt_Quantity.setText(String.valueOf(soldClock.getQuantity()));
+        viewHolder.txt_Name.setText(clock.getName());
+        DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+        viewHolder.txt_Price.setText("Giá: " +decimalFormat.format(clock.getPrice())+" Đ");
+        viewHolder.txt_Total.setText("Thành tiền: "+decimalFormat.format(clock.getTotal())+" Đ");
+        viewHolder.txt_Quantity.setText(String.valueOf(clock.getQuantity()));
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        viewHolder.txt_DateOfPay.setText("Thanh toán: "+ dateFormat.format(Long.parseLong(clock.getDate())));
+
+        Glide.with(context)
+                .load(clock.getImage())
+                .apply(
+                        RequestOptions
+                                .overrideOf(100, 100)
+                                .placeholder(R.drawable.noimage)
+                                .error(R.drawable.noimage)
+                                .formatOf(DecodeFormat.PREFER_RGB_565)
+                                .timeout(3000)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                )
+                .into(viewHolder.img_Image);
         return view;
     }
 }

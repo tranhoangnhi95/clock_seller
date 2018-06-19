@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Adapter.MyFragmentAdapter;
 import com.example.immortal.clock_seller.AnimViewPager.ZoomOutPageTransfomer;
+import com.example.immortal.clock_seller.Model.Cart;
+import com.example.immortal.clock_seller.Model.Clock;
 import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
@@ -37,12 +39,13 @@ public class SignInActivity extends AppCompatActivity {
     TabLayout tl_Sliding;
     ViewPager vp_ViewPager;
     MyFragmentAdapter myFragmentAdapter;
-    String SU_Name, SU_Phone, SU_Email, SU_Address,  SU_Pass;
+    String SU_Name, SU_Phone, SU_Email, SU_Address, SU_Pass;
     String SI_Email, SI_Pass;
     public FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
     public static User user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +53,6 @@ public class SignInActivity extends AppCompatActivity {
         inits();
 
     }
-
 
 
     private void inits() {
@@ -67,7 +69,7 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 
-    public void signUpFragment(String Name,String Phone, String Email, String Address, String Pass){
+    public void signUpFragment(String Name, String Phone, String Email, String Address, String Pass) {
         this.SU_Name = Name;
         this.SU_Phone = Phone;
         this.SU_Email = Email;
@@ -81,15 +83,14 @@ public class SignInActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
 
-                            User user1 = new User(SU_Name,SU_Phone, SU_Email,SU_Address);
+                            User user1 = new User(SU_Name, SU_Phone, SU_Email, SU_Address);
                             mDatabase.child("User").push().setValue(user1, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                                    if (databaseError == null){
-                                        Toast.makeText(SignInActivity.this,"Đăng ký thành công, vui lòng chuyển sang đăng nhập",Toast.LENGTH_SHORT).show();
-                                    }
-                                    else{
-                                        Toast.makeText(SignInActivity.this,"Đăng ký người dùng không thành công",Toast.LENGTH_SHORT).show();
+                                    if (databaseError == null) {
+                                        Toast.makeText(SignInActivity.this, "Đăng ký thành công, vui lòng chuyển sang đăng nhập", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(SignInActivity.this, "Đăng ký người dùng không thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -98,7 +99,7 @@ public class SignInActivity extends AppCompatActivity {
 //                            startActivity(i_ToMainPage);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(SignInActivity.this,"Email đã trùng, vui lòng nhập email khác",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, "Email đã trùng, vui lòng nhập email khác", Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -106,7 +107,7 @@ public class SignInActivity extends AppCompatActivity {
                 });
     }
 
-    public void signInFragment(String Email, String Pass){
+    public void signInFragment(String Email, String Pass) {
         this.SI_Email = Email;
         this.SI_Pass = Pass;
 
@@ -144,15 +145,22 @@ public class SignInActivity extends AppCompatActivity {
 
                                 }
                             });
-                            Toast.makeText(SignInActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
-                            Intent i_ToMainPage = new Intent(SignInActivity.this,MainPageActivity.class);
-//                            Model model = new Model("Test","Test","Test","Test",0,0);
-//
-//                            mDatabase.child("Cart").child(user.getPhone().toString()).setValue(model);
+                            Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
+                            String mail = SI_Email;
+                            mail = mail.replace("@", "");
+                            mail = mail.replace(".", "");
+                            mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
+                                    "default",0,0,"default",0
+                            ));
+                            mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
+                                    "default","default","default",0,0,0
+                            ));
+                            i_ToMainPage.putExtra(email_key,mail);
                             startActivity(i_ToMainPage);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(SignInActivity.this,"Đăng nhập không thành công",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -164,7 +172,7 @@ public class SignInActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         final FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null){
+        if (currentUser != null) {
             mDatabase.child("User").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -203,8 +211,16 @@ public class SignInActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user1) {
         if (user1 != null) {
             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
-//            Toast.makeText(this,user.getPhone().toString(),Toast.LENGTH_SHORT).show();
-//            i_ToMainPage.putExtra(SignInActivity.email_key,user.getEmail());
+            String mail = user1.getEmail();
+            mail = mail.replace("@", "");
+            mail = mail.replace(".", "");
+            mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
+                    "default",0,0,"default",0
+            ));
+            mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
+                    "default","default","default",0,0,0
+            ));
+            i_ToMainPage.putExtra(email_key,mail);
             startActivity(i_ToMainPage);
 
         } else {
