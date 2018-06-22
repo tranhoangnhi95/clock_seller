@@ -1,7 +1,9 @@
 package com.example.immortal.clock_seller.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -63,11 +65,18 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         cartAdapter = new CartAdapter(CartActivity.this, R.layout.layout_cart_item, MainPageActivity.carts, txt_Total);
         lv_Cart.setAdapter(cartAdapter);
         getCartTotal();
+//        Toast.makeText(this,MainPageActivity.carts.size()+"", Toast.LENGTH_LONG).show();
     }
 
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tb_Cart.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     private void controls() {
@@ -117,29 +126,48 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
     private void pay(User user) {
         if (MainPageActivity.carts != null) {
-            String time = String.valueOf(calendar.getTimeInMillis());
-            String email = user.getEmail();
-            email = email.replace("@","");
-            email = email.replace(".","");
+            if (MainPageActivity.carts.size() > 0) {
+                String time = String.valueOf(calendar.getTimeInMillis());
+                String email = user.getEmail();
+                email = email.replace("@", "");
+                email = email.replace(".", "");
 //            Toast.makeText(this,"Email" +email,Toast.LENGTH_LONG).show();
 
-            for (int i = 0; i < MainPageActivity.carts.size(); i++) {
-                Cart cart = MainPageActivity.carts.get(i);
-                Clock clock = new Clock(cart.getName(), String.valueOf(time),
-                        cart.getImage(), cart.getPrice(),
-                        cart.getQuantity(), cart.getTotal()
-                );
-                clocks.add(clock);
-            }
-            for (int i = 0; i < clocks.size(); i++) {
-                mDataBase.child("History").child(email).push().setValue(clocks.get(i));
+                for (int i = 0; i < MainPageActivity.carts.size(); i++) {
+                    Cart cart = MainPageActivity.carts.get(i);
+                    Clock clock = new Clock(cart.getName(), String.valueOf(time),
+                            cart.getImage(), cart.getPrice(),
+                            cart.getQuantity(), cart.getTotal()
+                    );
+                    clocks.add(clock);
+                }
+                for (int i = 0; i < clocks.size(); i++) {
+                    mDataBase.child("History").child(email).push().setValue(clocks.get(i));
 
+                }
+                MainPageActivity.carts.clear();
+                clocks.clear();
+                cartAdapter.notifyDataSetChanged();
+                txt_Total.setText(String.valueOf(0));
+            } else {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+                builder.setMessage("Giỏ hàng đang trống, vui lòng đặt hàng vào trước khi thanh toán!");
+                builder.setCancelable(true);
+                builder.setPositiveButton(
+                        "Có",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+                            }
+                        }
+                );
+
+                android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
-            MainPageActivity.carts.clear();
-            clocks.clear();
-            cartAdapter.notifyDataSetChanged();
-            txt_Total.setText(String.valueOf(0));
-    }
+        }
     }
 
     @Override
@@ -160,4 +188,31 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onPause() {
+        pushCart(SignInActivity.user);
+        MainPageActivity.carts.clear();
+        super.onPause();
+        ;
+    }
+
+    private void pushCart(User user1) {
+        if (MainPageActivity.carts.size() > 0) {
+            String mail = "";
+            mail += user1.getEmail();
+            mail = mail.replace("@", "");
+            mail = mail.replace(".", "");
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Cart").child(mail);
+            databaseReference.removeValue();
+            for (int i = 0; i < MainPageActivity.carts.size(); i++) {
+                mDataBase.child("Cart").child(mail).push().setValue(MainPageActivity.carts.get(i));
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }

@@ -11,10 +11,21 @@
         android:id="@+id/tb_History"
         layout="@layout/layout_toolbar"></include>
 
-    <ListView
-        android:id="@+id/lv_HHistory"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"></ListView>
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/txt_HAnnouce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bạn chưa bất kì sản phẩm nào!"
+            android:textSize="20sp" />
+        <ListView
+            android:id="@+id/lv_HHistory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"></ListView>
+    </FrameLayout>
 </LinearLayout>

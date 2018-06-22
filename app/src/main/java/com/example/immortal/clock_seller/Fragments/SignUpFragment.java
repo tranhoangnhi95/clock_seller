@@ -41,17 +41,21 @@ public class SignUpFragment extends Fragment {
         btn_SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Name, Phone, Email, Address, Pass;
-                Name = txt_Name.getText().toString();
-                Phone = txt_Phone.getText().toString();
-                Email = txt_Email.getText().toString().toLowerCase();
-                Address = txt_Address.getText().toString();
-                Pass = txt_Pass.getText().toString();
-//                Toast.makeText(getContext(),"Đăng ký thành công",Toast.LENGTH_SHORT).show();
-//                Intent i_ToProfile = new Intent(getContext(), ProfileActivity.class);
-//                startActivity(i_ToProfile);
-                SignInActivity activity = (SignInActivity) getActivity();
-                activity.signUpFragment( Name, Phone, Email, Address, Pass);
+                    try {
+                        String Name, Phone, Email, Address, Pass;
+                        Name = txt_Name.getText().toString();
+                        Phone = txt_Phone.getText().toString();
+                        Email = txt_Email.getText().toString().toLowerCase();
+                        Address = txt_Address.getText().toString();
+                        Pass = txt_Pass.getText().toString();
+
+                        SignInActivity activity = (SignInActivity) getActivity();
+                        activity.signUpFragment( Name, Phone, Email, Address, Pass);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                        Toast.makeText(getContext(),"Vui lòng nhập dầy đủ thông tin trước khi đăng ký", Toast.LENGTH_SHORT).show();
+                    }
             }
         });
     }

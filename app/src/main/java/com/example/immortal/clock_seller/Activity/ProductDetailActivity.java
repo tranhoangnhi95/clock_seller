@@ -30,7 +30,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     Toolbar tb_Detail;
     ImageView img_Image;
     TextView txt_Name, txt_Price, txt_Detail;
-//    Button btn_AddToCart;
+    //    Button btn_AddToCart;
 //    Spinner sp_Quantity;
     Model model;
     String name = "";
@@ -74,9 +74,9 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.mn_cart:
-                Intent i_ToCart = new Intent(ProductDetailActivity.this,CartActivity.class);
+                Intent i_ToCart = new Intent(ProductDetailActivity.this, CartActivity.class);
                 startActivity(i_ToCart);
                 break;
         }
@@ -85,49 +85,9 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void controls() {
         getInformation();
-//        eventSpinnerQuantity();
-//        eventButtonAdd();
+
     }
 
-//    private void eventButtonAdd() {
-//        btn_AddToCart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (MainPageActivity.carts.size() > 0) {
-//                    int quantity1 = Integer.parseInt(sp_Quantity.getSelectedItem().toString());
-//                    boolean exist = false;
-//                    for (int i = 0; i < MainPageActivity.carts.size(); i++) {
-//                        if (MainPageActivity.carts.get(i).getName().equals(name)) {
-//                            MainPageActivity.carts.get(i).setQuantity(MainPageActivity.carts.get(i).getQuantity() + quantity1);
-//                            if (MainPageActivity.carts.get(i).getQuantity() >= 10) {
-//                                MainPageActivity.carts.get(i).setQuantity(10);
-//                            }
-//                            MainPageActivity.carts.get(i).setTotal(price * MainPageActivity.carts.get(i).getQuantity());
-//                            exist = true;
-//                        }
-//                    }
-//                    if (!exist) {
-//                        int quantity = Integer.parseInt(sp_Quantity.getSelectedItem().toString());
-//                        long total = quantity * clock.getPrice();
-//                        MainPageActivity.carts.add(new Cart(name, (int) total, img, quantity));
-//                    }
-//                } else {
-//                    int quantity = Integer.parseInt(sp_Quantity.getSelectedItem().toString());
-//                    long total = quantity * clock.getPrice();
-//                    MainPageActivity.carts.add(new Cart(name, (int) total, img, quantity));
-//                }
-//
-//                Intent i_ToCart = new Intent(ProductDetailActivity.this,CartActivity.class);
-//                startActivity(i_ToCart);
-//            }
-//        });
-//    }
-
-//    private void eventSpinnerQuantity() {
-//        Integer[] quantity = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-//        ArrayAdapter<Integer> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, quantity);
-//        sp_Quantity.setAdapter(arrayAdapter);
-//    }
 
     private void getInformation() {
         model = (Model) getIntent().getSerializableExtra(ProducstActivity.intent_product_key);
@@ -139,15 +99,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         txt_Price.setText("Giá : " + decimalFormat.format(price) + " Đ");
         txt_Detail.setText(detail);
-//        Glide.with(getApplicationContext()).load(img)
-//                .placeholder(R.drawable.noimage)
-//                .error(R.drawable.noimage)
-//                .into(img_Image);
         Glide.with(getApplicationContext())
                 .load(img)
                 .apply(
                         RequestOptions
-                                .overrideOf(150,150)
+                                .overrideOf(150, 150)
                                 .placeholder(R.drawable.noimage)
                                 .error(R.drawable.noimage)
                                 .formatOf(DecodeFormat.PREFER_RGB_565)

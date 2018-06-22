@@ -3,6 +3,7 @@ package com.example.immortal.clock_seller.Adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,7 @@ public class CartAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        final Cart cart = (Cart) getItem(i);
+        Cart cart = (Cart) getItem(i);
         viewHolder.txt_Name.setText(cart.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
         viewHolder.txt_Price.setText("Giá: " + decimalFormat.format(cart.getPrice()) + " Đ");
@@ -117,8 +118,8 @@ public class CartAdapter extends BaseAdapter {
 
                 }
                 long total = 0;
-                for (int i = 0; i < MainPageActivity.carts.size(); i++) {
-                    total += MainPageActivity.carts.get(i).getTotal();
+                for (int i = 0; i < carts.size(); i++) {
+                    total += carts.get(i).getTotal();
                 }
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                 txt_CTotal.setText(decimalFormat.format(total));
@@ -141,8 +142,8 @@ public class CartAdapter extends BaseAdapter {
                     notifyDataSetChanged();
                 }
                 long total = 0;
-                for (int i = 0; i < MainPageActivity.carts.size(); i++) {
-                    total += MainPageActivity.carts.get(i).getTotal();
+                for (int i = 0; i < carts.size(); i++) {
+                    total += carts.get(i).getTotal();
                 }
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                 txt_CTotal.setText(decimalFormat.format(total));
@@ -165,8 +166,8 @@ public class CartAdapter extends BaseAdapter {
                                 notifyDataSetChanged();
 
                                 long total = 0;
-                                for (int k = 0; k < MainPageActivity.carts.size(); k++) {
-                                    total += MainPageActivity.carts.get(k).getTotal();
+                                for (int k = 0; k < carts.size(); k++) {
+                                    total += carts.get(k).getTotal();
                                 }
                                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                                 txt_CTotal.setText(decimalFormat.format(total));
@@ -188,6 +189,12 @@ public class CartAdapter extends BaseAdapter {
                 return true;
             }
         });
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent
+//            }
+//        });
         return view;
     }
 }

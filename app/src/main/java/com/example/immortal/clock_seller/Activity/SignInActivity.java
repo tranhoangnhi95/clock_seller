@@ -65,7 +65,9 @@ public class SignInActivity extends AppCompatActivity {
         tl_Sliding.setupWithViewPager(vp_ViewPager);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        user = new User();
+        if (user == null){
+            user = new User();
+        }
     }
 
 
@@ -84,7 +86,9 @@ public class SignInActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
 
                             User user1 = new User(SU_Name, SU_Phone, SU_Email, SU_Address);
-                            mDatabase.child("User").push().setValue(user1, new DatabaseReference.CompletionListener() {
+                            String mail = SU_Email.replace("@","");
+                            mail = mail.replace(".","");
+                            mDatabase.child("User").child(mail).setValue(user1, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                                     if (databaseError == null) {
@@ -116,12 +120,19 @@ public class SignInActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            user.setEmail(SI_Email);
+                            String mail = SI_Email.replace("@","");
+                            mail = mail.replace(".","");
                             mDatabase.child("User").addChildEventListener(new ChildEventListener() {
                                 @Override
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     User userFB = dataSnapshot.getValue(User.class);
                                     if (userFB.getEmail().equals(SI_Email)) {
                                         user = userFB;
+//                                        user.setName(userFB.getName());
+//                                        user.setPhone(userFB.getPhone());
+//                                        user.setAddress(userFB.getAddress());
+//                                        user.setEmail(userFB.getEmail());
                                     }
                                 }
 
@@ -147,17 +158,18 @@ public class SignInActivity extends AppCompatActivity {
                             });
                             Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
-                            String mail = SI_Email;
-                            mail = mail.replace("@", "");
-                            mail = mail.replace(".", "");
+//                            String mail = SI_Email;
+//                            mail = mail.replace("@", "");
+//                            mail = mail.replace(".", "");
                             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
-                                    "default",0,0,"default",0
+                                    "default", 0, 0, "default", 0
                             ));
                             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
-                                    "default","default","default",0,0,0
+                                    "default", "default", "default", 0, 0, 0
                             ));
-                            i_ToMainPage.putExtra(email_key,mail);
+//                            i_ToMainPage.putExtra(email_key, mail);
                             startActivity(i_ToMainPage);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignInActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
@@ -179,7 +191,10 @@ public class SignInActivity extends AppCompatActivity {
                     User userFB = dataSnapshot.getValue(User.class);
                     if (userFB.getEmail().equals(currentUser.getEmail())) {
                         user = userFB;
-
+//                        user.setName(userFB.getName());
+//                        user.setPhone(userFB.getPhone());
+//                        user.setAddress(userFB.getAddress());
+//                        user.setEmail(userFB.getEmail());
                     }
                 }
 
@@ -212,17 +227,18 @@ public class SignInActivity extends AppCompatActivity {
         if (user1 != null) {
             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
             String mail = user1.getEmail();
+            user.setEmail(mail);
             mail = mail.replace("@", "");
             mail = mail.replace(".", "");
             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
-                    "default",0,0,"default",0
+                    "default", 0, 0, "default", 0
             ));
             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
-                    "default","default","default",0,0,0
+                    "default", "default", "default", 0, 0, 0
             ));
-            i_ToMainPage.putExtra(email_key,mail);
+//            i_ToMainPage.putExtra(email_key, mail);
             startActivity(i_ToMainPage);
-
+            finish();
         } else {
 
         }

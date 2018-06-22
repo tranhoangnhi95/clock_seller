@@ -42,13 +42,16 @@ public class SignInFragment extends Fragment{
         btn_SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email, pass;
-                email = txt_Email.getText().toString().toLowerCase();
-                pass = txt_Pass.getText().toString();
-//                Intent i_ToMainPage = new Intent(getContext(),MainPageActivity.class);
-//                startActivity(i_ToMainPage);
-                SignInActivity activity = (SignInActivity) getActivity();
-                activity.signInFragment(email,pass);
+                try {
+                    String email, pass;
+                    email = txt_Email.getText().toString().toLowerCase();
+                    pass = txt_Pass.getText().toString();
+                    SignInActivity activity = (SignInActivity) getActivity();
+                    activity.signInFragment(email,pass);
+                }catch (Exception e){
+                    e.printStackTrace();
+                    Toast.makeText(getContext(),"Vui lòng nhập dầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

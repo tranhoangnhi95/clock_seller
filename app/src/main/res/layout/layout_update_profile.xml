@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Cập nhật thông tin"
+        android:textColor="@color/my_Black"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/txt_UdName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/usero"
+                android:hint="@string/name"
+                android:textColor="@color/my_Black" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/txt_UdPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/phone"
+                android:hint="@string/phone"
+                android:maxLength="10"
+                android:textColor="@color/my_Black" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+        <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/txt_UdAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/address"
+                android:hint="@string/address"
+                android:textColor="@color/my_Black" />
+        </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+    </LinearLayout>
+</LinearLayout>

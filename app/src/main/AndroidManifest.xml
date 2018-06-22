@@ -22,43 +22,12 @@
         </activity>
         <activity android:name=".Activity.SignInActivity" />
         <activity android:name=".Activity.MainPageActivity" />
-        <activity
-            android:name=".Activity.ProducstActivity"
-            android:parentActivityName=".Activity.MainPageActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainPageActivity" />
-        </activity>
-        <activity
-            android:name=".Activity.CartActivity"
-            android:parentActivityName=".Activity.ProducstActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.ProducstActivity" />
+        <activity android:name=".Activity.ProducstActivity"></activity>
+        <activity android:name=".Activity.CartActivity"></activity>
+        <activity android:name=".Activity.ProfileActivity"></activity>
+        <activity android:name=".Activity.HistoryActivity"></activity>
 
-        </activity>
-        <activity
-            android:name=".Activity.ProfileActivity"
-            android:parentActivityName=".Activity.MainPageActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainPageActivity" />
-        </activity>
-        <activity
-            android:name=".Activity.HistoryActivity"
-            android:parentActivityName=".Activity.MainPageActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainPageActivity" />
-        </activity>
-
-        <activity
-            android:name=".Activity.ProductDetailActivity"
-            android:parentActivityName=".Activity.MainPageActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Activity.MainPageActivity" />
-        </activity>
+        <activity android:name=".Activity.ProductDetailActivity"></activity>
     </application>
 
 </manifest>

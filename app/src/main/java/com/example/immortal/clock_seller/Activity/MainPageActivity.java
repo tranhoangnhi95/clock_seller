@@ -1,5 +1,6 @@
 package com.example.immortal.clock_seller.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.MyMenuItem;
 import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
+import com.google.android.gms.signin.SignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -46,7 +49,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
     ArrayList<MyMenuItem> myMenuItems;
     MyMenuItemAdapter myMenuItemAdapter;
-    MyMenuItem mi_MainPage, mi_Profile, mi_SignOut, mi_History;
+    MyMenuItem mi_Profile, mi_SignOut, mi_History;
 
     ArrayList<Model> models;
     HotProductAdapter hotProductAdapter;
@@ -79,15 +82,15 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MyMenuItem item = (MyMenuItem) adapterView.getItemAtPosition(i);
                 String name = item.getName();
-                if (name.equals("Trang chính")) {
-                    Intent i_ToMainPage = new Intent(MainPageActivity.this, MainPageActivity.class);
-                    startActivity(i_ToMainPage);
-                } else if (name.equals("Thông tin tài khoản")) {
+//                if (name.equals("Trang chính")) {
+//                    Intent i_ToMainPage = new Intent(MainPageActivity.this, MainPageActivity.class);
+//                    startActivity(i_ToMainPage);
+//                } else
+                if (name.equals("Thông tin tài khoản")) {
                     Intent i_ToProfile = new Intent(MainPageActivity.this, ProfileActivity.class);
                     startActivity(i_ToProfile);
                 } else if (name.equals("Đăng xuất")) {
                     mAuth.signOut();
-                    SignInActivity.user = null;
                     Intent i_ToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
                     startActivity(i_ToSignIn);
                 } else if (name.equals("Lịch sử")) {
@@ -97,6 +100,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                     Intent i_ToProDuct = new Intent(MainPageActivity.this, ProducstActivity.class);
                     i_ToProDuct.putExtra(manufaturer_name, item.getName());
                     startActivity(i_ToProDuct);
+//                    finish();
                 }
 
             }
@@ -104,48 +108,48 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void drawerStateChange() {
-        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                if (mi_Profile == null) {
-                    mi_Profile = new MyMenuItem();
-                    mi_Profile.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/profile.png?alt=media&token=1fda1b40-9620-4f1c-9266-b7d707df5256");
-                    mi_Profile.setName("Thông tin tài khoản");
-                    myMenuItems.add(mi_Profile);
-                    myMenuItemAdapter.notifyDataSetChanged();
-                }
-                if (mi_SignOut == null) {
-                    mi_SignOut = new MyMenuItem();
-                    mi_SignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
-                    mi_SignOut.setName("Đăng xuất");
-                    myMenuItems.add(mi_SignOut);
-                    myMenuItemAdapter.notifyDataSetChanged();
-                }
-
-                if (mi_History == null) {
-                    mi_History = new MyMenuItem();
-                    mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
-                    mi_History.setName("Lịch sử");
-                    myMenuItems.add(mi_History);
-                    myMenuItemAdapter.notifyDataSetChanged();
-                }
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                myMenuItemAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
+//        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+//            @Override
+//            public void onDrawerSlide(View drawerView, float slideOffset) {
+//                if (mi_Profile == null) {
+//                    mi_Profile = new MyMenuItem();
+//                    mi_Profile.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/profile.png?alt=media&token=1fda1b40-9620-4f1c-9266-b7d707df5256");
+//                    mi_Profile.setName("Thông tin tài khoản");
+//                    myMenuItems.add(mi_Profile);
+//                    myMenuItemAdapter.notifyDataSetChanged();
+//                }
+//                if (mi_SignOut == null) {
+//                    mi_SignOut = new MyMenuItem();
+//                    mi_SignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
+//                    mi_SignOut.setName("Đăng xuất");
+//                    myMenuItems.add(mi_SignOut);
+//                    myMenuItemAdapter.notifyDataSetChanged();
+//                }
+//
+//                if (mi_History == null) {
+//                    mi_History = new MyMenuItem();
+//                    mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
+//                    mi_History.setName("Lịch sử");
+//                    myMenuItems.add(mi_History);
+//                    myMenuItemAdapter.notifyDataSetChanged();
+//                }
+//            }
+//
+//            @Override
+//            public void onDrawerOpened(View drawerView) {
+//                myMenuItemAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onDrawerClosed(View drawerView) {
+//
+//            }
+//
+//            @Override
+//            public void onDrawerStateChanged(int newState) {
+//
+//            }
+//        });
     }
 
 
@@ -170,23 +174,30 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         myMenuItems = new ArrayList<>();
         setSupportActionBar(tb_MainPage);
         setTitle("Trang chủ");
-
         if (carts == null) {
             carts = new ArrayList<>();
-            loadCart();
+        }
+        carts.clear();
+
+        if (carts.size() <= 0) {
+            loadCart(SignInActivity.user);
+        }
+//        }
+        if (models == null) {
+            models = new ArrayList<>();
         }
 
-
-        models = new ArrayList<>();
         hotProductAdapter = new HotProductAdapter(getApplicationContext(), R.layout.layout_hot_product_item, models);
         rv_NewProducts.setHasFixedSize(true);
         rv_NewProducts.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rv_NewProducts.setAdapter(hotProductAdapter);
 
-        myMenuItems = new ArrayList<>();
+        if (myMenuItems == null) {
+            myMenuItems = new ArrayList<>();
+        }
+
         myMenuItemAdapter = new MyMenuItemAdapter(MainPageActivity.this, R.layout.layout_menu_item, myMenuItems);
         lv_Navigation.setAdapter(myMenuItemAdapter);
-        ;
         myMenuItemAdapter.notifyDataSetChanged();
 
         loadHotModel();
@@ -194,49 +205,14 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         loadMenu();
     }
 
-    private void loadCart() {
-        Intent i_rc = getIntent();
-        String mail = i_rc.getStringExtra(SignInActivity.email_key);
-        mDatabase.child("Cart").child(mail).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Cart cart = dataSnapshot.getValue(Cart.class);
-                if ((!cart.getName().equals("Default")) &&(cart.getPrice() != 0)){
-                    carts.add(cart);
-                }
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
     private void loadMenu() {
 
         if (myMenuItems.size() <= 0) {
-            mi_MainPage = new MyMenuItem();
-            mi_MainPage.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/home.png?alt=media&token=7694d7ac-f5f5-44aa-91c8-fc51e19ecb13");
-            mi_MainPage.setName("Trang chính");
-            myMenuItems.add(mi_MainPage);
-            myMenuItemAdapter.notifyDataSetChanged();
+//            mi_MainPage = new MyMenuItem();
+//            mi_MainPage.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/home.png?alt=media&token=7694d7ac-f5f5-44aa-91c8-fc51e19ecb13");
+//            mi_MainPage.setName("Trang chính");
+//            myMenuItems.add(mi_MainPage);
+//            myMenuItemAdapter.notifyDataSetChanged();
 
             mDatabase.child("Brand").addChildEventListener(new ChildEventListener() {
                 @Override
@@ -342,4 +318,106 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 //                startActivity(i_ToProduct);
         }
     }
+
+    private void loadCart(User user1) {
+        String mail = user1.getEmail();
+        mail = mail.replace("@", "");
+        mail = mail.replace(".", "");
+
+
+        mDatabase.child("Cart").child(mail).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Cart cart = dataSnapshot.getValue(Cart.class);
+                if ((!cart.getName().equals("Default")) && cart.getPrice() != 0) {
+                    carts.add(cart);
+                }
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void pushCart(User user1) {
+        if (carts.size() > 0) {
+            String mail = "";
+            mail += user1.getEmail();
+            mail = mail.replace("@", "");
+            mail = mail.replace(".", "");
+
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Cart").child(mail);
+            databaseReference.removeValue();
+            for (int i = 0; i < carts.size(); i++) {
+                mDatabase.child("Cart").child(mail).push().setValue(carts.get(i));
+            }
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        pushCart(SignInActivity.user);
+        carts.clear();
+        super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else {
+            android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+            builder.setMessage("Bạn thực sự muốn thoát ứng dụng");
+            builder.setCancelable(true);
+            builder.setPositiveButton(
+                    "Có",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+                            System.exit(0);
+                        }
+                    }
+            );
+            builder.setNegativeButton(
+                    "Không",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            dialogInterface.cancel();
+                        }
+                    }
+            );
+
+
+            android.app.AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        }
+    }
+    //    @Override
+//    protected void onDestroy() {
+//        pushCart(SignInActivity.user);
+//        super.onDestroy();
+//    }
 }
