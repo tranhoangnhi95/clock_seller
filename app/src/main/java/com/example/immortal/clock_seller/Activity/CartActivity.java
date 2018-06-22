@@ -117,6 +117,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_CContinue:
                 Intent i_ToMainPage = new Intent(CartActivity.this, MainPageActivity.class);
                 startActivity(i_ToMainPage);
+                finish();
                 break;
             case R.id.btn_CPay:
                 pay(SignInActivity.user);
@@ -188,13 +189,15 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onPause() {
-        pushCart(SignInActivity.user);
-        MainPageActivity.carts.clear();
-        super.onPause();
-        ;
-    }
+//    @Override
+//    protected void onPause() {
+//        pushCart(SignInActivity.user);
+//        MainPageActivity.carts.clear();
+//        super.onPause();
+//        ;
+//    }
+
+
 
     private void pushCart(User user1) {
         if (MainPageActivity.carts.size() > 0) {

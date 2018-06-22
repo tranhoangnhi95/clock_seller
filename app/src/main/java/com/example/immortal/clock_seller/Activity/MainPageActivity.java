@@ -71,7 +71,6 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
     private void controls() {
         actionBarClick();
-        drawerStateChange();
         navigationItemClick();
 
     }
@@ -100,56 +99,10 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                     Intent i_ToProDuct = new Intent(MainPageActivity.this, ProducstActivity.class);
                     i_ToProDuct.putExtra(manufaturer_name, item.getName());
                     startActivity(i_ToProDuct);
-//                    finish();
                 }
 
             }
         });
-    }
-
-    private void drawerStateChange() {
-//        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
-//            @Override
-//            public void onDrawerSlide(View drawerView, float slideOffset) {
-//                if (mi_Profile == null) {
-//                    mi_Profile = new MyMenuItem();
-//                    mi_Profile.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/profile.png?alt=media&token=1fda1b40-9620-4f1c-9266-b7d707df5256");
-//                    mi_Profile.setName("Thông tin tài khoản");
-//                    myMenuItems.add(mi_Profile);
-//                    myMenuItemAdapter.notifyDataSetChanged();
-//                }
-//                if (mi_SignOut == null) {
-//                    mi_SignOut = new MyMenuItem();
-//                    mi_SignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
-//                    mi_SignOut.setName("Đăng xuất");
-//                    myMenuItems.add(mi_SignOut);
-//                    myMenuItemAdapter.notifyDataSetChanged();
-//                }
-//
-//                if (mi_History == null) {
-//                    mi_History = new MyMenuItem();
-//                    mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
-//                    mi_History.setName("Lịch sử");
-//                    myMenuItems.add(mi_History);
-//                    myMenuItemAdapter.notifyDataSetChanged();
-//                }
-//            }
-//
-//            @Override
-//            public void onDrawerOpened(View drawerView) {
-//                myMenuItemAdapter.notifyDataSetChanged();
-//            }
-//
-//            @Override
-//            public void onDrawerClosed(View drawerView) {
-//
-//            }
-//
-//            @Override
-//            public void onDrawerStateChanged(int newState) {
-//
-//            }
-//        });
     }
 
 
@@ -177,12 +130,11 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         if (carts == null) {
             carts = new ArrayList<>();
         }
-        carts.clear();
 
         if (carts.size() <= 0) {
             loadCart(SignInActivity.user);
         }
-//        }
+
         if (models == null) {
             models = new ArrayList<>();
         }
@@ -208,16 +160,11 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     private void loadMenu() {
 
         if (myMenuItems.size() <= 0) {
-//            mi_MainPage = new MyMenuItem();
-//            mi_MainPage.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/home.png?alt=media&token=7694d7ac-f5f5-44aa-91c8-fc51e19ecb13");
-//            mi_MainPage.setName("Trang chính");
-//            myMenuItems.add(mi_MainPage);
-//            myMenuItemAdapter.notifyDataSetChanged();
 
             mDatabase.child("Brand").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    myMenuItems.add(dataSnapshot.getValue(MyMenuItem.class));
+                    myMenuItems.add(0,dataSnapshot.getValue(MyMenuItem.class));
                     myMenuItemAdapter.notifyDataSetChanged();
                 }
 
@@ -241,7 +188,28 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
                 }
             });
+            if (mi_Profile == null) {
+                mi_Profile = new MyMenuItem();
+                mi_Profile.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/profile.png?alt=media&token=1fda1b40-9620-4f1c-9266-b7d707df5256");
+                mi_Profile.setName("Thông tin tài khoản");
+                myMenuItems.add(mi_Profile);
+                myMenuItemAdapter.notifyDataSetChanged();
+            }
+            if (mi_SignOut == null) {
+                mi_SignOut = new MyMenuItem();
+                mi_SignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
+                mi_SignOut.setName("Đăng xuất");
+                myMenuItems.add(mi_SignOut);
+                myMenuItemAdapter.notifyDataSetChanged();
+            }
 
+            if (mi_History == null) {
+                mi_History = new MyMenuItem();
+                mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
+                mi_History.setName("Lịch sử");
+                myMenuItems.add(mi_History);
+                myMenuItemAdapter.notifyDataSetChanged();
+            }
 
         }
 
@@ -374,17 +342,10 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    protected void onPause() {
-        pushCart(SignInActivity.user);
-        carts.clear();
-        super.onPause();
-    }
-
-    @Override
     public void onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }else {
+        } else {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
             builder.setMessage("Bạn thực sự muốn thoát ứng dụng");
             builder.setCancelable(true);
@@ -415,9 +376,11 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
             alertDialog.show();
         }
     }
-    //    @Override
-//    protected void onDestroy() {
-//        pushCart(SignInActivity.user);
-//        super.onDestroy();
-//    }
+        @Override
+    protected void onDestroy() {
+        pushCart(SignInActivity.user);
+        carts.clear();
+        super.onDestroy();
+    }
+
 }

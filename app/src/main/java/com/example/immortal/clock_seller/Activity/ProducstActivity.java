@@ -61,6 +61,12 @@ public class ProducstActivity extends AppCompatActivity {
     private void loadActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tb_Products.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
@@ -141,5 +147,10 @@ public class ProducstActivity extends AppCompatActivity {
             modelAdapter.notifyDataSetChanged();
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
