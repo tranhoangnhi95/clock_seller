@@ -164,7 +164,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
             mDatabase.child("Brand").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    myMenuItems.add(0,dataSnapshot.getValue(MyMenuItem.class));
+                    myMenuItems.add(0, dataSnapshot.getValue(MyMenuItem.class));
                     myMenuItemAdapter.notifyDataSetChanged();
                 }
 
@@ -195,6 +195,14 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                 myMenuItems.add(mi_Profile);
                 myMenuItemAdapter.notifyDataSetChanged();
             }
+            if (mi_History == null) {
+                mi_History = new MyMenuItem();
+                mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
+                mi_History.setName("Lịch sử");
+                myMenuItems.add(mi_History);
+                myMenuItemAdapter.notifyDataSetChanged();
+            }
+
             if (mi_SignOut == null) {
                 mi_SignOut = new MyMenuItem();
                 mi_SignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
@@ -203,13 +211,6 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                 myMenuItemAdapter.notifyDataSetChanged();
             }
 
-            if (mi_History == null) {
-                mi_History = new MyMenuItem();
-                mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
-                mi_History.setName("Lịch sử");
-                myMenuItems.add(mi_History);
-                myMenuItemAdapter.notifyDataSetChanged();
-            }
 
         }
 
@@ -376,7 +377,8 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
             alertDialog.show();
         }
     }
-        @Override
+
+    @Override
     protected void onDestroy() {
         pushCart(SignInActivity.user);
         carts.clear();

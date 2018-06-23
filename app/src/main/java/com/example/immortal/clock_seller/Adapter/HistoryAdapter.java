@@ -79,7 +79,7 @@ public class HistoryAdapter extends BaseAdapter {
         viewHolder.txt_Price.setText("Giá: " +decimalFormat.format(clock.getPrice())+" Đ");
         viewHolder.txt_Total.setText("Thành tiền: "+decimalFormat.format(clock.getTotal())+" Đ");
         viewHolder.txt_Quantity.setText(String.valueOf(clock.getQuantity()));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy '-' HH:mm:ss");
         viewHolder.txt_DateOfPay.setText("Thanh toán: "+ dateFormat.format(Long.parseLong(clock.getDate())));
 
         Glide.with(context)

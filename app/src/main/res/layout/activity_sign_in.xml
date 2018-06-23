@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#009688"
     tools:context=".Activity.SignInActivity">
 
     <ImageView
@@ -20,10 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:background="@color/my_orange"
-        app:tabIndicatorColor="@color/product_price"
+        android:background="#f57c00"
+        app:tabIndicatorColor="@color/my_white"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="@color/product_price"
+        app:tabSelectedTextColor="@color/my_white"
         app:tabTextColor="@color/my_white"></android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager

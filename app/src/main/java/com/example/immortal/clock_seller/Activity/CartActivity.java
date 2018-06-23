@@ -218,4 +218,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         super.onBackPressed();
     }
+
+    @Override
+    protected void onDestroy() {
+        pushCart(SignInActivity.user);
+        MainPageActivity.carts.clear();
+        super.onDestroy();
+    }
 }

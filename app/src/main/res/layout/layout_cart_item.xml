@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/product_price" />
+        android:background="@color/my_light_primary" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
         <TextView
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/product_price" />
+            android:background="@color/my_light_primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:gravity="center"
+                android:gravity="left"
                 android:id="@+id/txt_CIProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,42 +48,30 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/product_price" />
-
-            <TextView
-                android:gravity="center"
+                android:gravity="left"
                 android:id="@+id/txt_CIProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Giá: 100000000 Đ"
-                android:textColor="@color/product_name"
+                android:textColor="@color/my_secondary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/product_price" />
-            <TextView
-                android:gravity="center"
+                android:gravity="left"
                 android:id="@+id/txt_CIProductTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="Tổng: 100000000 Đ"
-                android:textColor="@color/product_name"
+                android:textColor="@color/my_secondary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/product_price" />
-
             <LinearLayout
-                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="30dp"
+                android:gravity="left"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -92,22 +80,25 @@
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:text="-"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/btn_CIQuantity"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:text="1"
+                    android:layout_weight="6"
                     android:background="@null"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content" />
                 <Button
                     android:id="@+id/btn_CIIncrease"
                     android:textSize="30sp"
                     android:textStyle="bold"
                     android:text="+"
-                    android:layout_width="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
@@ -115,5 +106,5 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/product_price" />
+        android:background="@color/my_light_primary" />
 </LinearLayout>

@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/product_price" />
+        android:background="@color/my_light_primary" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
         <TextView
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/product_price" />
+            android:background="@color/my_light_primary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,91 +35,81 @@
             android:orientation="vertical">
 
             <TextView
-                android:gravity="center"
                 android:id="@+id/txt_HIProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="left"
                 android:text="Đồng hồ casio huyền thoại"
-                android:textColor="@color/product_name"
+                android:textColor="@color/my_Black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/product_price" />
-
-            <TextView
-                android:gravity="center"
                 android:id="@+id/txt_HIPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="left"
                 android:text="Giá: 1000000000 Đ"
-                android:textColor="@color/my_Black"
+                android:textColor="@color/my_secondary_dark"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/product_price" />
-
-            <TextView
-                android:gravity="center"
+                android:textStyle="bold|italic"
                 android:id="@+id/txt_HITotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="left"
                 android:text="Thành tiền: 2000000000 Đ"
-                android:textColor="@color/product_name"
-                android:textSize="20sp"
- />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/product_price" />
+                android:textColor="@color/my_secondary_dark"
+                android:textSize="20sp" />
 
             <LinearLayout
-                android:weightSum="3"
-                android:orientation="horizontal"
+                android:layout_marginLeft="5dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
                 <TextView
-                    android:gravity="center"
-                    android:textColor="@color/my_Black"
-                    android:textSize="20sp"
-                    android:text="Số lượng:"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:gravity="left"
+                    android:text="Số lượng:"
+                    android:textColor="@color/my_Black"
+                    android:textSize="20sp" />
+
                 <TextView
                     android:id="@+id/txt_HIQuantity"
-                    android:gravity="center"
-                    android:textColor="@color/my_Black"
-                    android:textSize="20sp"
-                    android:text="2"
-                    android:layout_weight="2"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="4"
+                    android:gravity="left"
+                    android:text="2"
+                    android:textColor="@color/my_Black"
+                    android:textSize="20sp" />
             </LinearLayout>
+
+
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/product_price" />
-            <TextView
+                android:layout_marginLeft="5dp"
                 android:id="@+id/txt_HIDateOfPay"
-                android:gravity="center"
-                android:textColor="@color/my_Black"
-                android:textSize="20sp"
-                android:text="Thanh toán: 12/12/2016"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Thanh toán: 12/12/2016"
+                android:textColor="@color/my_Black"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/product_price" />
+        android:background="@color/my_light_primary" />
 </LinearLayout>

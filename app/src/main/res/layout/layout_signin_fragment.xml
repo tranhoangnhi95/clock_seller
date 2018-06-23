@@ -11,11 +11,13 @@
         android:layout_marginRight="20dp">
 
         <EditText
+            android:textColorHint="@color/my_white"
+            android:textColor="@color/my_white"
             android:inputType="textEmailAddress"
             android:id="@+id/txt_SIEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/email"
+            android:drawableLeft="@drawable/email2"
             android:hint="@string/hint_email" />
     </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -26,10 +28,12 @@
         android:layout_marginRight="20dp">
 
         <EditText
+            android:textColorHint="@color/my_white"
+            android:textColor="@color/my_white"
             android:id="@+id/txt_SIPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/pass"
+            android:drawableLeft="@drawable/pass2"
             android:hint="@string/hint_pass_word"
             android:inputType="textPassword" />
     </com.wrapp.floatlabelededittext.FloatLabeledEditText>

@@ -7,14 +7,22 @@
     <color name="my_Blue">#7ce0ff</color>
     <color name="my_black_blue">#75d2ef</color>
     <color name="my_Black">#000</color>
-    <color name="my_orange">#fa6801</color>
+    <color name="my_orange">#f57c00</color>
     <color name="my_blur_orange">#fa8a01</color>
-    <color name="my_black_orange">#de5d03</color>
+    <color name="my_black_orange">#bb4d00</color>
     <color name="my_white">#fff</color>
     <color name="product_name">#3eb69d</color>
     <color name="product_price">#51edcc</color>
-    <color name="my_menu_background">#d1fff5</color>
+    <color name="my_menu_background">#52c7b8</color>
     <color name="main_background_color">#94f1db</color>
     <color name="line">#2d8674</color>
     <color name="my_update_bacground">#ffb050</color>
+    <color name="my_primary">#009688</color>
+    <color name="my_dark_primary">#00675b</color>
+    <color name="my_light_primary">#52c7b8</color>
+    <color name="my_lighter_primary">#4DB6AC</color>
+    <color name="my_secondary">#f57c00</color>
+    <color name="my_secondary_light">#ffad42</color>
+    <color name="my_secondary_dark">#bb4d00</color>
+    <color name="my_lightest_secondary">#FFF3E0</color>
 </resources>

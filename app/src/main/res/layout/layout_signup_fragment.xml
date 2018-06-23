@@ -21,10 +21,12 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textColorHint="@color/my_white"
+                    android:textColor="@color/my_white"
                     android:id="@+id/txt_SUName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/usero"
+                    android:drawableLeft="@drawable/usero2"
                     android:hint="@string/name" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -33,11 +35,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textColorHint="@color/my_white"
+                    android:textColor="@color/my_white"
                     android:maxLength="10"
                     android:id="@+id/txt_SUPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/phone"
+                    android:drawableLeft="@drawable/phone2"
                     android:hint="@string/phone" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -46,10 +50,12 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textColorHint="@color/my_white"
+                    android:textColor="@color/my_white"
                     android:id="@+id/txt_SUEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/email"
+                    android:drawableLeft="@drawable/email2"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
@@ -59,10 +65,12 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textColorHint="@color/my_white"
+                    android:textColor="@color/my_white"
                     android:id="@+id/txt_SUAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/address"
+                    android:drawableLeft="@drawable/address2"
                     android:hint="@string/address" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -71,10 +79,12 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:textColorHint="@color/my_white"
+                    android:textColor="@color/my_white"
                     android:id="@+id/txt_SUPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/pass"
+                    android:drawableLeft="@drawable/pass2"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>

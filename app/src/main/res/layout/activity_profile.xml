@@ -96,7 +96,7 @@
             android:textColor="@color/my_white"
             android:text="Cập nhật"
             android:layout_marginTop="5dp"
-            android:background="@drawable/radius_button_selector"
+            android:background="@drawable/green_radius_buttton_selector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

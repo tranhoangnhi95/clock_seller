@@ -10,6 +10,6 @@
     <string name="phone">Số điện thoại</string>
     <string name="address">Địa chỉ</string>
     <string name="password">Mật khẩu</string>
-    <string name="hot_product">Sản phẩm bán chạy</string>
+    <string name="hot_product">Sản phẩm hot</string>
     <string name="sign_out">Đăng xuất</string>
 </resources>

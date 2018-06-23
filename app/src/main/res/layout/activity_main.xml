@@ -21,13 +21,13 @@
                 android:id="@+id/tb_MainPage"
                 layout="@layout/layout_toolbar"></include>
             <ImageView
-                android:background="@color/main_background_color"
+                android:background="@color/my_lighter_primary"
                 android:scaleType="fitCenter"
                 android:src="@drawable/clockseller"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
             <LinearLayout
-                android:background="@color/main_background_color"
+                android:background="@color/my_lighter_primary"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -36,7 +36,7 @@
                     android:clickable="true"
                     android:id="@+id/txt_NewProduct"
                     android:layout_marginBottom="10dp"
-                    android:textColor="@color/my_orange"
+                    android:textColor="@color/my_secondary_dark"
                     android:textSize="20sp"
                     android:layout_gravity="center"
                     android:text="@string/hot_product"
@@ -49,14 +49,24 @@
             </LinearLayout>
         </LinearLayout>
         <android.support.design.widget.NavigationView
-            android:background="@color/my_menu_background"
+            android:background="@color/my_lightest_secondary"
             android:layout_gravity="start"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ListView
-                android:id="@+id/lv_Menu"
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></ListView>
+                android:layout_height="match_parent">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+                <ListView
+                    android:id="@+id/lv_Menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></ListView>
+            </LinearLayout>
         </android.support.design.widget.NavigationView>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
