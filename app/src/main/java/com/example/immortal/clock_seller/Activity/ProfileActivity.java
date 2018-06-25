@@ -1,5 +1,6 @@
 package com.example.immortal.clock_seller.Activity;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -114,7 +115,14 @@ public class ProfileActivity extends AppCompatActivity {
                 }
         );
 
-        android.app.AlertDialog alertDialog = builder.create();
+        final android.app.AlertDialog alertDialog = builder.create();
+        alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(getResources().getColor(R.color.my_secondary));
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.my_secondary));
+            }
+        });
         alertDialog.show();
 
 

@@ -1,5 +1,7 @@
 package com.example.immortal.clock_seller.Fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +20,10 @@ import com.example.immortal.clock_seller.R;
 public class SignUpFragment extends Fragment {
     TextView txt_Name,txt_Phone, txt_Email, txt_Address, txt_Pass;
     Button btn_SignUp;
+
+    public interface FragmentCommunication{
+        public void EmailSending(String email);
+    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

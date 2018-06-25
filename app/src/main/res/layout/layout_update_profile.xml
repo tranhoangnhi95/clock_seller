@@ -10,7 +10,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="Cập nhật thông tin"
-        android:textColor="@color/my_dark_primary"
+        android:textColor="@color/my_primary"
         android:textSize="30sp" />
 
     <LinearLayout
@@ -25,10 +25,11 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:drawablePadding="5dp"
                 android:id="@+id/txt_UdName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/usero2"
+                android:drawableLeft="@drawable/person_red_24dp"
                 android:hint="@string/name"
                 android:textColor="@color/my_Black" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
@@ -38,10 +39,11 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:drawablePadding="5dp"
                 android:id="@+id/txt_UdPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/phone2"
+                android:drawableLeft="@drawable/phone_red_24dp"
                 android:hint="@string/phone"
                 android:maxLength="10"
                 android:textColor="@color/my_Black" />
@@ -52,10 +54,11 @@
             android:layout_height="wrap_content">
 
             <EditText
+                android:drawablePadding="5dp"
                 android:id="@+id/txt_UdAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/address2"
+                android:drawableLeft="@drawable/location_red_24dp"
                 android:hint="@string/address"
                 android:textColor="@color/my_Black" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>

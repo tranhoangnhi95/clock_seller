@@ -21,12 +21,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:drawablePadding="5dp"
                     android:textColorHint="@color/my_white"
                     android:textColor="@color/my_white"
                     android:id="@+id/txt_SUName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/usero2"
+                    android:drawableLeft="@drawable/person_24dp"
                     android:hint="@string/name" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -35,13 +36,15 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:drawablePadding="5dp"
+                    android:inputType="phone"
                     android:textColorHint="@color/my_white"
                     android:textColor="@color/my_white"
                     android:maxLength="10"
                     android:id="@+id/txt_SUPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/phone2"
+                    android:drawableLeft="@drawable/phone_24dp"
                     android:hint="@string/phone" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -50,12 +53,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:drawablePadding="5dp"
                     android:textColorHint="@color/my_white"
                     android:textColor="@color/my_white"
                     android:id="@+id/txt_SUEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/email2"
+                    android:drawableLeft="@drawable/email_24dp"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
@@ -65,12 +69,13 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:drawablePadding="5dp"
                     android:textColorHint="@color/my_white"
                     android:textColor="@color/my_white"
                     android:id="@+id/txt_SUAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/address2"
+                    android:drawableLeft="@drawable/location24dp"
                     android:hint="@string/address" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -79,33 +84,25 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:drawablePadding="5dp"
                     android:textColorHint="@color/my_white"
                     android:textColor="@color/my_white"
                     android:id="@+id/txt_SUPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/pass2"
+                    android:drawableLeft="@drawable/lock_24dp"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
             </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            <Button
+                android:id="@+id/btn_SUSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/radius_button_selector"
+                android:text="@string/sign_up"
+                android:textColor="@color/my_white" />
         </LinearLayout>
     </ScrollView>
-
-   <LinearLayout
-       android:gravity="center"
-       android:layout_weight="2"
-       android:layout_width="match_parent"
-       android:layout_height="0dp">
-       <Button
-           android:id="@+id/btn_SUSignUp"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center"
-           android:layout_marginBottom="5dp"
-           android:background="@drawable/radius_button_selector"
-           android:text="@string/sign_up"
-           android:textColor="@color/my_white" />
-   </LinearLayout>
-
-
 </LinearLayout>

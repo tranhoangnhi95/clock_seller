@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/usero"
+            android:drawableLeft="@drawable/person_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
             android:text="Trần Văn A"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/phone"
+            android:drawableLeft="@drawable/phone_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
             android:text="09xxxxxxxx"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/email"
+            android:drawableLeft="@drawable/mail_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
             android:text="xxxx@gmail.com"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/address"
+            android:drawableLeft="@drawable/location_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
             android:text="Cần Thơ"
@@ -101,17 +101,5 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="right"
-        android:orientation="vertical">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/info" />
-    </LinearLayout>
 
 </LinearLayout>

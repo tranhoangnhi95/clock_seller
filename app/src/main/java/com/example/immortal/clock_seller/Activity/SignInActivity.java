@@ -1,5 +1,6 @@
 package com.example.immortal.clock_seller.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -58,7 +59,6 @@ public class SignInActivity extends AppCompatActivity {
     private void inits() {
         tl_Sliding = findViewById(R.id.tl_SISliding);
         vp_ViewPager = findViewById(R.id.vp_SIViewPager);
-
         myFragmentAdapter = new MyFragmentAdapter(SignInActivity.this, getSupportFragmentManager());
         vp_ViewPager.setAdapter(myFragmentAdapter);
         vp_ViewPager.setPageTransformer(true, new ZoomOutPageTransfomer());
@@ -77,7 +77,6 @@ public class SignInActivity extends AppCompatActivity {
         this.SU_Email = Email;
         this.SU_Address = Address;
         this.SU_Pass = Pass;
-
         mAuth.createUserWithEmailAndPassword(SU_Email, SU_Pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -92,12 +91,13 @@ public class SignInActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                                     if (databaseError == null) {
-                                        Toast.makeText(SignInActivity.this, "Đăng ký thành công, vui lòng chuyển sang đăng nhập", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignInActivity.this, "Đăng ký thành công, vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(SignInActivity.this, "Đăng ký người dùng không thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
+                            tl_Sliding.getTabAt(0).select();
 //                            Intent i_ToMainPage = new Intent(SignInActivity.this,MainPageActivity.class);
 //                            i_ToMainPage.putExtra(email_key,SU_Email);
 //                            startActivity(i_ToMainPage);

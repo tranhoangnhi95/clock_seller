@@ -1,53 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:textColorHint="@color/my_white"
-            android:textColor="@color/my_white"
-            android:inputType="textEmailAddress"
-            android:id="@+id/txt_SIEmail"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/email2"
-            android:hint="@string/hint_email" />
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <com.wrapp.floatlabelededittext.FloatLabeledEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
 
-        <EditText
-            android:textColorHint="@color/my_white"
-            android:textColor="@color/my_white"
-            android:id="@+id/txt_SIPass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/pass2"
-            android:hint="@string/hint_pass_word"
-            android:inputType="textPassword" />
-    </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+                <EditText
+                    android:id="@+id/txt_SIEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/email_24dp"
+                    android:drawablePadding="5dp"
+                    android:textColorHint="@color/my_white"
+                    android:textColor="@color/my_white"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                     />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
-    <Button
-        android:id="@+id/btn_SISignIn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/radius_button_selector"
-        android:text="@string/sign_in"
-        android:textAllCaps="false"
-        android:textColor="@color/my_white" />
+            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <EditText
+                    android:id="@+id/txt_SIPass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/lock_24dp"
+                    android:drawablePadding="5dp"
+                    android:hint="@string/hint_pass_word"
+                    android:inputType="textPassword"
+                    android:textColor="@color/my_white"
+                    android:textColorHint="@color/my_white" />
+            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+
+            <Button
+                android:id="@+id/btn_SISignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/radius_button_selector"
+                android:text="@string/sign_in"
+                android:textAllCaps="false"
+                android:textColor="@color/my_white" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

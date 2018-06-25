@@ -17,12 +17,13 @@
     <color name="main_background_color">#94f1db</color>
     <color name="line">#2d8674</color>
     <color name="my_update_bacground">#ffb050</color>
-    <color name="my_primary">#009688</color>
-    <color name="my_dark_primary">#00675b</color>
-    <color name="my_light_primary">#52c7b8</color>
+    <color name="my_primary">#03a9f4</color>
+    <color name="my_dark_primary">#007ac1</color>
+    <color name="my_light_primary">#67daff</color>
     <color name="my_lighter_primary">#4DB6AC</color>
-    <color name="my_secondary">#f57c00</color>
-    <color name="my_secondary_light">#ffad42</color>
-    <color name="my_secondary_dark">#bb4d00</color>
-    <color name="my_lightest_secondary">#FFF3E0</color>
+    <color name="my_secondary">#d32f2f</color>
+    <color name="my_secondary_light">#ff6659</color>
+    <color name="my_secondary_dark">#9a0007</color>
+    <color name="my_lightest_secondary">#FFEBEE</color>
+    <color name="my_lighter_secondary">#EF9A9A</color>
 </resources>
