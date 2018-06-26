@@ -1,6 +1,5 @@
 package com.example.immortal.clock_seller.Activity;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,20 +7,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Adapter.MyFragmentAdapter;
 import com.example.immortal.clock_seller.AnimViewPager.ZoomOutPageTransfomer;
 import com.example.immortal.clock_seller.Model.Cart;
 import com.example.immortal.clock_seller.Model.Clock;
-import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -37,11 +28,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignInActivity extends AppCompatActivity {
     public static final String email_key = "email";
-    TabLayout tl_Sliding;
-    ViewPager vp_ViewPager;
-    MyFragmentAdapter myFragmentAdapter;
-    String SU_Name, SU_Phone, SU_Email, SU_Address, SU_Pass;
-    String SI_Email, SI_Pass;
+    private TabLayout tlSliding;
+    private ViewPager vpViewPager;
+    private MyFragmentAdapter myFragmentAdapter;
+    private String suName, suPhone, suEmail, suAddress, suPass;
+    private String siEmail, siPass;
     public FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -57,12 +48,12 @@ public class SignInActivity extends AppCompatActivity {
 
 
     private void inits() {
-        tl_Sliding = findViewById(R.id.tl_SISliding);
-        vp_ViewPager = findViewById(R.id.vp_SIViewPager);
+        tlSliding = findViewById(R.id.tl_SISliding);
+        vpViewPager = findViewById(R.id.vp_SIViewPager);
         myFragmentAdapter = new MyFragmentAdapter(SignInActivity.this, getSupportFragmentManager());
-        vp_ViewPager.setAdapter(myFragmentAdapter);
-        vp_ViewPager.setPageTransformer(true, new ZoomOutPageTransfomer());
-        tl_Sliding.setupWithViewPager(vp_ViewPager);
+        vpViewPager.setAdapter(myFragmentAdapter);
+        vpViewPager.setPageTransformer(true, new ZoomOutPageTransfomer());
+        tlSliding.setupWithViewPager(vpViewPager);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         if (user == null){
@@ -72,20 +63,20 @@ public class SignInActivity extends AppCompatActivity {
 
 
     public void signUpFragment(String Name, String Phone, String Email, String Address, String Pass) {
-        this.SU_Name = Name;
-        this.SU_Phone = Phone;
-        this.SU_Email = Email;
-        this.SU_Address = Address;
-        this.SU_Pass = Pass;
-        mAuth.createUserWithEmailAndPassword(SU_Email, SU_Pass)
+        this.suName = Name;
+        this.suPhone = Phone;
+        this.suEmail = Email;
+        this.suAddress = Address;
+        this.suPass = Pass;
+        mAuth.createUserWithEmailAndPassword(suEmail, suPass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
 
-                            User user1 = new User(SU_Name, SU_Phone, SU_Email, SU_Address);
-                            String mail = SU_Email.replace("@","");
+                            User user1 = new User(suName, suPhone, suEmail, suAddress);
+                            String mail = suEmail.replace("@","");
                             mail = mail.replace(".","");
                             mDatabase.child("User").child(mail).setValue(user1, new DatabaseReference.CompletionListener() {
                                 @Override
@@ -97,9 +88,9 @@ public class SignInActivity extends AppCompatActivity {
                                     }
                                 }
                             });
-                            tl_Sliding.getTabAt(0).select();
+                            tlSliding.getTabAt(0).select();
 //                            Intent i_ToMainPage = new Intent(SignInActivity.this,MainPageActivity.class);
-//                            i_ToMainPage.putExtra(email_key,SU_Email);
+//                            i_ToMainPage.putExtra(email_key,suEmail);
 //                            startActivity(i_ToMainPage);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -112,22 +103,22 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void signInFragment(String Email, String Pass) {
-        this.SI_Email = Email;
-        this.SI_Pass = Pass;
+        this.siEmail = Email;
+        this.siPass = Pass;
 
-        mAuth.signInWithEmailAndPassword(SI_Email, SI_Pass)
+        mAuth.signInWithEmailAndPassword(siEmail, siPass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            user.setEmail(SI_Email);
-                            String mail = SI_Email.replace("@","");
+                            user.setEmail(siEmail);
+                            String mail = siEmail.replace("@","");
                             mail = mail.replace(".","");
                             mDatabase.child("User").addChildEventListener(new ChildEventListener() {
                                 @Override
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     User userFB = dataSnapshot.getValue(User.class);
-                                    if (userFB.getEmail().equals(SI_Email)) {
+                                    if (userFB.getEmail().equals(siEmail)) {
                                         user = userFB;
 //                                        user.setName(userFB.getName());
 //                                        user.setPhone(userFB.getPhone());
@@ -158,7 +149,7 @@ public class SignInActivity extends AppCompatActivity {
                             });
                             Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
-//                            String mail = SI_Email;
+//                            String mail = siEmail;
 //                            mail = mail.replace("@", "");
 //                            mail = mail.replace(".", "");
                             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(

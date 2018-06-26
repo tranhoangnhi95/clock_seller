@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -13,14 +12,12 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Adapter.HotProductAdapter;
 import com.example.immortal.clock_seller.Adapter.MyMenuItemAdapter;
@@ -29,7 +26,6 @@ import com.example.immortal.clock_seller.Model.Model;
 import com.example.immortal.clock_seller.Model.MyMenuItem;
 import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
-import com.google.android.gms.signin.SignIn;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -41,18 +37,18 @@ import java.util.ArrayList;
 
 public class MainPageActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String manufaturer_name = "manufacture";
-    Toolbar tb_MainPage;
-    RecyclerView rv_NewProducts;
-    ListView lv_Navigation;
-    DrawerLayout drawerLayout;
-    TextView txt_Product;
+    private Toolbar tbMainPage;
+    private RecyclerView rvNewProducts;
+    private ListView lvNavigation;
+    private DrawerLayout drawerLayout;
+    private TextView txtProduct;
 
-    ArrayList<MyMenuItem> myMenuItems;
-    MyMenuItemAdapter myMenuItemAdapter;
-    MyMenuItem mi_Profile, mi_SignOut, mi_History;
+    private ArrayList<MyMenuItem> myMenuItems;
+    private MyMenuItemAdapter myMenuItemAdapter;
+    private MyMenuItem miProfile, miSignOut, miHistory;
 
-    ArrayList<Model> models;
-    HotProductAdapter hotProductAdapter;
+    private ArrayList<Model> models;
+    private HotProductAdapter hotProductAdapter;
 
     public FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -76,7 +72,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void navigationItemClick() {
-        lv_Navigation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvNavigation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MyMenuItem item = (MyMenuItem) adapterView.getItemAtPosition(i);
@@ -107,7 +103,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void actionBarClick() {
-        tb_MainPage.setNavigationOnClickListener(new View.OnClickListener() {
+        tbMainPage.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawerLayout.openDrawer(GravityCompat.START);
@@ -116,16 +112,16 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void inits() {
-        rv_NewProducts = findViewById(R.id.rv_NewProducts);
-        lv_Navigation = findViewById(R.id.lv_Menu);
-        tb_MainPage = findViewById(R.id.tb_MainPage);
+        rvNewProducts = findViewById(R.id.rv_NewProducts);
+        lvNavigation = findViewById(R.id.lv_Menu);
+        tbMainPage = findViewById(R.id.tb_MainPage);
         drawerLayout = findViewById(R.id.dl_MainPageLayout);
-        txt_Product = findViewById(R.id.txt_NewProduct);
+        txtProduct = findViewById(R.id.txt_NewProduct);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         myMenuItems = new ArrayList<>();
-        setSupportActionBar(tb_MainPage);
+        setSupportActionBar(tbMainPage);
         setTitle("Trang chủ");
         if (carts == null) {
             carts = new ArrayList<>();
@@ -140,16 +136,16 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         }
 
         hotProductAdapter = new HotProductAdapter(getApplicationContext(), R.layout.layout_hot_product_item, models);
-        rv_NewProducts.setHasFixedSize(true);
-        rv_NewProducts.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-        rv_NewProducts.setAdapter(hotProductAdapter);
+        rvNewProducts.setHasFixedSize(true);
+        rvNewProducts.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+        rvNewProducts.setAdapter(hotProductAdapter);
 
         if (myMenuItems == null) {
             myMenuItems = new ArrayList<>();
         }
 
         myMenuItemAdapter = new MyMenuItemAdapter(MainPageActivity.this, R.layout.layout_menu_item, myMenuItems);
-        lv_Navigation.setAdapter(myMenuItemAdapter);
+        lvNavigation.setAdapter(myMenuItemAdapter);
         myMenuItemAdapter.notifyDataSetChanged();
 
         loadHotModel();
@@ -188,26 +184,26 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
                 }
             });
-            if (mi_Profile == null) {
-                mi_Profile = new MyMenuItem();
-                mi_Profile.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/profile.png?alt=media&token=1fda1b40-9620-4f1c-9266-b7d707df5256");
-                mi_Profile.setName("Thông tin tài khoản");
-                myMenuItems.add(mi_Profile);
+            if (miProfile == null) {
+                miProfile = new MyMenuItem();
+                miProfile.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/profile.png?alt=media&token=1fda1b40-9620-4f1c-9266-b7d707df5256");
+                miProfile.setName("Thông tin tài khoản");
+                myMenuItems.add(miProfile);
                 myMenuItemAdapter.notifyDataSetChanged();
             }
-            if (mi_History == null) {
-                mi_History = new MyMenuItem();
-                mi_History.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
-                mi_History.setName("Lịch sử");
-                myMenuItems.add(mi_History);
+            if (miHistory == null) {
+                miHistory = new MyMenuItem();
+                miHistory.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/history.png?alt=media&token=b03f4e74-4882-491f-95bf-945b1eb8c0db");
+                miHistory.setName("Lịch sử");
+                myMenuItems.add(miHistory);
                 myMenuItemAdapter.notifyDataSetChanged();
             }
 
-            if (mi_SignOut == null) {
-                mi_SignOut = new MyMenuItem();
-                mi_SignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
-                mi_SignOut.setName("Đăng xuất");
-                myMenuItems.add(mi_SignOut);
+            if (miSignOut == null) {
+                miSignOut = new MyMenuItem();
+                miSignOut.setImage("https://firebasestorage.googleapis.com/v0/b/clockseller-5de25.appspot.com/o/signout.png?alt=media&token=e10fe8fe-89b9-4c05-a3a5-3e4140531036");
+                miSignOut.setName("Đăng xuất");
+                myMenuItems.add(miSignOut);
                 myMenuItemAdapter.notifyDataSetChanged();
             }
 
@@ -258,7 +254,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tb_MainPage.setNavigationIcon(R.drawable.menu);
+        tbMainPage.setNavigationIcon(R.drawable.menu);
     }
 
     @Override

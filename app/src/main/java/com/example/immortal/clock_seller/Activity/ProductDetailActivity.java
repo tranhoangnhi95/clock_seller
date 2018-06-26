@@ -5,17 +5,11 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
@@ -27,17 +21,15 @@ import com.example.immortal.clock_seller.R;
 import java.text.DecimalFormat;
 
 public class ProductDetailActivity extends AppCompatActivity {
-    Toolbar tb_Detail;
-    ImageView img_Image;
-    TextView txt_Name, txt_Price, txt_Detail;
-    //    Button btn_AddToCart;
-//    Spinner sp_Quantity;
-    Model model;
-    String name = "";
-    int price = 0;
-    String detail = "";
-    String img = "";
-    String date = "";
+    private Toolbar tbDetail;
+    private ImageView imgImage;
+    private TextView txtName, txtPrice, txtDetail;
+    private Model model;
+    private String name = "";
+    private int price = 0;
+    private String detail = "";
+    private String img = "";
+    private String date = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,15 +40,13 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
     private void inits() {
-        img_Image = findViewById(R.id.img_DtImage);
-        txt_Name = findViewById(R.id.txt_DtName);
-        txt_Price = findViewById(R.id.txt_DtPrice);
-        txt_Detail = findViewById(R.id.txt_DtDetail);
-//        btn_AddToCart = findViewById(R.id.btn_DtAddToCart);
-//        sp_Quantity = findViewById(R.id.sp_DtQuantity);
-        tb_Detail = findViewById(R.id.tb_Detail);
+        imgImage = findViewById(R.id.img_DtImage);
+        txtName = findViewById(R.id.txt_DtName);
+        txtPrice = findViewById(R.id.txt_DtPrice);
+        txtDetail = findViewById(R.id.txt_DtDetail);
+        tbDetail = findViewById(R.id.tb_Detail);
 
-        setSupportActionBar(tb_Detail);
+        setSupportActionBar(tbDetail);
         loadActionBar();
         setTitle("Chi tiết sản phẩm");
     }
@@ -64,7 +54,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private void loadActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tb_Detail.setNavigationOnClickListener(new View.OnClickListener() {
+        tbDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -101,10 +91,10 @@ public class ProductDetailActivity extends AppCompatActivity {
         price = model.getPrice();
         detail = model.getDetail();
         img = model.getImage();
-        txt_Name.setText(name);
+        txtName.setText(name);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        txt_Price.setText("Giá : " + decimalFormat.format(price) + " Đ");
-        txt_Detail.setText(detail);
+        txtPrice.setText("Giá : " + decimalFormat.format(price) + " Đ");
+        txtDetail.setText(detail);
         Glide.with(getApplicationContext())
                 .load(img)
                 .apply(
@@ -116,7 +106,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                                 .timeout(3000)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
-                .into(img_Image);
+                .into(imgImage);
     }
 
     @Override

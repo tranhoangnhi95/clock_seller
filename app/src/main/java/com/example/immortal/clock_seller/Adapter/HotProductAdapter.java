@@ -29,9 +29,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.ItemHolder> {
-    Context context;
-    int resource;
-    ArrayList<Model> models;
+    public Context context;
+    public int resource;
+    public ArrayList<Model> models;
 
     public HotProductAdapter(Context context, int resource, ArrayList<Model> models) {
         this.context = context;
@@ -50,19 +50,19 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
         final Model model = models.get(position);
-        holder.txt_Name.setMaxLines(1);
-        holder.txt_Name.setEllipsize(TextUtils.TruncateAt.END);
-        holder.txt_Name.setText(model.getName());
+        holder.txtName.setMaxLines(1);
+        holder.txtName.setEllipsize(TextUtils.TruncateAt.END);
+        holder.txtName.setText(model.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.txt_Price.setText("Giá: " + decimalFormat.format(model.getPrice()) + " Đ");
-        holder.txt_Detail.setMaxLines(1);
-        holder.txt_Detail.setEllipsize(TextUtils.TruncateAt.END);
-        holder.txt_Detail.setText(model.getDetail());
+        holder.txtPrice.setText("Giá: " + decimalFormat.format(model.getPrice()) + " Đ");
+        holder.txtDetail.setMaxLines(1);
+        holder.txtDetail.setEllipsize(TextUtils.TruncateAt.END);
+        holder.txtDetail.setText(model.getDetail());
 //        Glide.with(context).load(model.getImage())
 //                .placeholder(R.drawable.noimage)
 //                .error(R.drawable.noimage)
 //                .override(100,100)
-//                .into(holder.img_Image);
+//                .into(holder.imgImage);
         Glide.with(context)
                 .load(model.getImage())
                 .apply(
@@ -74,15 +74,15 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
                                 .timeout(3000)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
-                .into(holder.img_Image);
-//        holder.img_Image.setImageResource(R.drawable.menu);
+                .into(holder.imgImage);
+//        holder.imgImage.setImageResource(R.drawable.menu);
         final ItemHolder holder1 = holder;
         final Model model1 = model;
         holder.setHotProductItemClickListner(new HotProductItemClickListner() {
             @Override
             public void addToCartClick(View view, int position, boolean isLongClick) {
                 if (MainPageActivity.carts.size() > 0) {
-                    int quantity1 = Integer.parseInt(holder1.btn_Quantity.getText().toString());
+                    int quantity1 = Integer.parseInt(holder1.btnQuantity.getText().toString());
                     boolean exist = false;
                     for (int i = 0; i < MainPageActivity.carts.size(); i++) {
                         if (MainPageActivity.carts.get(i).getName().equals(model1.getName())) {
@@ -95,12 +95,12 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
                         }
                     }
                     if (!exist) {
-                        int quantity = Integer.parseInt(holder1.btn_Quantity.getText().toString());
+                        int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                         long total = quantity * model1.getPrice();
                         MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity));
                     }
                 } else {
-                    int quantity = Integer.parseInt(holder1.btn_Quantity.getText().toString());
+                    int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                     long total = quantity * model1.getPrice();
                     MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity));
                 }
@@ -117,21 +117,21 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
 
             @Override
             public void increaseClick(View view, int position, boolean isLongClick) {
-                if (Integer.valueOf(holder1.btn_Quantity.getText().toString()) >= 10) {
-                    holder1.btn_Quantity.setText(String.valueOf(10));
+                if (Integer.valueOf(holder1.btnQuantity.getText().toString()) >= 10) {
+                    holder1.btnQuantity.setText(String.valueOf(10));
                 } else {
-                    holder1.btn_Quantity.setText(String.valueOf(Integer.valueOf(
-                            holder1.btn_Quantity.getText().toString()) + 1));
+                    holder1.btnQuantity.setText(String.valueOf(Integer.valueOf(
+                            holder1.btnQuantity.getText().toString()) + 1));
                 }
             }
 
             @Override
             public void decreaseClick(View view, int position, boolean isLongClick) {
-                if (Integer.valueOf(holder1.btn_Quantity.getText().toString()) <= 0) {
-                    holder1.btn_Quantity.setText(String.valueOf(0));
+                if (Integer.valueOf(holder1.btnQuantity.getText().toString()) <= 0) {
+                    holder1.btnQuantity.setText(String.valueOf(0));
                 } else {
-                    holder1.btn_Quantity.setText(String.valueOf(Integer.valueOf(
-                            holder1.btn_Quantity.getText().toString()) - 1));
+                    holder1.btnQuantity.setText(String.valueOf(Integer.valueOf(
+                            holder1.btnQuantity.getText().toString()) - 1));
                 }
             }
         });
@@ -146,27 +146,27 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public ImageView img_Image;
-        public TextView txt_Name, txt_Price, txt_Detail;
-        public ImageButton btn_AddToCart, btn_Decrease, btn_Increase;
-        public Button btn_Quantity;
+        public ImageView imgImage;
+        public TextView txtName, txtPrice, txtDetail;
+        public ImageButton btnAddToCart, btnDecrease, btnIncrease;
+        public Button btnQuantity;
         public HotProductItemClickListner hotProductItemClickListner;
 
         public ItemHolder(View itemView) {
             super(itemView);
-            this.img_Image = itemView.findViewById(R.id.img_HPImage);
-            this.txt_Name = itemView.findViewById(R.id.txt_HPName);
-            this.txt_Price = itemView.findViewById(R.id.txt_HPPrice);
-            this.txt_Detail = itemView.findViewById(R.id.txt_HPDetail);
-            this.btn_AddToCart = itemView.findViewById(R.id.btn_HPAddToCart);
-            this.btn_Decrease = itemView.findViewById(R.id.btn_HPDecrease);
-            this.btn_Quantity = itemView.findViewById(R.id.btn_HPQuantity);
-            this.btn_Increase = itemView.findViewById(R.id.btn_HPIncrease);
+            this.imgImage = itemView.findViewById(R.id.img_HPImage);
+            this.txtName = itemView.findViewById(R.id.txt_HPName);
+            this.txtPrice = itemView.findViewById(R.id.txt_HPPrice);
+            this.txtDetail = itemView.findViewById(R.id.txt_HPDetail);
+            this.btnAddToCart = itemView.findViewById(R.id.btn_HPAddToCart);
+            this.btnDecrease = itemView.findViewById(R.id.btn_HPDecrease);
+            this.btnQuantity = itemView.findViewById(R.id.btn_HPQuantity);
+            this.btnIncrease = itemView.findViewById(R.id.btn_HPIncrease);
 
             itemView.setOnClickListener(this);
-            btn_Decrease.setOnClickListener(this);
-            btn_Increase.setOnClickListener(this);
-            btn_AddToCart.setOnClickListener(this);
+            btnDecrease.setOnClickListener(this);
+            btnIncrease.setOnClickListener(this);
+            btnAddToCart.setOnClickListener(this);
         }
 
         public void setHotProductItemClickListner(HotProductItemClickListner hotProductItemClickListner) {

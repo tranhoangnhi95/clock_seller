@@ -1,10 +1,7 @@
 package com.example.immortal.clock_seller.Activity;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,19 +18,14 @@ import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DecimalFormat;
-
 public class ProfileActivity extends AppCompatActivity {
-    Toolbar tb_Profile;
-    Button btn_Update;
-    TextView txt_Name, txt_Phone, txt_Email, txt_Address;
-    DatabaseReference mDatabase;
+    private Toolbar tbProfile;
+    private Button btnUpdate;
+    private TextView txtName, txtPhone, txtEmail, txtAddress;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void controls() {
-        btn_Update.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 updateProfile(SignInActivity.user);
@@ -99,9 +91,9 @@ public class ProfileActivity extends AppCompatActivity {
 
                             mDatabase.child("User").child(mail).setValue(user1);
 
-                            txt_Name.setText(name);
-                            txt_Address.setText(address);
-                            txt_Phone.setText(phone);
+                            txtName.setText(name);
+                            txtAddress.setText(address);
+                            txtPhone.setText(phone);
 
                             Toast.makeText(getApplicationContext(),"Cập nhật thành công",Toast.LENGTH_SHORT).show();
                             dialogInterface.cancel();
@@ -130,18 +122,18 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void inits() {
-        tb_Profile = findViewById(R.id.tb_Profile);
-        txt_Name = findViewById(R.id.txt_PfName);
-        txt_Phone = findViewById(R.id.txt_PfPhone);
-        txt_Email = findViewById(R.id.txt_PfEmail);
-        txt_Address = findViewById(R.id.txt_PfAdrress);
-        btn_Update = findViewById(R.id.btn_PfUpdate);
+        tbProfile = findViewById(R.id.tb_Profile);
+        txtName = findViewById(R.id.txt_PfName);
+        txtPhone = findViewById(R.id.txt_PfPhone);
+        txtEmail = findViewById(R.id.txt_PfEmail);
+        txtAddress = findViewById(R.id.txt_PfAdrress);
+        btnUpdate = findViewById(R.id.btn_PfUpdate);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        txt_Name.setText(SignInActivity.user.getName());
-        txt_Phone.setText(SignInActivity.user.getPhone());
-        txt_Email.setText(SignInActivity.user.getEmail());
-        txt_Address.setText(SignInActivity.user.getAddress());
-        setSupportActionBar(tb_Profile);
+        txtName.setText(SignInActivity.user.getName());
+        txtPhone.setText(SignInActivity.user.getPhone());
+        txtEmail.setText(SignInActivity.user.getEmail());
+        txtAddress.setText(SignInActivity.user.getAddress());
+        setSupportActionBar(tbProfile);
         loadingActionBar();
         setTitle("Tài khoản của bạn");
     }
@@ -149,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tb_Profile.setNavigationOnClickListener(new View.OnClickListener() {
+        tbProfile.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();

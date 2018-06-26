@@ -1,22 +1,17 @@
 package com.example.immortal.clock_seller.Activity;
 
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.immortal.clock_seller.Adapter.HistoryAdapter;
-import com.example.immortal.clock_seller.Model.Cart;
 import com.example.immortal.clock_seller.Model.Clock;
-import com.example.immortal.clock_seller.Model.SoldClock;
 import com.example.immortal.clock_seller.Model.User;
 import com.example.immortal.clock_seller.R;
 import com.google.firebase.database.ChildEventListener;
@@ -26,16 +21,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
 public class HistoryActivity extends AppCompatActivity {
-    Toolbar tb_History;
-    TextView txt_Annouce;
-    ListView lv_History;
-    ArrayList<Clock> clocks;
-    HistoryAdapter historyAdapter;
-    DatabaseReference mDatabase;
+    private Toolbar tbHistory;
+    private TextView txtAnnouce;
+    private ListView lvHistory;
+    private ArrayList<Clock> clocks;
+    private HistoryAdapter historyAdapter;
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +39,17 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     private void inits() {
-        tb_History = findViewById(R.id.tb_History);
-        lv_History = findViewById(R.id.lv_HHistory);
-        txt_Annouce = findViewById(R.id.txt_HAnnouce);
+        tbHistory = findViewById(R.id.tb_History);
+        lvHistory = findViewById(R.id.lv_HHistory);
+        txtAnnouce = findViewById(R.id.txt_HAnnouce);
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        setSupportActionBar(tb_History);
+        setSupportActionBar(tbHistory);
         setTitle("Lịch sử");
         loadingActionBar();
         clocks = new ArrayList<>();
 
         historyAdapter = new HistoryAdapter(this, R.layout.layout_history_item, clocks);
-        lv_History.setAdapter(historyAdapter);
+        lvHistory.setAdapter(historyAdapter);
         historyAdapter.notifyDataSetChanged();
 
 
@@ -65,31 +58,13 @@ public class HistoryActivity extends AppCompatActivity {
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tb_History.setNavigationOnClickListener(new View.OnClickListener() {
+        tbHistory.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.option_menu, menu);
-//        return true;
-//    }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.mn_cart:
-//                Intent i_ToCart = new Intent(HistoryActivity.this, CartActivity.class);
-//                startActivity(i_ToCart);
-//                break;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
 
     private void controls() {
         loadHistory(SignInActivity.user);
@@ -110,7 +85,7 @@ public class HistoryActivity extends AppCompatActivity {
                 if ((!clock.getName().equals("Default")) && clock.getPrice() != 0) {
                     clocks.add(0, dataSnapshot.getValue(Clock.class));
                     historyAdapter.notifyDataSetChanged();
-                    txt_Annouce.setVisibility(View.INVISIBLE);
+                    txtAnnouce.setVisibility(View.INVISIBLE);
                 }
             }
 

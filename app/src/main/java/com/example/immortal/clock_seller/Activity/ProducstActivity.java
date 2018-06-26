@@ -7,14 +7,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Adapter.ModelAdapter;
 import com.example.immortal.clock_seller.Model.Model;
@@ -26,18 +22,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ProducstActivity extends AppCompatActivity {
     public static final String intent_product_key = "product";
-    Toolbar tb_Products;
-    ListView lv_Products;
+    private Toolbar tbProducts;
+    private ListView lvProducts;
 
-    ModelAdapter modelAdapter;
-    ArrayList<Model> models;
+    private ModelAdapter modelAdapter;
+    private ArrayList<Model> models;
 //    Button btn_Qt;
 
-    DatabaseReference mDatabase;
+    private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +42,12 @@ public class ProducstActivity extends AppCompatActivity {
     }
 
     private void inits() {
-        tb_Products = findViewById(R.id.tb_Products);
-        lv_Products = findViewById(R.id.lv_PsProducts);
-        setSupportActionBar(tb_Products);
+        tbProducts = findViewById(R.id.tb_Products);
+        lvProducts = findViewById(R.id.lv_PsProducts);
+        setSupportActionBar(tbProducts);
         models = new ArrayList<>();
         modelAdapter = new ModelAdapter(ProducstActivity.this,R.layout.layout_products_item,models);
-        lv_Products.setAdapter(modelAdapter);
+        lvProducts.setAdapter(modelAdapter);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         loadActionBar();
         setTitle("Sản phẩm");
@@ -61,7 +56,7 @@ public class ProducstActivity extends AppCompatActivity {
     private void loadActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tb_Products.setNavigationOnClickListener(new View.OnClickListener() {
+        tbProducts.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -88,7 +83,7 @@ public class ProducstActivity extends AppCompatActivity {
 
     private void controls() {
         loadProducts();
-//        lv_Products.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//        lvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                Intent i_ToProductDetail = new Intent(ProducstActivity.this,ProductDetailActivity.class);
@@ -96,7 +91,7 @@ public class ProducstActivity extends AppCompatActivity {
 //                startActivity(i_ToProductDetail);
 //            }
 //        });
-//        lv_Products.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//        lvProducts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //            @Override
 //            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                Clock clock = (Clock) adapterView.getItemAtPosition(i);

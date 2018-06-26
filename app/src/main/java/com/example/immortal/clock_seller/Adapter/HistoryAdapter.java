@@ -14,22 +14,16 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.immortal.clock_seller.Model.Clock;
-import com.example.immortal.clock_seller.Model.Model;
-import com.example.immortal.clock_seller.Model.SoldClock;
 import com.example.immortal.clock_seller.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class HistoryAdapter extends BaseAdapter {
-    Context context;
-    int resource;
-    ArrayList<Clock> objects;
+    public Context context;
+    public int resource;
+    public ArrayList<Clock> objects;
 
     public HistoryAdapter(Context context, int resource, ArrayList<Clock> objects) {
         this.context = context;
@@ -52,8 +46,8 @@ public class HistoryAdapter extends BaseAdapter {
         return i;
     }
     public class ViewHolder{
-        public ImageView img_Image;
-        public TextView txt_Name, txt_Total, txt_Price, txt_Quantity, txt_DateOfPay;
+        public ImageView imgImage;
+        public TextView txtName, txtTotal, txtPrice, txtQuantity, txtDateOfPay;
     }
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
@@ -62,25 +56,25 @@ public class HistoryAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.layout_history_item,null);
-            viewHolder.img_Image = view.findViewById(R.id.img_HIImage);
-            viewHolder.txt_Name = view.findViewById(R.id.txt_HIProductName);
-            viewHolder.txt_Total = view.findViewById(R.id.txt_HITotal);
-            viewHolder.txt_DateOfPay = view.findViewById(R.id.txt_HIDateOfPay);
-            viewHolder.txt_Price = view.findViewById(R.id.txt_HIPrice);
-            viewHolder.txt_Quantity = view.findViewById(R.id.txt_HIQuantity);
+            viewHolder.imgImage = view.findViewById(R.id.img_HIImage);
+            viewHolder.txtName = view.findViewById(R.id.txt_HIProductName);
+            viewHolder.txtTotal = view.findViewById(R.id.txt_HITotal);
+            viewHolder.txtDateOfPay = view.findViewById(R.id.txt_HIDateOfPay);
+            viewHolder.txtPrice = view.findViewById(R.id.txt_HIPrice);
+            viewHolder.txtQuantity = view.findViewById(R.id.txt_HIQuantity);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
         }
         Clock clock = (Clock) getItem(i);
 
-        viewHolder.txt_Name.setText(clock.getName());
+        viewHolder.txtName.setText(clock.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txt_Price.setText("Giá: " +decimalFormat.format(clock.getPrice())+" Đ");
-        viewHolder.txt_Total.setText("Thành tiền: "+decimalFormat.format(clock.getTotal())+" Đ");
-        viewHolder.txt_Quantity.setText(String.valueOf(clock.getQuantity()));
+        viewHolder.txtPrice.setText("Giá: " +decimalFormat.format(clock.getPrice())+" Đ");
+        viewHolder.txtTotal.setText("Thành tiền: "+decimalFormat.format(clock.getTotal())+" Đ");
+        viewHolder.txtQuantity.setText(String.valueOf(clock.getQuantity()));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy '-' HH:mm:ss");
-        viewHolder.txt_DateOfPay.setText("Thanh toán: "+ dateFormat.format(Long.parseLong(clock.getDate())));
+        viewHolder.txtDateOfPay.setText("Thanh toán: "+ dateFormat.format(Long.parseLong(clock.getDate())));
 
         Glide.with(context)
                 .load(clock.getImage())
@@ -93,7 +87,7 @@ public class HistoryAdapter extends BaseAdapter {
                                 .timeout(3000)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
-                .into(viewHolder.img_Image);
+                .into(viewHolder.imgImage);
         return view;
     }
 }

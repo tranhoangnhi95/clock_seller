@@ -3,18 +3,15 @@ package com.example.immortal.clock_seller.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.immortal.clock_seller.Adapter.CartAdapter;
 import com.example.immortal.clock_seller.Model.Cart;
@@ -29,14 +26,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class CartActivity extends AppCompatActivity implements View.OnClickListener {
-    Toolbar tb_Cart;
-    ListView lv_Cart;
-    Button btn_Pay, btn_Continue;
-    TextView txt_Total, txt_Annouce;
-    CartAdapter cartAdapter;
+    private Toolbar tbCart;
+    private ListView lvCart;
+    private Button btnPay, btnContinue;
+    private TextView txtTotal, txtAnnouce;
+    private CartAdapter cartAdapter;
 
-    Calendar calendar;
-    ArrayList<Clock> clocks;
+    private Calendar calendar;
+    public ArrayList<Clock> clocks;
 
     private DatabaseReference mDataBase;
 
@@ -49,21 +46,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void inits() {
-        tb_Cart = findViewById(R.id.tb_Cart);
-        lv_Cart = findViewById(R.id.lv_CCart);
-        btn_Pay = findViewById(R.id.btn_CPay);
-        btn_Continue = findViewById(R.id.btn_CContinue);
-        txt_Total = findViewById(R.id.txt_CTotal);
-        txt_Annouce = findViewById(R.id.txt_CAnnouce);
+        tbCart = findViewById(R.id.tb_Cart);
+        lvCart = findViewById(R.id.lv_CCart);
+        btnPay = findViewById(R.id.btn_CPay);
+        btnContinue = findViewById(R.id.btn_CContinue);
+        txtTotal = findViewById(R.id.txt_CTotal);
+        txtAnnouce = findViewById(R.id.txt_CAnnouce);
         mDataBase = FirebaseDatabase.getInstance().getReference();
         clocks = new ArrayList<>();
         calendar = Calendar.getInstance();
-        setSupportActionBar(tb_Cart);
+        setSupportActionBar(tbCart);
         setTitle("Giỏ hàng");
         loadingActionBar();
 
-        cartAdapter = new CartAdapter(CartActivity.this, R.layout.layout_cart_item, MainPageActivity.carts, txt_Total);
-        lv_Cart.setAdapter(cartAdapter);
+        cartAdapter = new CartAdapter(CartActivity.this, R.layout.layout_cart_item, MainPageActivity.carts, txtTotal);
+        lvCart.setAdapter(cartAdapter);
         getCartTotal();
 //        Toast.makeText(this,MainPageActivity.carts.size()+"", Toast.LENGTH_LONG).show();
     }
@@ -71,7 +68,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tb_Cart.setNavigationOnClickListener(new View.OnClickListener() {
+        tbCart.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
@@ -82,8 +79,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private void controls() {
         annouce();
         getCartTotal();
-        btn_Continue.setOnClickListener(this);
-        btn_Pay.setOnClickListener(this);
+        btnContinue.setOnClickListener(this);
+        btnPay.setOnClickListener(this);
 
     }
 
@@ -94,7 +91,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 total += MainPageActivity.carts.get(i).getTotal();
             }
             DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-            txt_Total.setText(decimalFormat.format(total));
+            txtTotal.setText(decimalFormat.format(total));
 
         }
     }
@@ -102,12 +99,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private void annouce() {
         if (MainPageActivity.carts.size() <= 0) {
             cartAdapter.notifyDataSetChanged();
-            txt_Annouce.setVisibility(View.VISIBLE);
-            lv_Cart.setVisibility(View.INVISIBLE);
+            txtAnnouce.setVisibility(View.VISIBLE);
+            lvCart.setVisibility(View.INVISIBLE);
         } else {
             cartAdapter.notifyDataSetChanged();
-            txt_Annouce.setVisibility(View.INVISIBLE);
-            lv_Cart.setVisibility(View.VISIBLE);
+            txtAnnouce.setVisibility(View.INVISIBLE);
+            lvCart.setVisibility(View.VISIBLE);
         }
     }
 
@@ -149,7 +146,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 MainPageActivity.carts.clear();
                 clocks.clear();
                 cartAdapter.notifyDataSetChanged();
-                txt_Total.setText(String.valueOf(0));
+                txtTotal.setText(String.valueOf(0));
             } else {
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
                 builder.setMessage("Giỏ hàng đang trống, vui lòng đặt hàng vào trước khi thanh toán!");

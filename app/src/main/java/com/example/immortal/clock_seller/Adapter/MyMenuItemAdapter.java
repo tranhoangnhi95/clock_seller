@@ -18,9 +18,9 @@ import com.example.immortal.clock_seller.R;
 import java.util.ArrayList;
 
 public class MyMenuItemAdapter extends BaseAdapter {
-    Context context;
-    int resources;
-    ArrayList<MyMenuItem> myMenuItems;
+    public Context context;
+    public int resources;
+    public ArrayList<MyMenuItem> myMenuItems;
 
     public MyMenuItemAdapter(Context context, int resources, ArrayList<MyMenuItem> myMenuItems) {
         this.context = context;
@@ -29,8 +29,8 @@ public class MyMenuItemAdapter extends BaseAdapter {
     }
 
     public class ViewHolder{
-        public ImageView img_Image;
-        public TextView txt_Name;
+        public ImageView imgImage;
+        public TextView txtName;
 
     }
     @Override
@@ -55,8 +55,8 @@ public class MyMenuItemAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.layout_menu_item,null);
-            viewHolder.img_Image = view.findViewById(R.id.img_MIImage);
-            viewHolder.txt_Name = view.findViewById(R.id.txt_MIName);
+            viewHolder.imgImage = view.findViewById(R.id.img_MIImage);
+            viewHolder.txtName = view.findViewById(R.id.txt_MIName);
             view.setTag(viewHolder);
         }else {
             viewHolder = (ViewHolder) view.getTag();
@@ -67,7 +67,7 @@ public class MyMenuItemAdapter extends BaseAdapter {
 //                .error(R.drawable.noimage)
 //                .fitCenter()
 //                .override(70,70)
-//                .into(viewHolder.img_Image);
+//                .into(viewHolder.imgImage);
         Glide.with(context)
                 .load(item.getImage())
                 .apply(
@@ -79,8 +79,8 @@ public class MyMenuItemAdapter extends BaseAdapter {
                                 .timeout(3000)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
-                .into(viewHolder.img_Image);
-        viewHolder.txt_Name.setText(item.getName());
+                .into(viewHolder.imgImage);
+        viewHolder.txtName.setText(item.getName());
         return view;
     }
 }
