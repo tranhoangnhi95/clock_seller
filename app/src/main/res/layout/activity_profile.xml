@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".Activity.ProfileActivity">
+    tools:context=".activity.ProfileActivity">
 
     <include
         android:id="@+id/tb_Profile"

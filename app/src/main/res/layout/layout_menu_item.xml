@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/product_price" />
+        android:background="@color/my_light_primary" />
     <LinearLayout
         android:gravity="center"
         android:layout_margin="3dp"
@@ -18,6 +18,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp" />
         <TextView
+            android:textColor="@color/my_Black"
             android:paddingRight="10dp"
             android:paddingLeft="10dp"
             android:textSize="20sp"
@@ -29,5 +30,5 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/product_price" />
+        android:background="@color/my_light_primary" />
 </LinearLayout>

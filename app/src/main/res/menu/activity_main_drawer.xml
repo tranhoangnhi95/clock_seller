@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_Model"
+            android:icon="@drawable/list_24dp"
+            android:title="Danh mục sản phẩm" />
+    </group>
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_Profile"
+                android:icon="@drawable/person_red_24dp"
+                android:title="Thông tin tài khoản" />
+            <item
+                android:id="@+id/nav_History"
+                android:icon="@drawable/history_24dp"
+                android:title="Lịch sử" />
+            <item
+                android:id="@+id/nav_SignOut"
+                android:icon="@drawable/signout_24dp"
+                android:title="Đăng xuất" />
+        </menu>
+    </item>
+</menu>

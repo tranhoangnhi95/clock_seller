@@ -13,21 +13,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.LoadingActivity">
+        <activity android:name=".activity.LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.SignInActivity" />
-        <activity android:name=".Activity.MainPageActivity" />
-        <activity android:name=".Activity.ProducstActivity"></activity>
-        <activity android:name=".Activity.CartActivity"></activity>
-        <activity android:name=".Activity.ProfileActivity"></activity>
-        <activity android:name=".Activity.HistoryActivity"></activity>
-
-        <activity android:name=".Activity.ProductDetailActivity"></activity>
+        <activity android:name=".activity.SignInActivity" />
+        <activity android:name=".activity.MainPageActivity" />
+        <activity android:name=".activity.ProducstActivity" />
+        <activity android:name=".activity.CartActivity" />
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.HistoryActivity" />
+        <activity android:name=".activity.ProductDetailActivity" />
+        <activity android:name=".activity.ProductCatalogyActivity"></activity>
     </application>
 
 </manifest>

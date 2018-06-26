@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activity.MainPageActivity">
+    tools:context=".activity.MainPageActivity">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/dl_MainPageLayout"
@@ -20,54 +20,50 @@
             <include
                 android:id="@+id/tb_MainPage"
                 layout="@layout/layout_toolbar"></include>
+
             <ImageView
-                android:src="@drawable/logo4"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
                 android:background="@color/my_light_primary"
                 android:scaleType="fitCenter"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:src="@drawable/logo4" />
+
             <LinearLayout
-                android:background="@color/my_light_primary"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/my_light_primary"
                 android:orientation="vertical">
+
                 <TextView
+                    android:id="@+id/txt_NewProduct"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:clickable="true"
-                    android:id="@+id/txt_NewProduct"
-                    android:layout_marginBottom="10dp"
-                    android:textColor="@color/my_secondary"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"
                     android:text="@string/hot_product"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textColor="@color/my_secondary"
+                    android:textSize="20sp" />
+
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_NewProducts"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
             </LinearLayout>
         </LinearLayout>
+
         <android.support.design.widget.NavigationView
-            android:background="@color/my_lightest_secondary"
+            android:id="@+id/nv_Navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:background="@color/my_light_primary"
-                    android:scaleType="center"
-                    android:src="@drawable/logo1"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp" />
-                <ListView
-                    android:id="@+id/lv_Menu"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"></ListView>
-            </LinearLayout>
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header_main"
+            app:itemIconTint="@color/my_secondary"
+            app:menu="@menu/activity_main_drawer">
+
+
         </android.support.design.widget.NavigationView>
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>

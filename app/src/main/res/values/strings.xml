@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">clock_seller</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Xin chào</string>
+    <string name="nav_header_subtitle">abc@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
     <string name="hint_user_name">Tên đăng nhập</string>
     <string name="hint_email">Email</string>
     <string name="hint_pass_word">Mật khẩu</string>
