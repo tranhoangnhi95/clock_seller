@@ -34,7 +34,6 @@
             android:drawableLeft="@drawable/person_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
-            android:text="Trần Văn A"
             android:textSize="20sp" />
         <TextView
             android:layout_width="match_parent"
@@ -49,7 +48,6 @@
             android:drawableLeft="@drawable/phone_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
-            android:text="09xxxxxxxx"
             android:textSize="20sp" />
 
         <TextView
@@ -66,7 +64,6 @@
             android:drawableLeft="@drawable/mail_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
-            android:text="xxxx@gmail.com"
             android:textSize="20sp" />
 
         <TextView
@@ -83,7 +80,6 @@
             android:drawableLeft="@drawable/location_red_24dp"
             android:drawablePadding="30dp"
             android:gravity="center_vertical"
-            android:text="Cần Thơ"
             android:textSize="20sp" />
 
         <TextView
@@ -94,7 +90,7 @@
         <Button
             android:id="@+id/btn_PfUpdate"
             android:textColor="@color/my_white"
-            android:text="Cập nhật"
+            android:text="@string/update"
             android:layout_marginTop="5dp"
             android:background="@drawable/green_radius_buttton_selector"
             android:layout_width="match_parent"

@@ -1,21 +1,54 @@
 <resources>
     <string name="app_name">clock_seller</string>
+    
+    //navigation string
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Xin chào</string>
-    <string name="nav_header_subtitle">abc@gmail.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    //cart string
+    <string name="empty_cart">Giỏ hàng của bạn đang trống!</string>
+    <string name="total_cart">Thành tiền:</string>
+    <string name="currency">Đ</string>
+    <string name="pay">Thanh toán giỏ hàng</string>
+    <string name="continue_cart">Tiếp tục mua hàng</string>
+    <string name="increase">+</string>
+    <string name="decrease">-</string>
+    <string name="one">1</string>
+    //History
+    <string name="empty_history">Bạn chưa mua bất kì sản phẩm nào!</string>
+    <string name="quantity_history">Số lượng: </string>
+    //Main
+    <string name="hot_product">Sản phẩm hot</string>
+    //catalogy
+    <string name="catalogy">Danh mục sản phẩm</string>
+    //detail
+    <string name="product_detail">Mô tả chi tiết sản phẩm</string>
+    //profile
+    <string name="update">Cập nhật</string>
+    <string name="information_update">Cập nhật thông tin</string>
+    <string name="cancel">Hủy</string>
+    //signIn
     <string name="hint_user_name">Tên đăng nhập</string>
     <string name="hint_email">Email</string>
     <string name="hint_pass_word">Mật khẩu</string>
     <string name="sign_in">Đăng nhập</string>
     <string name="sign_up">Đăng ký</string>
-    <string name="remember">Lưu tài khoản</string>
     <string name="name">Họ tên</string>
     <string name="phone">Số điện thoại</string>
     <string name="address">Địa chỉ</string>
     <string name="password">Mật khẩu</string>
-    <string name="hot_product">Sản phẩm hot</string>
     <string name="sign_out">Đăng xuất</string>
+
+    //accouce
+    <string name="price" formatted="false">Giá: %s Đ</string>
+    <string name="total" formatted="false">Tổng: %s Đ</string>
+    <string name="date" formatted="false">Thanh toán: %s</string>
+    //Toast
+    <string name="empty_cart_toast">Giỏ hàng đang trống, vui lòng đặt hàng vào trước khi thanh toán!</string>
+    <string name="back">Trở về</string>
+    //Menu
+    <string name="cart">Cart</string>
+    <string name="profile">Thông tin tài khoản</string>
+    <string name="history">Lịch sử</string>
+    <string name="signout">Đăng xuất</string>
 </resources>

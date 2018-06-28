@@ -3,6 +3,7 @@ package com.example.immortal.clock_seller.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.immortal.clock_seller.adapter.CartAdapter;
 import com.example.immortal.clock_seller.model.Cart;
@@ -149,10 +151,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 txtTotal.setText(String.valueOf(0));
             } else {
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-                builder.setMessage("Giỏ hàng đang trống, vui lòng đặt hàng vào trước khi thanh toán!");
+//                builder.setMessage("Giỏ hàng đang trống, vui lòng đặt hàng vào trước khi thanh toán!");
+                builder.setMessage(getString(R.string.empty_cart_toast));
                 builder.setCancelable(true);
                 builder.setPositiveButton(
-                        "Có",
+                        R.string.back,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -162,7 +165,13 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         }
                 );
 
-                android.app.AlertDialog alertDialog = builder.create();
+                final android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.my_secondary));
+                    }
+                });
                 alertDialog.show();
             }
         }

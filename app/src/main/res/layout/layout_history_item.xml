@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="left"
-                android:text="Đồng hồ casio huyền thoại"
                 android:textColor="@color/my_Black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -51,7 +50,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="left"
-                android:text="Giá: 1000000000 Đ"
                 android:textColor="@color/my_secondary_dark"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -63,7 +61,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="left"
-                android:text="Thành tiền: 2000000000 Đ"
                 android:textColor="@color/my_secondary_dark"
                 android:textSize="20sp" />
 
@@ -79,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:gravity="left"
-                    android:text="Số lượng:"
+                    android:text="@string/quantity_history"
                     android:textColor="@color/my_Black"
                     android:textSize="20sp" />
 
@@ -90,7 +87,7 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="4"
                     android:gravity="left"
-                    android:text="2"
+                    android:text="@string/one"
                     android:textColor="@color/my_Black"
                     android:textSize="20sp" />
             </LinearLayout>
@@ -102,7 +99,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:text="Thanh toán: 12/12/2016"
                 android:textColor="@color/my_Black"
                 android:textSize="20sp" />
         </LinearLayout>

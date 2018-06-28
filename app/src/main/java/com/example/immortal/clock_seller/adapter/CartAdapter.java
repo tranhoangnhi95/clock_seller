@@ -1,5 +1,6 @@
 package com.example.immortal.clock_seller.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
@@ -75,8 +76,10 @@ public class CartAdapter extends BaseAdapter {
         Cart cart = (Cart) getItem(i);
         viewHolder.txtName.setText(cart.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txtPrice.setText("Giá: " + decimalFormat.format(cart.getPrice()) + " Đ");
-        viewHolder.txtTotal.setText("Tổng: " + decimalFormat.format(cart.getTotal()) + " Đ");
+//        viewHolder.txtPrice.setText("Giá: " + decimalFormat.format(cart.getPrice()) + " Đ");
+//        viewHolder.txtTotal.setText("Tổng: " + decimalFormat.format(cart.getTotal()) + " Đ");
+        viewHolder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(cart.getPrice())));
+        viewHolder.txtTotal.setText(String.format(context.getString(R.string.total),decimalFormat.format(cart.getTotal())));
 //        Glide.with(context).load(cart.getImage())
 //                .placeholder(R.drawable.noimage)
 //                .error(R.drawable.noimage)
@@ -179,17 +182,18 @@ public class CartAdapter extends BaseAdapter {
                             }
                         }
                 );
-                android.app.AlertDialog alertDialog = builder.create();
+                final android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.my_secondary));
+                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.my_secondary));
+                    }
+                });
                 alertDialog.show();
                 return true;
             }
         });
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent
-//            }
-//        });
         return view;
     }
 }

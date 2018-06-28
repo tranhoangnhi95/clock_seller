@@ -1,5 +1,6 @@
 package com.example.immortal.clock_seller.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -85,6 +86,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("StringFormatMatches")
     private void getInformation() {
         model = (Model) getIntent().getSerializableExtra(ProducstActivity.intent_product_key);
         name = model.getName();
@@ -93,7 +95,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         img = model.getImage();
         txtName.setText(name);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        txtPrice.setText("Giá : " + decimalFormat.format(price) + " Đ");
+//        txtPrice.setText("Giá : " + decimalFormat.format(price) + " Đ");
+        txtPrice.setText(String.format(getString(R.string.price),decimalFormat.format(price)));
         txtDetail.setText(detail);
         Glide.with(getApplicationContext())
                 .load(img)

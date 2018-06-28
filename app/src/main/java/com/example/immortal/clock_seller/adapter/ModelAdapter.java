@@ -82,7 +82,8 @@ public class ModelAdapter extends BaseAdapter {
         final Model model = (Model) getItem(i);
         viewHolder.txtName.setText(model.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txtPrice.setText("Giá : " + decimalFormat.format(model.getPrice()) + " Đ");
+//        viewHolder.txtPrice.setText("Giá : " + decimalFormat.format(model.getPrice()) + " Đ");
+        viewHolder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(model.getPrice())));
         viewHolder.txtDetail.setMaxLines(2);
         viewHolder.txtDetail.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txtDetail.setText(model.getDetail());

@@ -54,7 +54,8 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
         holder.txtName.setEllipsize(TextUtils.TruncateAt.END);
         holder.txtName.setText(model.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        holder.txtPrice.setText("Giá: " + decimalFormat.format(model.getPrice()) + " Đ");
+//        holder.txtPrice.setText("Giá: " + decimalFormat.format(model.getPrice()) + " Đ");
+        holder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(model.getPrice())));
         holder.txtDetail.setMaxLines(1);
         holder.txtDetail.setEllipsize(TextUtils.TruncateAt.END);
         holder.txtDetail.setText(model.getDetail());
@@ -117,8 +118,8 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
 
             @Override
             public void increaseClick(View view, int position, boolean isLongClick) {
-                if (Integer.valueOf(holder1.btnQuantity.getText().toString()) >= 10) {
-                    holder1.btnQuantity.setText(String.valueOf(10));
+                if (Integer.valueOf(holder1.btnQuantity.getText().toString()) >= model.getQuantity()) {
+                    holder1.btnQuantity.setText(String.valueOf(model.getQuantity()));
                 } else {
                     holder1.btnQuantity.setText(String.valueOf(Integer.valueOf(
                             holder1.btnQuantity.getText().toString()) + 1));

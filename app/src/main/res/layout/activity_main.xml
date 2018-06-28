@@ -21,12 +21,10 @@
                 android:id="@+id/tb_MainPage"
                 layout="@layout/layout_toolbar"></include>
 
-            <ImageView
+            <ViewFlipper
+                android:id="@+id/vf_Advertisement"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/my_light_primary"
-                android:scaleType="fitCenter"
-                android:src="@drawable/logo4" />
+                android:layout_height="200dp"></ViewFlipper>
 
             <LinearLayout
                 android:layout_width="match_parent"

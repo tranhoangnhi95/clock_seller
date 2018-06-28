@@ -42,7 +42,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Đồng hồ casio huyền thoại"
                     android:textColor="@color/my_Black"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -52,7 +51,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Giá: 100000000 Đ"
                     android:textColor="@color/my_secondary"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -62,7 +60,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Đồng hồ với thiết kế bền chắc, bao đập"
                     android:textColor="@color/my_Black"
                     android:textSize="15sp" />
 
@@ -108,7 +105,7 @@
                             android:layout_weight="3"
                             android:layout_height="40dp"
                             android:background="@drawable/radius_button_selector"
-                            android:text="-"
+                            android:text="@string/decrease"
                             android:textColor="@color/my_white"
                             android:textSize="30sp"
                             android:textStyle="bold" />
@@ -119,7 +116,7 @@
                             android:layout_weight="4"
                             android:layout_height="40dp"
                             android:background="@null"
-                            android:text="1"
+                            android:text="@string/one"
                             android:textColor="@color/my_Black"
                             android:textSize="25sp"
                             android:textStyle="bold" />
@@ -130,7 +127,7 @@
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:background="@drawable/radius_button_selector"
-                            android:text="+"
+                            android:text="@string/decrease"
                             android:textColor="@color/my_white"
                             android:textSize="30sp"
                             android:textStyle="bold" />

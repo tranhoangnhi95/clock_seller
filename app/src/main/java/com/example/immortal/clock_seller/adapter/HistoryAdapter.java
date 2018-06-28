@@ -70,11 +70,13 @@ public class HistoryAdapter extends BaseAdapter {
 
         viewHolder.txtName.setText(clock.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txtPrice.setText("Giá: " +decimalFormat.format(clock.getPrice())+" Đ");
-        viewHolder.txtTotal.setText("Thành tiền: "+decimalFormat.format(clock.getTotal())+" Đ");
+//        viewHolder.txtPrice.setText("Giá: " +decimalFormat.format(clock.getPrice())+" Đ");
+//        viewHolder.txtTotal.setText("Thành tiền: "+decimalFormat.format(clock.getTotal())+" Đ");
+        viewHolder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(clock.getPrice())));
+        viewHolder.txtTotal.setText(String.format(context.getString(R.string.total),decimalFormat.format(clock.getTotal())));
         viewHolder.txtQuantity.setText(String.valueOf(clock.getQuantity()));
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy '-' HH:mm:ss");
-        viewHolder.txtDateOfPay.setText("Thanh toán: "+ dateFormat.format(Long.parseLong(clock.getDate())));
+        viewHolder.txtDateOfPay.setText(String.format(context.getString(R.string.date),dateFormat.format(Long.parseLong(clock.getDate()))));
 
         Glide.with(context)
                 .load(clock.getImage())

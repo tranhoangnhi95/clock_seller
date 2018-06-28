@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:text="Cập nhật thông tin"
+        android:text="@string/information_update"
         android:textColor="@color/my_primary"
         android:textSize="30sp" />
 

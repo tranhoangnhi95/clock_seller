@@ -42,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Đồng hồ casio huyền thoại"
                 android:textColor="@color/my_Black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -53,7 +52,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Giá: 100000000 Đ"
                 android:textColor="@color/my_secondary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -63,7 +61,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="Tổng: 100000000 Đ"
                 android:textColor="@color/my_secondary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -79,7 +76,7 @@
                     android:id="@+id/btn_CIDecrease"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:text="-"
+                    android:text="@string/decrease"
                     android:layout_weight="3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
@@ -87,7 +84,7 @@
                     android:id="@+id/btn_CIQuantity"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:text="1"
+                    android:text="@string/one"
                     android:layout_weight="6"
                     android:background="@null"
                     android:layout_width="0dp"
@@ -96,7 +93,7 @@
                     android:id="@+id/btn_CIIncrease"
                     android:textSize="30sp"
                     android:textStyle="bold"
-                    android:text="+"
+                    android:text="@string/increase"
                     android:layout_weight="3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />

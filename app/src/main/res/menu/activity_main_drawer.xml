@@ -6,22 +6,22 @@
         <item
             android:id="@+id/nav_Model"
             android:icon="@drawable/list_24dp"
-            android:title="Danh mục sản phẩm" />
+            android:title="@string/catalogy" />
     </group>
     <item android:title="Communicate">
         <menu>
             <item
                 android:id="@+id/nav_Profile"
                 android:icon="@drawable/person_red_24dp"
-                android:title="Thông tin tài khoản" />
+                android:title="@string/profile" />
             <item
                 android:id="@+id/nav_History"
                 android:icon="@drawable/history_24dp"
-                android:title="Lịch sử" />
+                android:title="@string/history" />
             <item
                 android:id="@+id/nav_SignOut"
                 android:icon="@drawable/signout_24dp"
-                android:title="Đăng xuất" />
+                android:title="@string/signout" />
         </menu>
     </item>
 </menu>

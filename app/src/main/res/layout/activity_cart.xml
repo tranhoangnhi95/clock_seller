@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Giỏ hàng bạn đang trống!"
+                android:text="@string/empty_cart"
                 android:textSize="20sp" />
 
             <ListView
@@ -49,7 +49,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="Thành tiền:"
+            android:text="@string/total_cart"
             android:textColor="@color/my_Black"
             android:textSize="20sp" />
 
@@ -70,7 +70,7 @@
             android:layout_weight="6"
             android:gravity="left|center"
             android:paddingLeft="5dp"
-            android:text="Đ"
+            android:text="@string/currency"
             android:textColor="@color/my_secondary"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -84,7 +84,7 @@
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:background="@drawable/green_radius_buttton_selector"
-        android:text="Thanh toán giỏ hàng"
+        android:text="@string/pay"
         android:textColor="@color/my_white" />
 
     <Button
@@ -94,6 +94,6 @@
         android:layout_margin="5dp"
         android:layout_weight="1"
         android:background="@drawable/green_radius_buttton_selector"
-        android:text="Tiếp tục mua hàng"
+        android:text="@string/continue_cart"
         android:textColor="@color/my_white" />
 </LinearLayout>

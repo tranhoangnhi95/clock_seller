@@ -40,7 +40,6 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
-                    android:text="Casio huyền thoại"
                     android:textColor="@color/my_Black"
                     android:textSize="20sp" />
 
@@ -51,7 +50,6 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
-                    android:text="200000 Đ"
                     android:textColor="@color/my_secondary"
                     android:textSize="20sp" />
 
@@ -63,7 +61,6 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:gravity="center"
-                    android:text="Đồng hồ bao bền"
                     android:textColor="@color/my_Black"
                     android:textSize="15sp" />
 
@@ -102,7 +99,7 @@
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
-                            android:text="-"
+                            android:text="@string/decrease"
                             android:textColor="@color/my_Black"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -113,7 +110,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:background="@null"
-                            android:text="1"
+                            android:text="@string/one"
                             android:textColor="@color/my_Black"
                             android:textStyle="bold" />
 
@@ -124,7 +121,7 @@
                             android:layout_width="0dp"
                             android:layout_height="40dp"
                             android:layout_weight="1"
-                            android:text="+"
+                            android:text="@string/increase"
                             android:textColor="@color/my_Black"
                             android:textSize="15sp"
                             android:textStyle="bold" />

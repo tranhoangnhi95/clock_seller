@@ -17,13 +17,11 @@ public class SignUpFragment extends Fragment {
     public TextView txtName, txtPhone, txtEmail, txtAddress, txtPass;
     public Button btnSignUp;
 
-    public interface FragmentCommunication{
-        public void EmailSending(String email);
-    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
 
     @Nullable
     @Override
@@ -54,9 +52,9 @@ public class SignUpFragment extends Fragment {
                         Email = txtEmail.getText().toString().toLowerCase();
                         Address = txtAddress.getText().toString();
                         Pass = txtPass.getText().toString();
-
                         SignInActivity activity = (SignInActivity) getActivity();
                         activity.signUpFragment( Name, Phone, Email, Address, Pass);
+
                     }
                     catch (Exception e){
                         e.printStackTrace();
@@ -65,7 +63,6 @@ public class SignUpFragment extends Fragment {
             }
         });
     }
-
     @Override
     public void onPause() {
         super.onPause();

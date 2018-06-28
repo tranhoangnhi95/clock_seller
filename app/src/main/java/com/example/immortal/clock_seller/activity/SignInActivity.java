@@ -7,10 +7,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.immortal.clock_seller.adapter.MyFragmentAdapter;
 import com.example.immortal.clock_seller.animviewpager.ZoomOutPageTransfomer;
+import com.example.immortal.clock_seller.fragments.SignInFragment;
+import com.example.immortal.clock_seller.fragments.SignUpFragment;
 import com.example.immortal.clock_seller.model.Cart;
 import com.example.immortal.clock_seller.model.Clock;
 import com.example.immortal.clock_seller.utils.DataBase;
@@ -26,7 +29,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity{
     public static final String email_key = "email";
     private TabLayout tlSliding;
     private ViewPager vpViewPager;
@@ -56,7 +59,7 @@ public class SignInActivity extends AppCompatActivity {
         tlSliding.setupWithViewPager(vpViewPager);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        if (user == null){
+        if (user == null) {
             user = new User();
         }
     }
@@ -74,10 +77,9 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-
                             User user1 = new User(suName, suPhone, suEmail, suAddress);
-                            String mail = suEmail.replace("@","");
-                            mail = mail.replace(".","");
+                            String mail = suEmail.replace("@", "");
+                            mail = mail.replace(".", "");
                             mDatabase.child("User").child(mail).setValue(user1, new DatabaseReference.CompletionListener() {
                                 @Override
                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
@@ -89,9 +91,6 @@ public class SignInActivity extends AppCompatActivity {
                                 }
                             });
                             tlSliding.getTabAt(0).select();
-//                            Intent i_ToMainPage = new Intent(SignInActivity.this,MainPageActivity.class);
-//                            i_ToMainPage.putExtra(email_key,suEmail);
-//                            startActivity(i_ToMainPage);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignInActivity.this, "Email đã trùng, vui lòng nhập email khác", Toast.LENGTH_SHORT).show();
@@ -112,33 +111,25 @@ public class SignInActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             user.setEmail(siEmail);
-                            String mail = siEmail.replace("@","");
-                            mail = mail.replace(".","");
+                            String mail = siEmail.replace("@", "");
+                            mail = mail.replace(".", "");
                             mDatabase.child("User").addChildEventListener(new DataBase() {
                                 @Override
                                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                                     User userFB = dataSnapshot.getValue(User.class);
                                     if (userFB.getEmail().equals(siEmail)) {
                                         user = userFB;
-//                                        user.setName(userFB.getName());
-//                                        user.setPhone(userFB.getPhone());
-//                                        user.setAddress(userFB.getAddress());
-//                                        user.setEmail(userFB.getEmail());
                                     }
                                 }
                             });
                             Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
-//                            String mail = siEmail;
-//                            mail = mail.replace("@", "");
-//                            mail = mail.replace(".", "");
                             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
                                     "default", 0, 0, "default", 0
                             ));
                             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
                                     "default", "default", "default", 0, 0, 0
                             ));
-//                            i_ToMainPage.putExtra(email_key, mail);
                             startActivity(i_ToMainPage);
                             finish();
                         } else {
@@ -162,10 +153,6 @@ public class SignInActivity extends AppCompatActivity {
                     User userFB = dataSnapshot.getValue(User.class);
                     if (userFB.getEmail().equals(currentUser.getEmail())) {
                         user = userFB;
-//                        user.setName(userFB.getName());
-//                        user.setPhone(userFB.getPhone());
-//                        user.setAddress(userFB.getAddress());
-//                        user.setEmail(userFB.getEmail());
                     }
                 }
             });
@@ -187,7 +174,6 @@ public class SignInActivity extends AppCompatActivity {
             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
                     "default", "default", "default", 0, 0, 0
             ));
-//            i_ToMainPage.putExtra(email_key, mail);
             startActivity(i_ToMainPage);
             finish();
         } else {

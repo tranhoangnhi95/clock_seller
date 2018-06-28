@@ -16,8 +16,13 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.example.immortal.clock_seller.adapter.HotProductAdapter;
 import com.example.immortal.clock_seller.model.Cart;
@@ -37,7 +42,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     public static final String manufaturer_name = "manufacture";
     private Toolbar tbMainPage;
     private RecyclerView rvNewProducts;
-
+    private ViewFlipper viewFlipper;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private TextView txtProduct;
@@ -85,6 +90,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         tbMainPage = findViewById(R.id.tb_MainPage);
         drawerLayout = findViewById(R.id.dl_MainPageLayout);
         txtProduct = findViewById(R.id.txt_NewProduct);
+        viewFlipper = findViewById(R.id.vf_Advertisement);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -115,12 +121,32 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 //        myMenuItemAdapter = new MyMenuItemAdapter(MainPageActivity.this, R.layout.layout_menu_item, myMenuItems);
 //        lvNavigation.setAdapter(myMenuItemAdapter);
 //        myMenuItemAdapter.notifyDataSetChanged();
-
+        loadViewFlipper();
         loadHotModel();
         loadingActionBar();
     }
 
+    private void loadViewFlipper() {
+        ArrayList<Integer> adv = new ArrayList<>();
+        adv.add(R.raw.casio);
+        adv.add(R.raw.citizen);
+        adv.add(R.raw.orient);
+        adv.add(R.raw.rolex);
+        adv.add(R.raw.seiko);
 
+        for (int i = 0; i < adv.size(); i++) {
+            ImageView imageView = new ImageView(getApplicationContext());
+            imageView.setImageResource(adv.get(i));
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            viewFlipper.addView(imageView);
+        }
+        viewFlipper.setFlipInterval(5000);
+        viewFlipper.setAutoStart(true);
+        Animation animation_silde_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in_right);
+        Animation animation_silde_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_out_right);
+        viewFlipper.setInAnimation(animation_silde_in);
+        viewFlipper.setOutAnimation(animation_silde_out);
+    }
 
 
     private void loadHotModel() {
@@ -129,8 +155,11 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     Model model = dataSnapshot.getValue(Model.class);
-                    models.add(model);
-                    hotProductAdapter.notifyDataSetChanged();
+                    if (model.getQuantity() > 0) {
+                        models.add(model);
+                        hotProductAdapter.notifyDataSetChanged();
+                    }
+
                 }
             });
         }
@@ -280,4 +309,5 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 //                    i_ToProDuct.putExtra(manufaturer_name, item.getName());
 //                    startActivity(i_ToProDuct);
     }
+
 }
