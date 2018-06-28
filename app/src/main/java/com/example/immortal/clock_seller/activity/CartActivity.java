@@ -141,12 +141,20 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     );
                     clocks.add(clock);
                 }
-                for (int i = 0; i < clocks.size(); i++) {
-                    mDataBase.child("History").child(email).push().setValue(clocks.get(i));
+                for (int k = 0; k < MainPageActivity.carts.size(); k++){
+                    Cart cart1 = MainPageActivity.carts.get(k);
+                    mDataBase.child("Model").child(cart1.getName())
+                            .child("quantity").setValue(cart1.getMaxQuantity() - cart1.getQuantity());
+                }
+
+                for (int j = 0; j < clocks.size(); j++) {
+                    mDataBase.child("History").child(email).push().setValue(clocks.get(j));
 
                 }
                 MainPageActivity.carts.clear();
+                mDataBase.child("Cart").child(email).removeValue();
                 clocks.clear();
+
                 cartAdapter.notifyDataSetChanged();
                 txtTotal.setText(String.valueOf(0));
             } else {

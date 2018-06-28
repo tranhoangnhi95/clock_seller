@@ -130,8 +130,8 @@ public class ModelAdapter extends BaseAdapter {
         viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) >= 10) {
-                    finalViewHolder.btnQuantity.setText(String.valueOf(10));
+                if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) >= model.getQuantity()) {
+                    finalViewHolder.btnQuantity.setText(String.valueOf(model.getQuantity()));
                 } else {
                     finalViewHolder.btnQuantity.setText(String.valueOf(Integer.valueOf(
                             finalViewHolder.btnQuantity.getText().toString()) + 1));
@@ -148,8 +148,8 @@ public class ModelAdapter extends BaseAdapter {
                     for (int i = 0; i < MainPageActivity.carts.size(); i++) {
                         if (MainPageActivity.carts.get(i).getName().equals(model.getName())) {
                             MainPageActivity.carts.get(i).setQuantity(MainPageActivity.carts.get(i).getQuantity() + quantity1);
-                            if (MainPageActivity.carts.get(i).getQuantity() >= 10) {
-                                MainPageActivity.carts.get(i).setQuantity(10);
+                            if (MainPageActivity.carts.get(i).getQuantity() >= model.getQuantity()) {
+                                MainPageActivity.carts.get(i).setQuantity(model.getQuantity());
                             }
                             MainPageActivity.carts.get(i).setTotal(model.getPrice() * MainPageActivity.carts.get(i).getQuantity());
                             exist = true;
@@ -160,7 +160,7 @@ public class ModelAdapter extends BaseAdapter {
                         long total = quantity * model.getPrice();
                         MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
                                 model.getImage(),
-                                quantity
+                                quantity, model.getQuantity()
                         ));
                     }
                 } else {
@@ -168,7 +168,7 @@ public class ModelAdapter extends BaseAdapter {
                     long total = quantity * model.getPrice();
                     MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
                             model.getImage(),
-                            quantity
+                            quantity, model.getQuantity()
                     ));
                 }
 

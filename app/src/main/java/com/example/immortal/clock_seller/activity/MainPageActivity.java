@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -46,6 +48,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private TextView txtProduct;
+    private ProgressBar pbLoading;
 
     private ArrayList<MyMenuItem> myMenuItems;
 
@@ -91,6 +94,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         drawerLayout = findViewById(R.id.dl_MainPageLayout);
         txtProduct = findViewById(R.id.txt_NewProduct);
         viewFlipper = findViewById(R.id.vf_Advertisement);
+        pbLoading = findViewById(R.id.pb_Loading);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
@@ -118,12 +122,15 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
             myMenuItems = new ArrayList<>();
         }
 
-//        myMenuItemAdapter = new MyMenuItemAdapter(MainPageActivity.this, R.layout.layout_menu_item, myMenuItems);
-//        lvNavigation.setAdapter(myMenuItemAdapter);
-//        myMenuItemAdapter.notifyDataSetChanged();
         loadViewFlipper();
-        loadHotModel();
         loadingActionBar();
+//        loadHotModel();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadHotModel();
     }
 
     private void loadViewFlipper() {
@@ -150,7 +157,8 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void loadHotModel() {
-        if (models.size() <= 0) {
+
+        models.clear();
             mDatabase.child("Model").addChildEventListener(new DataBase() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -158,11 +166,11 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
                     if (model.getQuantity() > 0) {
                         models.add(model);
                         hotProductAdapter.notifyDataSetChanged();
+                        pbLoading.setVisibility(View.INVISIBLE);
                     }
-
+                    pbLoading.setVisibility(View.INVISIBLE);
                 }
             });
-        }
 
     }
 
@@ -299,6 +307,8 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         } else if (id == R.id.nav_SignOut) {
             mAuth.signOut();
             Intent iToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
+            carts.clear();
+            SignInActivity.user = null;
             startActivity(iToSignIn);
         }
         drawerLayout = findViewById(R.id.dl_MainPageLayout);

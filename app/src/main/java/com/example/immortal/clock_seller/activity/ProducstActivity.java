@@ -26,11 +26,10 @@ public class ProducstActivity extends AppCompatActivity {
     public static final String intent_product_key = "product";
     private Toolbar tbProducts;
     private ListView lvProducts;
-
     private ModelAdapter modelAdapter;
     private ArrayList<Model> models;
 //    Button btn_Qt;
-
+    private String manufature_name = "";
     private DatabaseReference mDatabase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,7 @@ public class ProducstActivity extends AppCompatActivity {
         modelAdapter = new ModelAdapter(ProducstActivity.this,R.layout.layout_products_item,models);
         lvProducts.setAdapter(modelAdapter);
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        manufature_name = getIntent().getStringExtra(MainPageActivity.manufaturer_name);
         loadActionBar();
         setTitle("Sản phẩm");
     }
@@ -81,45 +81,29 @@ public class ProducstActivity extends AppCompatActivity {
     }
 
     private void controls() {
+//        loadProducts();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        models.clear();
         loadProducts();
-//        lvProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent i_ToProductDetail = new Intent(ProducstActivity.this,ProductDetailActivity.class);
-//                i_ToProductDetail.putExtra(intent_product_key,clocks.get(i));
-//                startActivity(i_ToProductDetail);
-//            }
-//        });
-//        lvProducts.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Clock clock = (Clock) adapterView.getItemAtPosition(i);
-//                Intent i_ToProductDetail = new Intent(ProducstActivity.this,ProductDetailActivity.class);
-//                i_ToProductDetail.putExtra(intent_product_key,clocks.get(i));
-//                startActivity(i_ToProductDetail);
-//                return false;
-//            }
-//        });
     }
 
     private void loadProducts() {
-        final Intent i_reciver = getIntent();
-        if (i_reciver.getStringExtra(MainPageActivity.manufaturer_name) != null){
-                mDatabase.child("Model").addChildEventListener(new DataBase() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        Model model = dataSnapshot.getValue(Model.class);
-                        if (model.getB_name().equals(i_reciver.getStringExtra(MainPageActivity.manufaturer_name))){
-                            models.add(model);
-                            modelAdapter.notifyDataSetChanged();
-                        }
+        if (!manufature_name.equals("")) {
+            mDatabase.child("Model").addChildEventListener(new DataBase() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    Model model = dataSnapshot.getValue(Model.class);
+                    if (model.getB_name().equals(manufature_name)) {
+                        models.add(model);
+                        modelAdapter.notifyDataSetChanged();
                     }
-                });
-        }else {
-            Model model_recive = (Model) i_reciver.getSerializableExtra(ProducstActivity.intent_product_key);
-            models.add(model_recive);
-            modelAdapter.notifyDataSetChanged();
-
+                }
+            });
         }
     }
 

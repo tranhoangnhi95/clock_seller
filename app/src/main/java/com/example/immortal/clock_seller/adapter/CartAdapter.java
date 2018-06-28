@@ -127,9 +127,9 @@ public class CartAdapter extends BaseAdapter {
         viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) >= 10) {
-                    finalViewHolder.btnQuantity.setText(String.valueOf(10));
-                    carts.get(carts.indexOf(cart1)).setQuantity(10);
+                if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) >= cart1.getMaxQuantity()) {
+                    finalViewHolder.btnQuantity.setText(String.valueOf(cart1.getMaxQuantity()));
+                    carts.get(carts.indexOf(cart1)).setQuantity(cart1.getMaxQuantity());
                     notifyDataSetChanged();
                 } else {
                     int quantity = Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) + 1;

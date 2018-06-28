@@ -125,7 +125,7 @@ public class SignInActivity extends AppCompatActivity{
                             Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
                             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
-                                    "default", 0, 0, "default", 0
+                                    "default", 0, 0, "default", 0,0
                             ));
                             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
                                     "default", "default", "default", 0, 0, 0
@@ -169,7 +169,7 @@ public class SignInActivity extends AppCompatActivity{
             mail = mail.replace("@", "");
             mail = mail.replace(".", "");
             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
-                    "default", 0, 0, "default", 0
+                    "default", 0, 0, "default", 0,0
             ));
             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
                     "default", "default", "default", 0, 0, 0

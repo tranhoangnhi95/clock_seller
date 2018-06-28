@@ -88,8 +88,8 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
                     for (int i = 0; i < MainPageActivity.carts.size(); i++) {
                         if (MainPageActivity.carts.get(i).getName().equals(model1.getName())) {
                             MainPageActivity.carts.get(i).setQuantity(MainPageActivity.carts.get(i).getQuantity() + quantity1);
-                            if (MainPageActivity.carts.get(i).getQuantity() >= 10) {
-                                MainPageActivity.carts.get(i).setQuantity(10);
+                            if (MainPageActivity.carts.get(i).getQuantity() >= model.getQuantity()) {
+                                MainPageActivity.carts.get(i).setQuantity(model.getQuantity());
                             }
                             MainPageActivity.carts.get(i).setTotal(model1.getPrice() * MainPageActivity.carts.get(i).getQuantity());
                             exist = true;
@@ -98,12 +98,12 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
                     if (!exist) {
                         int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                         long total = quantity * model1.getPrice();
-                        MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity));
+                        MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity()));
                     }
                 } else {
                     int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                     long total = quantity * model1.getPrice();
-                    MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity));
+                    MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity()));
                 }
                 Toast.makeText(context,"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
             }
