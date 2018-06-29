@@ -16,7 +16,8 @@
             android:orientation="vertical"
             android:padding="10dp">
 
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -29,9 +30,10 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/person_24dp"
                     android:hint="@string/name" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </android.support.design.widget.TextInputLayout>
 
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -46,9 +48,10 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/phone_24dp"
                     android:hint="@string/phone" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </android.support.design.widget.TextInputLayout>
 
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -62,9 +65,10 @@
                     android:drawableLeft="@drawable/email_24dp"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </android.support.design.widget.TextInputLayout>
 
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -77,9 +81,10 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/location24dp"
                     android:hint="@string/address" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </android.support.design.widget.TextInputLayout>
 
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -93,7 +98,7 @@
                     android:drawableLeft="@drawable/lock_24dp"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </android.support.design.widget.TextInputLayout>
             <Button
                 android:id="@+id/btn_SUSignUp"
                 android:layout_width="wrap_content"

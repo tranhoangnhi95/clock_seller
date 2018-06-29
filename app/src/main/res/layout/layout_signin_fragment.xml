@@ -14,7 +14,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -31,9 +32,10 @@
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
                      />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </android.support.design.widget.TextInputLayout>
 
-            <com.wrapp.floatlabelededittext.FloatLabeledEditText
+            <android.support.design.widget.TextInputLayout
+                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -49,7 +51,7 @@
                     android:inputType="textPassword"
                     android:textColor="@color/my_white"
                     android:textColorHint="@color/my_white" />
-            </com.wrapp.floatlabelededittext.FloatLabeledEditText>
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/btn_SISignIn"
