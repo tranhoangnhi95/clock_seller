@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,9 +29,10 @@ public class ProducstActivity extends AppCompatActivity {
     private ListView lvProducts;
     private ModelAdapter modelAdapter;
     private ArrayList<Model> models;
-//    Button btn_Qt;
+    //    Button btn_Qt;
     private String manufature_name = "";
     private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class ProducstActivity extends AppCompatActivity {
         lvProducts = findViewById(R.id.lv_PsProducts);
         setSupportActionBar(tbProducts);
         models = new ArrayList<>();
-        modelAdapter = new ModelAdapter(ProducstActivity.this,R.layout.layout_products_item,models);
+        modelAdapter = new ModelAdapter(ProducstActivity.this, R.layout.layout_products_item, models);
         lvProducts.setAdapter(modelAdapter);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         manufature_name = getIntent().getStringExtra(MainPageActivity.manufaturer_name);
@@ -65,15 +67,15 @@ public class ProducstActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option_menu,menu);
+        getMenuInflater().inflate(R.menu.option_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.mn_cart:
-                Intent i_ToCart = new Intent(ProducstActivity.this,CartActivity.class);
+                Intent i_ToCart = new Intent(ProducstActivity.this, CartActivity.class);
                 startActivity(i_ToCart);
                 break;
         }
@@ -94,16 +96,27 @@ public class ProducstActivity extends AppCompatActivity {
 
     private void loadProducts() {
         if (!manufature_name.equals("")) {
-            mDatabase.child("Model").addChildEventListener(new DataBase() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Model model = dataSnapshot.getValue(Model.class);
-                    if (model.getB_name().equals(manufature_name)) {
+            if (manufature_name.equals("Tất cả sản phẩm")) {
+                mDatabase.child("Model").addChildEventListener(new DataBase() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        Model model = dataSnapshot.getValue(Model.class);
                         models.add(model);
                         modelAdapter.notifyDataSetChanged();
                     }
-                }
-            });
+                });
+            } else {
+                mDatabase.child("Model").addChildEventListener(new DataBase() {
+                    @Override
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        Model model = dataSnapshot.getValue(Model.class);
+                        if (model.getB_name().equals(manufature_name)) {
+                            models.add(model);
+                            modelAdapter.notifyDataSetChanged();
+                        }
+                    }
+                });
+            }
         }
     }
 

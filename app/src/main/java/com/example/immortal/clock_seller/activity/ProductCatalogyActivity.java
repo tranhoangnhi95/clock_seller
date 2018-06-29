@@ -76,8 +76,15 @@ public class ProductCatalogyActivity extends AppCompatActivity {
             mDatabase.child("Brand").addChildEventListener(new DataBase() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    myMenuItems.add(0, dataSnapshot.getValue(MyMenuItem.class));
-                    myMenuItemAdapter.notifyDataSetChanged();
+                    MyMenuItem myMenuItem = dataSnapshot.getValue(MyMenuItem.class);
+                    if (myMenuItem.getName().equals("ALL")){
+                        myMenuItems.add(0, myMenuItem);
+                        myMenuItemAdapter.notifyDataSetChanged();
+                    }else {
+                        myMenuItems.add(myMenuItem);
+                        myMenuItemAdapter.notifyDataSetChanged();
+                    }
+
                 }
             });
         }

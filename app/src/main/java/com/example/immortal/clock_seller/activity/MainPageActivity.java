@@ -159,12 +159,12 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     private void loadHotModel() {
 
         models.clear();
-            mDatabase.child("Model").addChildEventListener(new DataBase() {
+            mDatabase.child("Model").orderByChild("sold").limitToLast(8).addChildEventListener(new DataBase() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     Model model = dataSnapshot.getValue(Model.class);
                     if (model.getQuantity() > 0) {
-                        models.add(model);
+                        models.add(0,model);
                         hotProductAdapter.notifyDataSetChanged();
                         pbLoading.setVisibility(View.INVISIBLE);
                     }

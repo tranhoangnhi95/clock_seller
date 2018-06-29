@@ -160,7 +160,7 @@ public class ModelAdapter extends BaseAdapter {
                         long total = quantity * model.getPrice();
                         MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
                                 model.getImage(),
-                                quantity, model.getQuantity()
+                                quantity, model.getQuantity(), model.getSold()
                         ));
                     }
                 } else {
@@ -168,7 +168,7 @@ public class ModelAdapter extends BaseAdapter {
                     long total = quantity * model.getPrice();
                     MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
                             model.getImage(),
-                            quantity, model.getQuantity()
+                            quantity, model.getQuantity(), model.getSold()
                     ));
                 }
 

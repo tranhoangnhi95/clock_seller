@@ -5,19 +5,20 @@ import java.io.Serializable;
 public class Model implements Serializable {
 
     private String name, b_name, detail, image;
-    private Integer price, quantity;
+    private Integer price, quantity, sold;
 
     public Model() {
 
     }
 
-    public Model(String name, String b_name, String detail, String image, Integer price, Integer quantity) {
+    public Model(String name, String b_name, String detail, String image, Integer price, Integer quantity, Integer sold) {
         this.name = name;
         this.b_name = b_name;
         this.detail = detail;
         this.image = image;
         this.price = price;
         this.quantity = quantity;
+        this.sold = sold;
     }
 
     public String getName() {
@@ -66,5 +67,13 @@ public class Model implements Serializable {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getSold() {
+        return sold;
+    }
+
+    public void setSold(Integer sold) {
+        this.sold = sold;
     }
 }

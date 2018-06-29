@@ -147,6 +147,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                             .child("quantity").setValue(cart1.getMaxQuantity() - cart1.getQuantity());
                 }
 
+                for (int k = 0; k < MainPageActivity.carts.size(); k++){
+                    Cart cart1 = MainPageActivity.carts.get(k);
+                    mDataBase.child("Model").child(cart1.getName())
+                            .child("sold").setValue(cart1.getSold() + cart1.getQuantity());
+                }
+
                 for (int j = 0; j < clocks.size(); j++) {
                     mDataBase.child("History").child(email).push().setValue(clocks.get(j));
 

@@ -9,18 +9,20 @@ public class Cart implements Serializable {
     private String image;
     private int quantity;
     private int maxQuantity;
+    private int sold;
 
 
     public Cart() {
     }
 
-    public Cart(String name, Integer price, Integer total, String image, int quantity, int maxQuantity) {
+    public Cart(String name, Integer price, Integer total, String image, int quantity, int maxQuantity, int sold) {
         this.name = name;
         this.price = price;
         this.total = total;
         this.image = image;
         this.quantity = quantity;
         this.maxQuantity = maxQuantity;
+        this.sold = sold;
     }
 
     public String getName() {
@@ -71,4 +73,11 @@ public class Cart implements Serializable {
         this.maxQuantity = maxQuantity;
     }
 
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
 }

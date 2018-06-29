@@ -98,12 +98,12 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
                     if (!exist) {
                         int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                         long total = quantity * model1.getPrice();
-                        MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity()));
+                        MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity(), model.getSold()));
                     }
                 } else {
                     int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                     long total = quantity * model1.getPrice();
-                    MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity()));
+                    MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity(), model.getSold()));
                 }
                 Toast.makeText(context,"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
             }
