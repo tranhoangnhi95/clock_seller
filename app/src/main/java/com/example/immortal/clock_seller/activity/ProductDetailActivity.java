@@ -55,6 +55,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private void loadActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tbDetail.setNavigationIcon(R.drawable.arrow_back_24dp);
         tbDetail.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

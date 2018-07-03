@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,7 @@ import com.example.immortal.clock_seller.R;
 
 public class SignInFragment extends Fragment{
     public Button btnSignIn;
-    public TextView txtEmail, txtPass;
+    public EditText txtEmail, txtPass;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,13 +41,6 @@ public class SignInFragment extends Fragment{
         btnSignIn = view.findViewById(R.id.btn_SISignIn);
         txtEmail = view.findViewById(R.id.txt_SIEmail);
         txtPass = view.findViewById(R.id.txt_SIPass);
-
-        try{
-            Bundle args = getArguments();
-            txtEmail.setText(args.getString(SignInActivity.email_key));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
 
@@ -69,19 +63,13 @@ public class SignInFragment extends Fragment{
 
     }
 
-    public void displayEmail(String email){
-        try{
-            Bundle args = getArguments();
-            txtEmail.setText(args.getString(SignInActivity.email_key));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public void onPause() {
         super.onPause();
     }
 
-
+    public void DisplayEmail(String Email){
+        txtEmail.setText(Email);
+    }
 }

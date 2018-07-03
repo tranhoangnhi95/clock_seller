@@ -7,7 +7,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.example.immortal.clock_seller.adapter.MyFragmentAdapter;
@@ -29,9 +28,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class SignInActivity extends AppCompatActivity{
+public class SignInActivity extends AppCompatActivity implements SignUpFragment.FragmentCommuniCation {
     public static final String email_key = "email";
-    private TabLayout tlSliding;
+    public TabLayout tlSliding;
     private ViewPager vpViewPager;
     private MyFragmentAdapter myFragmentAdapter;
     private String suName, suPhone, suEmail, suAddress, suPass;
@@ -84,15 +83,18 @@ public class SignInActivity extends AppCompatActivity{
                                 @Override
                                 public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                                     if (databaseError == null) {
+                                        SignUpFragment signUpFragment = (SignUpFragment) myFragmentAdapter.getItem(1);
+                                        signUpFragment.fragmentCommuniCation.PassingEmail(suEmail);
+                                        tlSliding.getTabAt(0).select();
                                         Toast.makeText(SignInActivity.this, "Đăng ký thành công, vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(SignInActivity.this, "Đăng ký người dùng không thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
-                            tlSliding.getTabAt(0).select();
                         } else {
                             // If sign in fails, display a message to the user.
+
                             Toast.makeText(SignInActivity.this, "Email đã trùng, vui lòng nhập email khác", Toast.LENGTH_SHORT).show();
                         }
 
@@ -125,7 +127,7 @@ public class SignInActivity extends AppCompatActivity{
                             Toast.makeText(SignInActivity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
                             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
-                                    "default", 0, 0, "default", 0,0,0
+                                    "default", 0, 0, "default", 0, 0, 0
                             ));
                             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
                                     "default", "default", "default", 0, 0, 0
@@ -169,7 +171,7 @@ public class SignInActivity extends AppCompatActivity{
             mail = mail.replace("@", "");
             mail = mail.replace(".", "");
             mDatabase.child("Cart").child(mail).child("Default").setValue(new Cart(
-                    "default", 0, 0, "default", 0,0,0
+                    "default", 0, 0, "default", 0, 0, 0
             ));
             mDatabase.child("History").child(mail).child("Default").setValue(new Clock(
                     "default", "default", "default", 0, 0, 0
@@ -181,4 +183,9 @@ public class SignInActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    public void PassingEmail(String Email) {
+        SignInFragment signInFragment = (SignInFragment) myFragmentAdapter.getItem(0);
+        signInFragment.DisplayEmail(Email);
+    }
 }

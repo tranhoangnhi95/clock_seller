@@ -141,6 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tbProfile.setNavigationIcon(R.drawable.arrow_back_24dp);
         tbProfile.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

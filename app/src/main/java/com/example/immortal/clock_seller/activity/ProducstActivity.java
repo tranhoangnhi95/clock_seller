@@ -57,6 +57,7 @@ public class ProducstActivity extends AppCompatActivity {
     private void loadActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tbProducts.setNavigationIcon(R.drawable.arrow_back_24dp);
         tbProducts.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

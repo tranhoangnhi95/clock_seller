@@ -109,6 +109,7 @@ public class ProductCatalogyActivity extends AppCompatActivity {
     private void loadingActionbar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tbCatalogy.setNavigationIcon(R.drawable.arrow_back_24dp);
         tbCatalogy.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

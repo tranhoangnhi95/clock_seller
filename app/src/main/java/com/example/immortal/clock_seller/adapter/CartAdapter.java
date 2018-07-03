@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -53,6 +54,7 @@ public class CartAdapter extends BaseAdapter {
         public TextView txtName, txtPrice, txtTotal;
         public ImageView imgImage;
         public Button btnIncrease, btnDecrease, btnQuantity;
+        public ImageButton btnDelete;
     }
 
     @Override
@@ -69,6 +71,7 @@ public class CartAdapter extends BaseAdapter {
             viewHolder.btnIncrease = view.findViewById(R.id.btn_CIIncrease);
             viewHolder.btnDecrease = view.findViewById(R.id.btn_CIDecrease);
             viewHolder.btnQuantity = view.findViewById(R.id.btn_CIQuantity);
+            viewHolder.btnDelete = view.findViewById(R.id.btn_Delete);
             view.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) view.getTag();
@@ -78,8 +81,8 @@ public class CartAdapter extends BaseAdapter {
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 //        viewHolder.txtPrice.setText("Giá: " + decimalFormat.format(cart.getPrice()) + " Đ");
 //        viewHolder.txtTotal.setText("Tổng: " + decimalFormat.format(cart.getTotal()) + " Đ");
-        viewHolder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(cart.getPrice())));
-        viewHolder.txtTotal.setText(String.format(context.getString(R.string.total),decimalFormat.format(cart.getTotal())));
+        viewHolder.txtPrice.setText(String.format(context.getString(R.string.price), decimalFormat.format(cart.getPrice())));
+        viewHolder.txtTotal.setText(String.format(context.getString(R.string.total), decimalFormat.format(cart.getTotal())));
 //        Glide.with(context).load(cart.getImage())
 //                .placeholder(R.drawable.noimage)
 //                .error(R.drawable.noimage)
@@ -148,6 +151,51 @@ public class CartAdapter extends BaseAdapter {
             }
         });
 
+        viewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+                builder.setMessage("Bạn muốn xóa sản phẩm?");
+                builder.setCancelable(true);
+                builder.setPositiveButton(
+                        "Có",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                carts.remove(cart1);
+                                dialogInterface.cancel();
+                                notifyDataSetChanged();
+
+                                long total = 0;
+                                for (int k = 0; k < carts.size(); k++) {
+                                    total += carts.get(k).getTotal();
+                                }
+                                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                                txtCTotal.setText(decimalFormat.format(total));
+                            }
+                        }
+                );
+
+                builder.setNegativeButton(
+                        "Không",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        }
+                );
+                final android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(context.getResources().getColor(R.color.my_secondary));
+                        alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(context.getResources().getColor(R.color.my_secondary));
+                    }
+                });
+                alertDialog.show();
+            }
+        });
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

@@ -10,18 +10,22 @@ import com.example.immortal.clock_seller.fragments.SignUpFragment;
 
 public class MyFragmentAdapter extends FragmentStatePagerAdapter {
     private Context context;
+    private SignInFragment signInFragment;
+    private SignUpFragment signUpFragment;
 
     public MyFragmentAdapter(Context context, FragmentManager fm) {
         super(fm);
         this.context = context;
+        this.signInFragment = new SignInFragment();
+        this.signUpFragment = new SignUpFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new SignInFragment();
+            return signInFragment;
         } else {
-            return new SignUpFragment();
+            return signUpFragment;
         }
     }
 

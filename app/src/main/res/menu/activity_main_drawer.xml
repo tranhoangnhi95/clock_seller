@@ -8,7 +8,7 @@
             android:icon="@drawable/list_24dp"
             android:title="@string/catalogy" />
     </group>
-    <item android:title="Communicate">
+    <item android:title="Tài khoản">
         <menu>
             <item
                 android:id="@+id/nav_Profile"

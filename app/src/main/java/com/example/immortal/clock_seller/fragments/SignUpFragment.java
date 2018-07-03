@@ -1,25 +1,45 @@
 package com.example.immortal.clock_seller.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.immortal.clock_seller.activity.SignInActivity;
 import com.example.immortal.clock_seller.R;
+import com.example.immortal.clock_seller.model.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.concurrent.Executor;
 
 public class SignUpFragment extends Fragment {
-    public TextView txtName, txtPhone, txtEmail, txtAddress, txtPass;
+    public EditText txtName, txtPhone, txtEmail, txtAddress, txtPass;
     public Button btnSignUp;
+    public FragmentCommuniCation fragmentCommuniCation;
+    public DatabaseReference mDatabase;
+    public FirebaseAuth mAuth;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
     }
 
 
@@ -54,12 +74,12 @@ public class SignUpFragment extends Fragment {
                         Pass = txtPass.getText().toString();
                         SignInActivity activity = (SignInActivity) getActivity();
                         activity.signUpFragment( Name, Phone, Email, Address, Pass);
-
                     }
                     catch (Exception e){
                         e.printStackTrace();
                         Toast.makeText(getContext(),"Vui lòng nhập dầy đủ thông tin trước khi đăng ký", Toast.LENGTH_SHORT).show();
                     }
+
             }
         });
     }
@@ -67,4 +87,19 @@ public class SignUpFragment extends Fragment {
     public void onPause() {
         super.onPause();
     }
+
+    public interface FragmentCommuniCation{
+        void PassingEmail(String Email);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            fragmentCommuniCation = (FragmentCommuniCation) getActivity();
+        }catch (ClassCastException e ){
+            throw new ClassCastException("Error in retrieving data. Please try again");
+        }
+    }
+
 }

@@ -70,6 +70,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tbCart.setNavigationIcon(R.drawable.arrow_back_24dp);
         tbCart.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

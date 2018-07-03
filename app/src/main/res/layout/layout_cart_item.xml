@@ -5,103 +5,126 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/my_light_primary" />
+        android:background="@color/line" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="100">
 
         <ImageView
-            android:scaleType="fitCenter"
             android:id="@+id/img_CIImage"
-            android:layout_width="100dp"
+            android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_margin="2dp"
+            android:layout_weight="30"
             android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
             android:src="@drawable/democlock" />
 
         <TextView
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/my_light_primary" />
+            android:background="@color/line" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="60"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                android:gravity="left"
                 android:id="@+id/txt_CIProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="left"
                 android:textColor="@color/my_Black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:gravity="left"
                 android:id="@+id/txt_CIProductPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="left"
                 android:textColor="@color/my_secondary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
             <TextView
-                android:gravity="left"
                 android:id="@+id/txt_CIProductTotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:gravity="left"
                 android:textColor="@color/my_secondary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="30dp"
                 android:gravity="left"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/btn_CIDecrease"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="@string/decrease"
-                    android:layout_weight="3"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/decrease"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
                 <Button
                     android:id="@+id/btn_CIQuantity"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="@string/one"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="6"
                     android:background="@null"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:text="@string/one"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
                 <Button
                     android:id="@+id/btn_CIIncrease"
-                    android:textSize="30sp"
-                    android:textStyle="bold"
-                    android:text="@string/increase"
-                    android:layout_weight="3"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:text="@string/increase"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line" />
+
+        <ImageButton
+            android:id="@+id/btn_Delete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="10"
+            android:background="@null"
+            android:src="@drawable/delete_32dp" />
     </LinearLayout>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/my_light_primary" />
+        android:background="@color/line" />
 </LinearLayout>

@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+android:orientation="vertical"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<TextView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="1dp"
+    android:background="@color/line" />
+<LinearLayout
+    android:gravity="center"
+    android:layout_margin="3dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:scaleType="fitCenter"
+        android:id="@+id/img_MIImage"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
     <TextView
+        android:textColor="@color/my_Black"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:id="@+id/txt_MIName"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/my_light_primary" />
-    <LinearLayout
-        android:gravity="center"
-        android:layout_margin="3dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:scaleType="fitCenter"
-            android:id="@+id/img_MIImage"
-            android:layout_width="60dp"
-            android:layout_height="60dp" />
-        <TextView
-            android:textColor="@color/my_Black"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:id="@+id/txt_MIName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/my_light_primary" />
+        android:layout_height="wrap_content" />
+</LinearLayout>
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@color/line" />
 </LinearLayout>

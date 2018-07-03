@@ -57,6 +57,7 @@ public class HistoryActivity extends AppCompatActivity {
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        tbHistory.setNavigationIcon(R.drawable.arrow_back_24dp);
         tbHistory.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

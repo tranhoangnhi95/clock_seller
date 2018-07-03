@@ -177,7 +177,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        tbMainPage.setNavigationIcon(R.drawable.menu);
+        tbMainPage.setNavigationIcon(R.drawable.menu_white_24dp);
     }
 
     @Override
