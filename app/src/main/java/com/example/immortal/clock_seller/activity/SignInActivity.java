@@ -48,7 +48,9 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
 
     }
 
-
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         tlSliding = findViewById(R.id.tl_SISliding);
         vpViewPager = findViewById(R.id.vp_SIViewPager);
@@ -58,18 +60,27 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
         tlSliding.setupWithViewPager(vpViewPager);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
+        //khởi tạo user nếu đối tượng null
         if (user == null) {
             user = new User();
         }
     }
 
-
+    /**
+     * Đăng kí người dùng bằng Email
+     * @param Name Tên người dùng
+     * @param Phone Số điện thoại
+     * @param Email Email
+     * @param Address Địa chỉ
+     * @param Pass Mật khẩu
+     */
     public void signUpFragment(String Name, String Phone, String Email, String Address, String Pass) {
         this.suName = Name;
         this.suPhone = Phone;
         this.suEmail = Email;
         this.suAddress = Address;
         this.suPass = Pass;
+        //Đăng kí toàn khoản bằng email password với firebase authencation
         mAuth.createUserWithEmailAndPassword(suEmail, suPass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -103,10 +114,15 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
                 });
     }
 
+    /**
+     * Đăng nhập vào ứng dụng bằng Email và mật khẩu
+     * @param Email email
+     * @param Pass Mật khẩu
+     */
     public void signInFragment(String Email, String Pass) {
         this.siEmail = Email;
         this.siPass = Pass;
-
+        //Đăng nhập bằng email và mật khẩu với firebase authencation
         mAuth.signInWithEmailAndPassword(siEmail, siPass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -146,8 +162,9 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
 
     @Override
     protected void onStart() {
+        //kiểm tra nếu người dùng đã đăng nhập ở lần trước đó sẽ bỏ qua bước đăng nhập
         super.onStart();
-        final FirebaseUser currentUser = mAuth.getCurrentUser();
+        final FirebaseUser currentUser = mAuth.getCurrentUser(); //người dùng trước đó
         if (currentUser != null) {
             mDatabase.child("User").addChildEventListener(new DataBase() {
                 @Override
@@ -162,7 +179,10 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
         updateUI(currentUser);
     }
 
-
+    /**
+     * Thực hiện các khởi tạo cơ bản và chuyển màn hình khi người dùng trước đó tồn tại
+     * @param user1
+     */
     private void updateUI(FirebaseUser user1) {
         if (user1 != null) {
             Intent i_ToMainPage = new Intent(SignInActivity.this, MainPageActivity.class);
@@ -185,6 +205,7 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
 
     @Override
     public void PassingEmail(String Email) {
+        //truyền dữ liệu sang cho frament đăng nhập
         SignInFragment signInFragment = (SignInFragment) myFragmentAdapter.getItem(0);
         signInFragment.DisplayEmail(Email);
     }

@@ -35,6 +35,9 @@ public class ProfileActivity extends AppCompatActivity {
         controls();
     }
 
+    /**
+     * Thêm các sự kiện lắng nghe, điều khiển
+     */
     private void controls() {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,8 +45,18 @@ public class ProfileActivity extends AppCompatActivity {
                 updateProfile(SignInActivity.user);
             }
         });
+        tbProfile.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
 
+    /**
+     * Cập nhật thông tin người dùng
+     * @param user1 -người dùng
+     */
     private void updateProfile(final User user1) {
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
@@ -78,8 +91,8 @@ public class ProfileActivity extends AppCompatActivity {
                         try {
                             String name, phone, address, mail;
                             mail = user1.getEmail();
-                            mail = mail.replace("@","");
-                            mail = mail.replace(".","");
+                            mail = mail.replace("@", "");
+                            mail = mail.replace(".", "");
 
                             name = txt_DName.getText().toString();
                             phone = txt_DPhone.getText().toString();
@@ -95,11 +108,11 @@ public class ProfileActivity extends AppCompatActivity {
                             txtAddress.setText(address);
                             txtPhone.setText(phone);
 
-                            Toast.makeText(getApplicationContext(),"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
                             dialogInterface.cancel();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
-                            Toast.makeText(getApplicationContext(),"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                         }
 
 
@@ -118,9 +131,11 @@ public class ProfileActivity extends AppCompatActivity {
         alertDialog.show();
 
 
-
     }
 
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         tbProfile = findViewById(R.id.tb_Profile);
         txtName = findViewById(R.id.txt_PfName);
@@ -138,16 +153,14 @@ public class ProfileActivity extends AppCompatActivity {
         setTitle("Tài khoản của bạn");
     }
 
+    /**
+     * Tạo đối tượng Navigation button trên ActionBar
+     */
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         tbProfile.setNavigationIcon(R.drawable.arrow_back_24dp);
-        tbProfile.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
     }
 
     @Override

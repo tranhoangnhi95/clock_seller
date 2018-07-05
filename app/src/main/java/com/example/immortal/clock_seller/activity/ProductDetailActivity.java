@@ -40,6 +40,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         controls();
     }
 
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         imgImage = findViewById(R.id.img_DtImage);
         txtName = findViewById(R.id.txt_DtName);
@@ -50,18 +53,17 @@ public class ProductDetailActivity extends AppCompatActivity {
         setSupportActionBar(tbDetail);
         loadActionBar();
         setTitle("Chi tiết sản phẩm");
+        getInformation();
     }
 
+    /**
+     * Tạo đối tượng Navigation button trên ActionBar
+     */
     private void loadActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         tbDetail.setNavigationIcon(R.drawable.arrow_back_24dp);
-        tbDetail.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
     }
 
     @Override
@@ -81,12 +83,23 @@ public class ProductDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Thêm các sự kiện lắng nghe, điều khiển
+     */
     private void controls() {
-        getInformation();
+
+        tbDetail.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
     }
 
-
+    /**
+     * Nhận dữ liệu sản phẩm từ Acrivity Product và đổ vào layout
+     */
     @SuppressLint("StringFormatMatches")
     private void getInformation() {
         model = (Model) getIntent().getSerializableExtra(ProducstActivity.intent_product_key);

@@ -50,7 +50,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     private TextView txtProduct;
     private ProgressBar pbLoading;
 
-    private ArrayList<MyMenuItem> myMenuItems;
+//    private ArrayList<MyMenuItem> myMenuItems;
 
     private ArrayList<Model> models;
     private HotProductAdapter hotProductAdapter;
@@ -103,7 +103,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
-        myMenuItems = new ArrayList<>();
+//        myMenuItems = new ArrayList<>();
         setSupportActionBar(tbMainPage);
         setTitle("Trang chủ");
         //Khởi tạo giỏ hàng khi giỏ hàng null
@@ -126,9 +126,9 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         rvNewProducts.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rvNewProducts.setAdapter(hotProductAdapter);
 
-        if (myMenuItems == null) {
-            myMenuItems = new ArrayList<>();
-        }
+//        if (myMenuItems == null) {
+//            myMenuItems = new ArrayList<>();
+//        }
 
         loadViewFlipper();
         loadingActionBar();
@@ -141,6 +141,9 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         loadHotModel();
     }
 
+    /**
+     * Đỗ dữ liệu local vào viewflipper
+     */
     private void loadViewFlipper() {
         ArrayList<Integer> adv = new ArrayList<>();
         adv.add(R.raw.casio);
@@ -163,7 +166,9 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         viewFlipper.setOutAnimation(animation_silde_out);
     }
 
-
+    /**
+     * Load các mẫu sản phẩm hot từ database
+     */
     private void loadHotModel() {
 
         models.clear();
@@ -182,6 +187,9 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    /**
+     * Tạo đối tượng Navigation button trên ActionBar
+     */
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -215,6 +223,9 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * Load giỏ hàng của khách hàng về từ database
+     */
     private void loadCart(User user1) {
         String mail = user1.getEmail();
         mail = mail.replace("@", "");
@@ -234,6 +245,10 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    /**
+     * Đưa các mẫu sản phẩm trong giỏ hàng mà người dùng chưa thanh toán lên database
+     * @param user1 khách hàng
+     */
     private void pushCart(User user1) {
         if (carts.size() > 0) {
             String mail = "";
@@ -249,6 +264,9 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     *  custom sự kiên click button back
+     */
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {

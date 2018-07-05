@@ -29,6 +29,7 @@ public class ProductCatalogyActivity extends AppCompatActivity {
     private MyMenuItemAdapter myMenuItemAdapter;
     private ArrayList<MyMenuItem> myMenuItems;
     private DatabaseReference mDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +38,19 @@ public class ProductCatalogyActivity extends AppCompatActivity {
         controls();
     }
 
+    /**
+     * Thêm các sự kiện lắng nghe, điều khiển
+     */
     private void controls() {
         lvItemClick();
+        tbCatalogy.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
     }
+
 
     private void lvItemClick() {
         lvCatalogy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -53,6 +64,9 @@ public class ProductCatalogyActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         lvCatalogy = findViewById(R.id.lv_Catalogy);
         tbCatalogy = findViewById(R.id.tb_Calatogy);
@@ -61,26 +75,29 @@ public class ProductCatalogyActivity extends AppCompatActivity {
         setTitle("Danh mục sản phẩm");
         mDatabase = FirebaseDatabase.getInstance().getReference();
         loadingActionbar();
-        if (myMenuItems ==  null){
+
+        //tạo list danh mục sản phẩm
+        if (myMenuItems == null) {
             myMenuItems = new ArrayList<>();
         }
-        myMenuItemAdapter = new MyMenuItemAdapter(getApplicationContext(),R.layout.layout_menu_item,myMenuItems);
+        myMenuItemAdapter = new MyMenuItemAdapter(getApplicationContext(), R.layout.layout_menu_item, myMenuItems);
         lvCatalogy.setAdapter(myMenuItemAdapter);
         myMenuItemAdapter.notifyDataSetChanged();
         loadCatalogy();
 
     }
 
+    //Load danh mục sản phẩm từ database
     private void loadCatalogy() {
-        if (myMenuItems.isEmpty()){
+        if (myMenuItems.isEmpty()) {
             mDatabase.child("Brand").addChildEventListener(new DataBase() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     MyMenuItem myMenuItem = dataSnapshot.getValue(MyMenuItem.class);
-                    if (myMenuItem.getName().equals("ALL")){
+                    if (myMenuItem.getName().equals("ALL")) {
                         myMenuItems.add(0, myMenuItem);
                         myMenuItemAdapter.notifyDataSetChanged();
-                    }else {
+                    } else {
                         myMenuItems.add(myMenuItem);
                         myMenuItemAdapter.notifyDataSetChanged();
                     }
@@ -89,6 +106,7 @@ public class ProductCatalogyActivity extends AppCompatActivity {
             });
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option_menu, menu);
@@ -106,16 +124,15 @@ public class ProductCatalogyActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    /**
+     * Tạo đối tượng Navigation button trên ActionBar
+     */
     private void loadingActionbar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         tbCatalogy.setNavigationIcon(R.drawable.arrow_back_24dp);
-        tbCatalogy.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
     }
 
     @Override

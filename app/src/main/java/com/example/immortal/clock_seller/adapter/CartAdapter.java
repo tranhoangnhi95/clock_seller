@@ -28,6 +28,14 @@ public class CartAdapter extends BaseAdapter {
     public ArrayList<Cart> carts;
     public TextView txtCTotal;
 
+    /**
+     * Hàm khởi tạo adapter giỏ hàng.
+     *
+     * @param context   context (ngữ cảnh của ứng dụng)
+     * @param resource  layout
+     * @param carts     giỏ hàng
+     * @param txtCTotal textview để cập nhật lại tổng khi thay đổi số lượng sản phẩm trong adapter
+     */
     public CartAdapter(Context context, int resource, ArrayList<Cart> carts, TextView txtCTotal) {
         this.context = context;
         this.resource = resource;
@@ -35,21 +43,41 @@ public class CartAdapter extends BaseAdapter {
         this.txtCTotal = txtCTotal;
     }
 
+    /**
+     * Lấy số lượng item
+     *
+     * @return số lượng
+     */
     @Override
     public int getCount() {
         return carts.size();
     }
 
+    /**
+     * Lấy item tại vị trí i
+     *
+     * @param i vị trí
+     * @return item
+     */
     @Override
     public Object getItem(int i) {
         return carts.get(i);
     }
 
+    /**
+     * Lấy id của item tại vị trí i
+     *
+     * @param i vị trị
+     * @return id
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
 
+    /**
+     * Lớp hỗ trợ khởi tạo item và giúp hoạt động nhanh hơn
+     */
     public class ViewHolder {
         public TextView txtName, txtPrice, txtTotal;
         public ImageView imgImage;
@@ -78,38 +106,37 @@ public class CartAdapter extends BaseAdapter {
         }
         Cart cart = (Cart) getItem(i);
         viewHolder.txtName.setText(cart.getName());
+        //format giá thành dàng 000.000.000
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        viewHolder.txtPrice.setText("Giá: " + decimalFormat.format(cart.getPrice()) + " Đ");
-//        viewHolder.txtTotal.setText("Tổng: " + decimalFormat.format(cart.getTotal()) + " Đ");
         viewHolder.txtPrice.setText(String.format(context.getString(R.string.price), decimalFormat.format(cart.getPrice())));
         viewHolder.txtTotal.setText(String.format(context.getString(R.string.total), decimalFormat.format(cart.getTotal())));
-//        Glide.with(context).load(cart.getImage())
-//                .placeholder(R.drawable.noimage)
-//                .error(R.drawable.noimage)
-//                .into(viewHolder.imgImage);
+        //đọc ảnh từ internet truyền vào cho ImageView
         Glide.with(context)
-                .load(cart.getImage())
+                .load(cart.getImage()) //link ảnh
                 .apply(
                         RequestOptions
-                                .overrideOf(100, 100)
-                                .placeholder(R.drawable.noimage)
-                                .error(R.drawable.noimage)
-                                .formatOf(DecodeFormat.PREFER_RGB_565)
-                                .timeout(3000)
+                                .overrideOf(100, 100) //resize ảnh
+                                .placeholder(R.drawable.noimage) //ảnh ban đầu
+                                .error(R.drawable.noimage) //ảnh được sử dụng khi lỗi
+                                .formatOf(DecodeFormat.PREFER_RGB_565) //format ảnh
+                                .timeout(3000) //thời gian tối đa
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
                 .into(viewHolder.imgImage);
-//        viewHolder.imgImage.setImageResource(cart.getImage());
         viewHolder.btnQuantity.setText(String.valueOf(cart.getQuantity()));
         final Cart cart1 = cart;
         final ViewHolder finalViewHolder = viewHolder;
+
+        //sự kiện click button giảm số lượng
         viewHolder.btnDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //số lượng <1 thì sản phẩm sẽ bị xỏa khỏi giỏ hàng
                 if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) <= 1) {
                     carts.remove(carts.indexOf(cart1));
                     notifyDataSetChanged();
                 } else {
+                    //giảm số lượng sản hẩm
                     int quantity = Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) - 1;
                     long c_total = cart1.getPrice() * quantity;
                     finalViewHolder.btnQuantity.setText(String.valueOf(quantity));
@@ -122,19 +149,23 @@ public class CartAdapter extends BaseAdapter {
                 for (int i = 0; i < carts.size(); i++) {
                     total += carts.get(i).getTotal();
                 }
+                //Cập nhật lại  thành tiền ở giỏ hàng
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                 txtCTotal.setText(decimalFormat.format(total));
             }
         });
 
+        //sự kiện click button tăng số lượng sản
         viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Nếu số lượng hiện tại là tối đa của mẫu sản phẩm, thì số lượng sẽ không tăng nữa
                 if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) >= cart1.getMaxQuantity()) {
                     finalViewHolder.btnQuantity.setText(String.valueOf(cart1.getMaxQuantity()));
                     carts.get(carts.indexOf(cart1)).setQuantity(cart1.getMaxQuantity());
                     notifyDataSetChanged();
                 } else {
+                    //tăng số lượng sản phẩm
                     int quantity = Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) + 1;
                     long c_total = cart1.getPrice() * quantity;
                     finalViewHolder.btnQuantity.setText(String.valueOf(quantity));
@@ -146,11 +177,13 @@ public class CartAdapter extends BaseAdapter {
                 for (int i = 0; i < carts.size(); i++) {
                     total += carts.get(i).getTotal();
                 }
+                //Cập nhật lại thành tiền ở giỏ hàng
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                 txtCTotal.setText(decimalFormat.format(total));
             }
         });
 
+        //sự kiện button xóa sản phẩm
         viewHolder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,7 +195,7 @@ public class CartAdapter extends BaseAdapter {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                carts.remove(cart1);
+                                carts.remove(cart1); //xóa sản phẩm khỏi giỏ hàng
                                 dialogInterface.cancel();
                                 notifyDataSetChanged();
 
@@ -170,6 +203,7 @@ public class CartAdapter extends BaseAdapter {
                                 for (int k = 0; k < carts.size(); k++) {
                                     total += carts.get(k).getTotal();
                                 }
+                                //Cập nhật lại thành tiền ở giỏ hàng
                                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                                 txtCTotal.setText(decimalFormat.format(total));
                             }
@@ -196,6 +230,8 @@ public class CartAdapter extends BaseAdapter {
                 alertDialog.show();
             }
         });
+
+        //sự kiện longclick item
         view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -207,7 +243,7 @@ public class CartAdapter extends BaseAdapter {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                carts.remove(cart1);
+                                carts.remove(cart1); //xóa sản phẩm khỏi giỏ hàng
                                 dialogInterface.cancel();
                                 notifyDataSetChanged();
 
@@ -215,6 +251,7 @@ public class CartAdapter extends BaseAdapter {
                                 for (int k = 0; k < carts.size(); k++) {
                                     total += carts.get(k).getTotal();
                                 }
+                                //Cập nhật lại thành tiền ở giỏ hàng
                                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
                                 txtCTotal.setText(decimalFormat.format(total));
                             }

@@ -42,6 +42,9 @@ public class ProducstActivity extends AppCompatActivity {
         controls();
     }
 
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         tbProducts = findViewById(R.id.tb_Products);
         lvProducts = findViewById(R.id.lv_PsProducts);
@@ -56,16 +59,14 @@ public class ProducstActivity extends AppCompatActivity {
         setTitle("Sản phẩm");
     }
 
+    /**
+     * Tạo đối tượng Navigation button trên ActionBar
+     */
     private void loadActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         tbProducts.setNavigationIcon(R.drawable.arrow_back_24dp);
-        tbProducts.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+
     }
 
     @Override
@@ -86,6 +87,12 @@ public class ProducstActivity extends AppCompatActivity {
     }
 
     private void controls() {
+        tbProducts.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         svSearch.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -94,8 +101,8 @@ public class ProducstActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                Log.d("Text------", s + "------------");
-                Log.d("Text size", models.size() + "--------------------");
+//                Log.d("Text------", s + "------------");
+//                Log.d("Text size", models.size() + "--------------------");
                 modelAdapter.getFilter().filter(s.trim());
 //                modelAdapter.filter(s);
                 return true;
@@ -110,6 +117,9 @@ public class ProducstActivity extends AppCompatActivity {
         loadProducts();
     }
 
+    /**
+     * Load sản phẩm được chọn từ catalogy về từ database
+     */
     private void loadProducts() {
         if (!manufature_name.equals("")) {
             if (manufature_name.equals("Tất cả sản phẩm")) {

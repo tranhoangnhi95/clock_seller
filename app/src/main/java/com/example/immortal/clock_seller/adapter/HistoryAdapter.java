@@ -25,26 +25,51 @@ public class HistoryAdapter extends BaseAdapter {
     public int resource;
     public ArrayList<Clock> objects;
 
+    /**
+     * Hàm khởi tạo adater lịch sử
+     * @param context context (ngữ cảnh của ứng dụng)
+     * @param resource layout
+     * @param objects danh sách đối tượng
+     */
     public HistoryAdapter(Context context, int resource, ArrayList<Clock> objects) {
         this.context = context;
         this.resource = resource;
         this.objects = objects;
     }
 
+    /**
+     * Lấy số lượng item
+     *
+     * @return số lượng
+     */
     @Override
     public int getCount() {
         return objects.size();
     }
 
+    /**
+     * Lấy item tại vị trí i
+     * @param i
+     * @return đối tượng
+     */
     @Override
     public Object getItem(int i) {
         return objects.get(i);
     }
 
+    /**
+     * Lấy id của item tại vị trí i
+     * @param i vị trí
+     * @return id
+     */
     @Override
     public long getItemId(int i) {
         return i;
     }
+
+    /**
+     * Lớp hỗ trợ khởi tạo item và giúp hoạt động nhanh hơn
+     */
     public class ViewHolder{
         public ImageView imgImage;
         public TextView txtName, txtTotal, txtPrice, txtQuantity, txtDateOfPay;
@@ -69,16 +94,17 @@ public class HistoryAdapter extends BaseAdapter {
         Clock clock = (Clock) getItem(i);
 
         viewHolder.txtName.setText(clock.getName());
+
+        //format giá và tổng thành dạng 000.000.000
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        viewHolder.txtPrice.setText("Giá: " +decimalFormat.format(clock.getPrice())+" Đ");
-//        viewHolder.txtTotal.setText("Thành tiền: "+decimalFormat.format(clock.getTotal())+" Đ");
         viewHolder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(clock.getPrice())));
         viewHolder.txtTotal.setText(String.format(context.getString(R.string.total),decimalFormat.format(clock.getTotal())));
         viewHolder.txtQuantity.setText(String.valueOf(clock.getQuantity()));
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy '-' HH:mm:ss");
+        //format ngày tháng năm
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         viewHolder.txtDateOfPay.setText(String.format(context.getString(R.string.date),dateFormat.format(Long.parseLong(clock.getDate()))));
-
+        //Load ảnh từ internet vào ImageView
         Glide.with(context)
                 .load(clock.getImage())
                 .apply(
