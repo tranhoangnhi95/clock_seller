@@ -52,7 +52,6 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
 
     private ArrayList<MyMenuItem> myMenuItems;
 
-
     private ArrayList<Model> models;
     private HotProductAdapter hotProductAdapter;
 
@@ -159,18 +158,18 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     private void loadHotModel() {
 
         models.clear();
-            mDatabase.child("Model").orderByChild("sold").limitToLast(8).addChildEventListener(new DataBase() {
-                @Override
-                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    Model model = dataSnapshot.getValue(Model.class);
-                    if (model.getQuantity() > 0) {
-                        models.add(0,model);
-                        hotProductAdapter.notifyDataSetChanged();
-                        pbLoading.setVisibility(View.INVISIBLE);
-                    }
+        mDatabase.child("Model").orderByChild("sold").limitToLast(8).addChildEventListener(new DataBase() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                Model model = dataSnapshot.getValue(Model.class);
+                if (model.getQuantity() > 0) {
+                    models.add(0, model);
+                    hotProductAdapter.notifyDataSetChanged();
                     pbLoading.setVisibility(View.INVISIBLE);
                 }
-            });
+                pbLoading.setVisibility(View.INVISIBLE);
+            }
+        });
 
     }
 
@@ -315,9 +314,5 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
 
-//                    Intent i_ToProDuct = new Intent(MainPageActivity.this, ProducstActivity.class);
-//                    i_ToProDuct.putExtra(manufaturer_name, item.getName());
-//                    startActivity(i_ToProDuct);
     }
-
 }

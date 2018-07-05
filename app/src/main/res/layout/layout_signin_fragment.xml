@@ -15,11 +15,11 @@
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
-                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:textColorHint="@color/my_white">
 
                 <EditText
                     android:id="@+id/txt_SIEmail"
@@ -27,19 +27,19 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/email_24dp"
                     android:drawablePadding="5dp"
-                    android:textColorHint="@color/my_white"
-                    android:textColor="@color/my_white"
+                    android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
-                     />
+                    android:textColor="@color/my_white"
+                    android:textColorHint="@color/my_white" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:textColorHint="@color/my_white"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp">
+                android:layout_marginRight="20dp"
+                android:textColorHint="@color/my_white">
 
                 <EditText
                     android:id="@+id/txt_SIPass"
@@ -47,6 +47,7 @@
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/lock_24dp"
                     android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/visibility_off_24dp"
                     android:hint="@string/hint_pass_word"
                     android:inputType="textPassword"
                     android:textColor="@color/my_white"

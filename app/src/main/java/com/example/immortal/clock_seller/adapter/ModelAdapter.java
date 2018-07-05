@@ -3,11 +3,14 @@ package com.example.immortal.clock_seller.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,17 +29,31 @@ import com.example.immortal.clock_seller.R;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class ModelAdapter extends BaseAdapter {
+public class ModelAdapter extends BaseAdapter implements Filterable {
     public Context context;
     public int resource;
     public ArrayList<Model> models;
+    public ArrayList<Model> tModels;
+    public ValueFilter valueFilter;
 
     public ModelAdapter(Context context, int resource, ArrayList<Model> models) {
         this.context = context;
         this.resource = resource;
         this.models = models;
+
+        tModels = new ArrayList<Model>();
     }
+
+    @Override
+    public Filter getFilter() {
+        if (valueFilter == null) {
+            valueFilter = new ValueFilter();
+        }
+        return valueFilter;
+    }
+
 
     public class ViewHolder {
         public ImageView imgImage;
@@ -45,6 +62,7 @@ public class ModelAdapter extends BaseAdapter {
         public ImageButton btnAddToCart;
 
     }
+
     @Override
     public int getCount() {
         return models.size();
@@ -83,7 +101,7 @@ public class ModelAdapter extends BaseAdapter {
         viewHolder.txtName.setText(model.getName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
 //        viewHolder.txtPrice.setText("Giá : " + decimalFormat.format(model.getPrice()) + " Đ");
-        viewHolder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(model.getPrice())));
+        viewHolder.txtPrice.setText(String.format(context.getString(R.string.price), decimalFormat.format(model.getPrice())));
         viewHolder.txtDetail.setMaxLines(2);
         viewHolder.txtDetail.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txtDetail.setText(model.getDetail());
@@ -97,7 +115,7 @@ public class ModelAdapter extends BaseAdapter {
                 .load(model.getImage())
                 .apply(
                         RequestOptions
-                                .overrideOf(100,100)
+                                .overrideOf(100, 100)
                                 .placeholder(R.drawable.noimage)
                                 .error(R.drawable.noimage)
                                 .formatOf(DecodeFormat.PREFER_RGB_565)
@@ -110,8 +128,8 @@ public class ModelAdapter extends BaseAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i_ToProductDetail = new Intent(context,ProductDetailActivity.class);
-                i_ToProductDetail.putExtra(ProducstActivity.intent_product_key,model);
+                Intent i_ToProductDetail = new Intent(context, ProductDetailActivity.class);
+                i_ToProductDetail.putExtra(ProducstActivity.intent_product_key, model);
                 context.startActivity(i_ToProductDetail);
             }
         });
@@ -158,7 +176,7 @@ public class ModelAdapter extends BaseAdapter {
                     if (!exist) {
                         int quantity = Integer.parseInt(finalViewHolder.btnQuantity.getText().toString());
                         long total = quantity * model.getPrice();
-                        MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
+                        MainPageActivity.carts.add(new Cart(model.getName(), model.getPrice(), (int) total,
                                 model.getImage(),
                                 quantity, model.getQuantity(), model.getSold()
                         ));
@@ -166,20 +184,74 @@ public class ModelAdapter extends BaseAdapter {
                 } else {
                     int quantity = Integer.parseInt(finalViewHolder.btnQuantity.getText().toString());
                     long total = quantity * model.getPrice();
-                    MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),(int) total,
+                    MainPageActivity.carts.add(new Cart(model.getName(), model.getPrice(), (int) total,
                             model.getImage(),
                             quantity, model.getQuantity(), model.getSold()
                     ));
                 }
-
-//                Intent i_ToCart = new Intent(ProductDetailActivity.this,CartActivity.class);
-//                startActivity(i_ToCart);
                 notifyDataSetChanged();
-                Toast.makeText(context,"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
             }
         });
 
         return view;
+    }
+
+//    // Filter Class
+//    public void filter(String charText) {
+//        charText = charText.toLowerCase(Locale.getDefault());
+//        Log.d("size", models.size() + "---------------------");
+//        models.clear();
+//        if (charText.length() == 0) {
+//            models.addAll(tModels);
+//        } else {
+//            for (Model model : tModels) {
+//                if (model.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
+//                    models.add(model);
+//                }
+//            }
+//        }
+//        notifyDataSetChanged();
+//    }
+
+    private class ValueFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (tModels.isEmpty())
+                tModels.addAll(models);
+
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<Model> filterList = new ArrayList<Model>();
+                for (int i = 0; i < tModels.size(); i++) {
+                    if ((tModels.get(i).getName().toUpperCase())
+                            .contains(constraint.toString().toUpperCase())) {
+
+                        Model model = new Model(tModels.get(i).getName(),
+                                tModels.get(i).getB_name(), tModels.get(i).getDetail(),
+                                tModels.get(i).getImage(), tModels.get(i).getPrice(),
+                                tModels.get(i).getQuantity(), tModels.get(i).getSold());
+
+                        filterList.add(model);
+                    }
+                }
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
+                results.count = tModels.size();
+                results.values = tModels;
+            }
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+            models = (ArrayList<Model>) results.values;
+            notifyDataSetChanged();
+        }
+
     }
 
 }

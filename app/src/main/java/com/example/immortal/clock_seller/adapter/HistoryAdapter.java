@@ -75,7 +75,8 @@ public class HistoryAdapter extends BaseAdapter {
         viewHolder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(clock.getPrice())));
         viewHolder.txtTotal.setText(String.format(context.getString(R.string.total),decimalFormat.format(clock.getTotal())));
         viewHolder.txtQuantity.setText(String.valueOf(clock.getQuantity()));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy '-' HH:mm:ss");
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy '-' HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         viewHolder.txtDateOfPay.setText(String.format(context.getString(R.string.date),dateFormat.format(Long.parseLong(clock.getDate()))));
 
         Glide.with(context)

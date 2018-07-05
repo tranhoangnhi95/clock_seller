@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 public class ProducstActivity extends AppCompatActivity {
     public static final String intent_product_key = "product";
+    private android.widget.SearchView svSearch;
     private Toolbar tbProducts;
     private ListView lvProducts;
     private ModelAdapter modelAdapter;
@@ -44,6 +45,7 @@ public class ProducstActivity extends AppCompatActivity {
     private void inits() {
         tbProducts = findViewById(R.id.tb_Products);
         lvProducts = findViewById(R.id.lv_PsProducts);
+        svSearch = findViewById(R.id.sv_PsSearch);
         setSupportActionBar(tbProducts);
         models = new ArrayList<>();
         modelAdapter = new ModelAdapter(ProducstActivity.this, R.layout.layout_products_item, models);
@@ -84,8 +86,21 @@ public class ProducstActivity extends AppCompatActivity {
     }
 
     private void controls() {
-//        loadProducts();
+        svSearch.setOnQueryTextListener(new android.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d("Text------", s + "------------");
+                Log.d("Text size", models.size() + "--------------------");
+                modelAdapter.getFilter().filter(s.trim());
+//                modelAdapter.filter(s);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -119,6 +134,7 @@ public class ProducstActivity extends AppCompatActivity {
                 });
             }
         }
+
     }
 
     @Override
