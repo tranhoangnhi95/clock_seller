@@ -41,7 +41,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 
 public class MainPageActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
-    public static final String manufaturer_name = "manufacture";
+    public static final String manufaturer_name = "manufacture"; //chuỗi khóa khi gửi intent
     private Toolbar tbMainPage;
     private RecyclerView rvNewProducts;
     private ViewFlipper viewFlipper;
@@ -58,8 +58,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     public FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    public static ArrayList<Cart> carts;
-//    public static User user;
+    public static ArrayList<Cart> carts; //giỏ hàng của khách hàng
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +68,18 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         controls();
     }
 
-
+    /**
+     * Thêm các sự kiện lắng nghe, điều khiển
+     */
     private void controls() {
         actionBarClick();
         navigationView.setNavigationItemSelectedListener(this);
 
     }
 
+    /**
+     * Sự kiên click Navigation Button
+     */
     private void actionBarClick() {
         tbMainPage.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,9 +89,11 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         });
     }
 
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         rvNewProducts = findViewById(R.id.rv_NewProducts);
-//        lvNavigation = findViewById(R.id.lv_Menu);
         navigationView = findViewById(R.id.nv_Navigation);
         tbMainPage = findViewById(R.id.tb_MainPage);
         drawerLayout = findViewById(R.id.dl_MainPageLayout);
@@ -100,14 +106,17 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         myMenuItems = new ArrayList<>();
         setSupportActionBar(tbMainPage);
         setTitle("Trang chủ");
+        //Khởi tạo giỏ hàng khi giỏ hàng null
         if (carts == null) {
             carts = new ArrayList<>();
         }
 
+        //load giỏ hàng về khi đối tượng giỏ hàng rỗng
         if (carts.size() <= 0) {
             loadCart(SignInActivity.user);
         }
 
+        //khởi tạo mảng models khi đối tượng rỗng
         if (models == null) {
             models = new ArrayList<>();
         }

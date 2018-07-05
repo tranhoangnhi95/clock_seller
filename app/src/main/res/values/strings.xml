@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">clock_seller</string>
+    <string name="app_name">Clock Seller</string>
     
     //navigation string
     <string name="navigation_drawer_open">Open navigation drawer</string>

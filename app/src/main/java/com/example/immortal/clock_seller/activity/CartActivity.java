@@ -47,6 +47,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         controls();
     }
 
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         tbCart = findViewById(R.id.tb_Cart);
         lvCart = findViewById(R.id.lv_CCart);
@@ -67,10 +70,24 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //        Toast.makeText(this,MainPageActivity.carts.size()+"", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     *Tạo đối tượng Navigation button trên ActionBar
+     */
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         tbCart.setNavigationIcon(R.drawable.arrow_back_24dp);
+    }
+
+    /**
+     * Thêm các sự kiện lắng nghe, điều khiển
+     */
+    private void controls() {
+        annouce();
+        getCartTotal();
+        btnContinue.setOnClickListener(this);
+        btnPay.setOnClickListener(this);
+
         tbCart.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,17 +96,12 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void controls() {
-        annouce();
-        getCartTotal();
-        btnContinue.setOnClickListener(this);
-        btnPay.setOnClickListener(this);
-
-    }
-
+    /**
+     * Tính giá trị tổng cho giỏ hàng
+     */
     private void getCartTotal() {
         if (MainPageActivity.carts.size() > 0) {
-            long total = 0;
+            long total = 0; //giá trị tổng
             for (int i = 0; i < MainPageActivity.carts.size(); i++) {
                 total += MainPageActivity.carts.get(i).getTotal();
             }
@@ -99,6 +111,9 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Kiểm tra giỏ hàng và thông báo giỏ hàng rỗng
+     */
     private void annouce() {
         if (MainPageActivity.carts.size() <= 0) {
             cartAdapter.notifyDataSetChanged();
@@ -125,15 +140,20 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Thanh toán giỏ hàng và đưa vào lịch sử mua hàng của một khách hàng
+     *
+     * @param user đối tượng khách hàng
+     */
     private void pay(User user) {
         if (MainPageActivity.carts != null) {
             if (MainPageActivity.carts.size() > 0) {
-                String time = String.valueOf(calendar.getTimeInMillis());
+                String time = String.valueOf(calendar.getTimeInMillis()); //thời gian thanh toán
                 String email = user.getEmail();
                 email = email.replace("@", "");
                 email = email.replace(".", "");
-//            Toast.makeText(this,"Email" +email,Toast.LENGTH_LONG).show();
 
+                //tạo đối tượng đồng hồ cụ thể tương ứng với mỗi mẫu trong giỏ hàng
                 for (int i = 0; i < MainPageActivity.carts.size(); i++) {
                     Cart cart = MainPageActivity.carts.get(i);
                     Clock clock = new Clock(cart.getName(), String.valueOf(time),
@@ -142,22 +162,28 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                     );
                     clocks.add(clock);
                 }
-                for (int k = 0; k < MainPageActivity.carts.size(); k++){
+
+                //Giảm số lượng của mẫu ở database tương ứng trong giỏ hàng
+                for (int k = 0; k < MainPageActivity.carts.size(); k++) {
                     Cart cart1 = MainPageActivity.carts.get(k);
                     mDataBase.child("Model").child(cart1.getName())
                             .child("quantity").setValue(cart1.getMaxQuantity() - cart1.getQuantity());
                 }
 
-                for (int k = 0; k < MainPageActivity.carts.size(); k++){
+                //Tăng số lượng đã bán của mẫu ở database tương ứng trong giỏ hàng
+                for (int k = 0; k < MainPageActivity.carts.size(); k++) {
                     Cart cart1 = MainPageActivity.carts.get(k);
                     mDataBase.child("Model").child(cart1.getName())
                             .child("sold").setValue(cart1.getSold() + cart1.getQuantity());
                 }
 
+                //Thêm sản phẩm đã thanh toán vào lịch sử
                 for (int j = 0; j < clocks.size(); j++) {
                     mDataBase.child("History").child(email).push().setValue(clocks.get(j));
 
                 }
+
+                //Clear giỏ hàng ở local và database
                 MainPageActivity.carts.clear();
                 mDataBase.child("Cart").child(email).removeValue();
                 clocks.clear();
@@ -165,6 +191,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 cartAdapter.notifyDataSetChanged();
                 txtTotal.setText(String.valueOf(0));
             } else {
+                //Thông báo khi người dùng thanh toán trong lúc giỏ hàng rỗng
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
 //                builder.setMessage("Giỏ hàng đang trống, vui lòng đặt hàng vào trước khi thanh toán!");
                 builder.setMessage(getString(R.string.empty_cart_toast));
@@ -219,7 +246,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 //    }
 
 
-
+    /**
+     * Đưa các mẫu trong giỏ hàng mà người dùng chưa thanh toán lên database để sử dụng lại
+     *
+     * @param user1 người dùng
+     */
     private void pushCart(User user1) {
         if (MainPageActivity.carts.size() > 0) {
             String mail = "";

@@ -37,6 +37,9 @@ public class HistoryActivity extends AppCompatActivity {
         controls();
     }
 
+    /**
+     * Ánh xạ các view và khỏi tạo giá trị
+     */
     private void inits() {
         tbHistory = findViewById(R.id.tb_History);
         lvHistory = findViewById(R.id.lv_HHistory);
@@ -50,14 +53,24 @@ public class HistoryActivity extends AppCompatActivity {
         historyAdapter = new HistoryAdapter(this, R.layout.layout_history_item, clocks);
         lvHistory.setAdapter(historyAdapter);
         historyAdapter.notifyDataSetChanged();
+        loadHistory(SignInActivity.user);
 
 
     }
 
+    /**
+     * Tạo đối tượng Navigation button trên ActionBar
+     */
     private void loadingActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         tbHistory.setNavigationIcon(R.drawable.arrow_back_24dp);
+    }
+
+    /**
+     * Thêm các sự kiện lắng nghe, điều khiển
+     */
+    private void controls() {
         tbHistory.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,14 +79,10 @@ public class HistoryActivity extends AppCompatActivity {
         });
     }
 
-    private void controls() {
-        loadHistory(SignInActivity.user);
-        annouce();
-    }
-
-    private void annouce() {
-    }
-
+    /**
+     * Load lịch sử mua hàng của một khách hàng từ database
+     * @param sUser -khách hàng
+     */
     private void loadHistory(User sUser) {
         String email = sUser.getEmail();
         email = email.replace("@", "");
