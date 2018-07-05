@@ -20,6 +20,12 @@ public class MyFragmentAdapter extends FragmentStatePagerAdapter {
         this.signUpFragment = new SignUpFragment();
     }
 
+    /**
+     * Lấy item ở vị trí position của adapter
+     *
+     * @param position vị trị
+     * @return Fragment
+     */
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
@@ -29,11 +35,22 @@ public class MyFragmentAdapter extends FragmentStatePagerAdapter {
         }
     }
 
+    /**
+     * Trả về số lượng item của adapter
+     *
+     * @return số lượng
+     */
     @Override
     public int getCount() {
         return 2;
     }
 
+    /**
+     * Lấy tiêu đề của trang tại vị trí position
+     *
+     * @param position vị trí
+     * @return tiêu đề
+     */
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {

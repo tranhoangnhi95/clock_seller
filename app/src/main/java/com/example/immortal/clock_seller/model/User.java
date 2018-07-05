@@ -3,10 +3,10 @@ package com.example.immortal.clock_seller.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String name;
-    private String phone;
-    private String email;
-    private String address;
+    private String name; //tên khách hàng
+    private String phone; //số điện thoại khách hàng
+    private String email; //email khách hàng
+    private String address; //địa chỉ khách hàng
 
     public User() {
     }

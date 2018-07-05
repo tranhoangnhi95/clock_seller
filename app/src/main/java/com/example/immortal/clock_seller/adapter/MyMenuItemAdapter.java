@@ -28,21 +28,41 @@ public class MyMenuItemAdapter extends BaseAdapter {
         this.myMenuItems = myMenuItems;
     }
 
+    /**
+     * Lớp hỗ trợ khởi tạo item và giúp hoạt động nhanh hơn
+     */
     public class ViewHolder{
         public ImageView imgImage;
         public TextView txtName;
 
     }
+
+    /**
+     * Lấy số lượng item adapter
+     * @return số lượng
+     */
     @Override
     public int getCount() {
         return myMenuItems.size();
     }
 
+    /**
+     * Lấy item tại vị trí i
+     *
+     * @param i vị trí
+     * @return đối tượng MyMenuItem
+     */
     @Override
     public Object getItem(int i) {
         return myMenuItems.get(i);
     }
 
+    /**
+     * Lấy id của item tại vị trí i
+     *
+     * @param i vị trị
+     * @return id
+     */
     @Override
     public long getItemId(int i) {
         return i;
@@ -62,12 +82,7 @@ public class MyMenuItemAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
         MyMenuItem item = (MyMenuItem) getItem(i);
-//        Glide.with(context).load(item.getImage())
-//                .placeholder(R.drawable.noimage)
-//                .error(R.drawable.noimage)
-//                .fitCenter()
-//                .override(70,70)
-//                .into(viewHolder.imgImage);
+        //Load ảnh từ internet vào ImageView
         Glide.with(context)
                 .load(item.getImage())
                 .apply(

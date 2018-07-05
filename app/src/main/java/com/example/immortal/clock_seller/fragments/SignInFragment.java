@@ -43,12 +43,16 @@ public class SignInFragment extends Fragment {
         return new SignInFragment();
     }
 
+    /**
+     * Ánh xạ các view và tạo sự kiện
+     * @param view điều khiển
+     */
     @SuppressLint("ClickableViewAccessibility")
     private void inits(View view) {
         btnSignIn = view.findViewById(R.id.btn_SISignIn);
         txtEmail = view.findViewById(R.id.txt_SIEmail);
         txtPass = view.findViewById(R.id.txt_SIPass);
-
+        //sự kiện RightDrawableClick xóa nội dung edittext
         txtEmail.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(txtEmail) {
             @Override
             public boolean onDrawableClick() {
@@ -56,19 +60,22 @@ public class SignInFragment extends Fragment {
                 return true;
             }
         });
-
+        //Sự kiện khi chuỗi của editText thay đổi
         txtEmail.addTextChangedListener(new TextChangeListener() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //nếu chuỗi rỗng sẽ ẩn drawable
                 if (charSequence.length() == 0) {
                     txtEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.email_24dp, 0, 0, 0);
                 } else {
+                    //ngược lại hiển thị drawable
                     txtEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.email_24dp, 0, R.drawable.cancel_24dp, 0);
                 }
                 super.onTextChanged(charSequence, i, i1, i2);
             }
         });
 
+        //sự kiện RightDrawableClick hiển thị hoặc ẩn nội dung mật khẩu
         txtPass.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(txtPass) {
             @Override
             public boolean onDrawableClick() {
@@ -85,7 +92,7 @@ public class SignInFragment extends Fragment {
         txtEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.email_24dp, 0, 0, 0);
     }
 
-
+    //sự kiên click button đăng nhập
     private void signInEvent() {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +118,10 @@ public class SignInFragment extends Fragment {
         super.onPause();
     }
 
+    /**
+     * Hiển thị email ra edittext
+     * @param Email chuỗi email
+     */
     public void DisplayEmail(String Email) {
         txtEmail.setText(Email);
     }

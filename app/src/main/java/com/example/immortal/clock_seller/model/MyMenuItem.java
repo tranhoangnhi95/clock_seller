@@ -3,8 +3,8 @@ package com.example.immortal.clock_seller.model;
 import java.io.Serializable;
 
 public class MyMenuItem implements Serializable{
-    private String Image;
-    private String Name;
+    private String Image; //link hình ảnh
+    private String Name; //tên nhãn hàng
 
     public MyMenuItem() {
     }

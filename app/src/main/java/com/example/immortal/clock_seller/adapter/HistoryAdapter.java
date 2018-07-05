@@ -50,7 +50,7 @@ public class HistoryAdapter extends BaseAdapter {
     /**
      * Lấy item tại vị trí i
      * @param i
-     * @return đối tượng
+     * @return đối tượng Clock
      */
     @Override
     public Object getItem(int i) {

@@ -33,6 +33,13 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
     public int resource;
     public ArrayList<Model> models;
 
+    /**
+     * Hàm khởi tạo adapter sản phẩm hot
+     *
+     * @param context  context context (ngữ cảnh của ứng dụng)
+     * @param resource layout
+     * @param models   danh sách các mẫu
+     */
     public HotProductAdapter(Context context, int resource, ArrayList<Model> models) {
         this.context = context;
         this.resource = resource;
@@ -53,22 +60,20 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
         holder.txtName.setMaxLines(1);
         holder.txtName.setEllipsize(TextUtils.TruncateAt.END);
         holder.txtName.setText(model.getName());
+
+        //format giá thành sang định dạng 000.000.000
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        holder.txtPrice.setText("Giá: " + decimalFormat.format(model.getPrice()) + " Đ");
-        holder.txtPrice.setText(String.format(context.getString(R.string.price),decimalFormat.format(model.getPrice())));
+        holder.txtPrice.setText(String.format(context.getString(R.string.price), decimalFormat.format(model.getPrice())));
         holder.txtDetail.setMaxLines(1);
         holder.txtDetail.setEllipsize(TextUtils.TruncateAt.END);
         holder.txtDetail.setText(model.getDetail());
-//        Glide.with(context).load(model.getImage())
-//                .placeholder(R.drawable.noimage)
-//                .error(R.drawable.noimage)
-//                .override(100,100)
-//                .into(holder.imgImage);
+
+        //Load ảnh từ internet vào ImageView
         Glide.with(context)
                 .load(model.getImage())
                 .apply(
                         RequestOptions
-                                .overrideOf(100,100)
+                                .overrideOf(100, 100)
                                 .placeholder(R.drawable.noimage)
                                 .error(R.drawable.noimage)
                                 .formatOf(DecodeFormat.PREFER_RGB_565)
@@ -76,61 +81,101 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
                 .into(holder.imgImage);
-//        holder.imgImage.setImageResource(R.drawable.menu);
+
+
         final ItemHolder holder1 = holder;
         final Model model1 = model;
+
+
         holder.setHotProductItemClickListner(new HotProductItemClickListner() {
+
+            /**
+             * Sự kiện click button thêm sản phẩm vào giỏ hàng của điều khiển view tại vị trí position
+             * @param view các điều khiển
+             * @param position vị trí được click
+             * @param isLongClick true nếu view được longclick, false đối với các trường hợp khác
+             */
             @Override
             public void addToCartClick(View view, int position, boolean isLongClick) {
+                /*
+                Nếu giỏ hàng khác rỗng, kiểm tra tồn tại sản của mẫu tương ứng trong giỏ hàng
+                    nếu không tồn tại thêm sản phẩm vào giỏ hàng, ngược lại tăng số lượng tương ứng
+                 */
                 if (MainPageActivity.carts.size() > 0) {
                     int quantity1 = Integer.parseInt(holder1.btnQuantity.getText().toString());
-                    boolean exist = false;
+                    boolean exist = false; //biến xác định sản phẩm đã tồn tại trong giỏ hàng hay chưa
                     for (int i = 0; i < MainPageActivity.carts.size(); i++) {
+                        //kiểm tra sản phẩm có tồn tại trong giỏ hàng
                         if (MainPageActivity.carts.get(i).getName().equals(model1.getName())) {
                             MainPageActivity.carts.get(i).setQuantity(MainPageActivity.carts.get(i).getQuantity() + quantity1);
+                            //kiểm tra số lượng đã đạt tối đa chưa, nếu tối đa giữ nguyên số lượng, ngược lại tăng số lượng tương ứng
                             if (MainPageActivity.carts.get(i).getQuantity() >= model.getQuantity()) {
                                 MainPageActivity.carts.get(i).setQuantity(model.getQuantity());
                             }
+                            //tính lại thành tiền cho sản phẩm vừa tăng số lượng
                             MainPageActivity.carts.get(i).setTotal(model1.getPrice() * MainPageActivity.carts.get(i).getQuantity());
                             exist = true;
                         }
                     }
+                    //nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm vào giỏ hàng
                     if (!exist) {
                         int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                         long total = quantity * model1.getPrice();
-                        MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity(), model.getSold()));
+                        MainPageActivity.carts.add(new Cart(model1.getName(), model1.getPrice(), (int) total, model1.getImage(), quantity, model1.getQuantity(), model.getSold()));
                     }
-                } else {
+                } else { //nếu giỏ hàng rỗng thêm mẫu sản phẩm vào giỏ hàng
                     int quantity = Integer.parseInt(holder1.btnQuantity.getText().toString());
                     long total = quantity * model1.getPrice();
-                    MainPageActivity.carts.add(new Cart(model1.getName(),model1.getPrice() ,(int) total, model1.getImage(), quantity, model1.getQuantity(), model.getSold()));
+                    MainPageActivity.carts.add(new Cart(model1.getName(), model1.getPrice(), (int) total, model1.getImage(), quantity, model1.getQuantity(), model.getSold()));
                 }
-                Toast.makeText(context,"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
             }
 
+            /**
+             * Sự kiện click vào item  tại vị trí position của điều khiển view để xem chị tiết sản phẩm
+             * @param view điều khiển
+             * @param position vị trí
+             * @param isLongClick true nếu view được longclick, false đối với các trường hợp khác
+             */
             @Override
             public void itemClick(View view, int position, boolean isLongClick) {
-                Intent i_ToProduct = new Intent(context,ProductDetailActivity.class);
+                Intent i_ToProduct = new Intent(context, ProductDetailActivity.class);
                 Model model2 = models.get(position);
-                i_ToProduct.putExtra(ProducstActivity.intent_product_key,model2);
+                i_ToProduct.putExtra(ProducstActivity.intent_product_key, model2);
                 view.getContext().startActivity(i_ToProduct);
             }
 
+            /**
+             * Sự kiện click button tăng số lượng một sản phẩm
+             * @param view điều khiển
+             * @param position vị trí được click
+             * @param isLongClick true nếu view được longclick, false đối với các trường hợp khác
+             */
             @Override
             public void increaseClick(View view, int position, boolean isLongClick) {
+                //nếu số lượng hiện tại là tối đa, giữ nguyên số lượng
                 if (Integer.valueOf(holder1.btnQuantity.getText().toString()) >= model.getQuantity()) {
                     holder1.btnQuantity.setText(String.valueOf(model.getQuantity()));
                 } else {
+                    //ngược lại tăng số lượng sản phẩm lên 1
                     holder1.btnQuantity.setText(String.valueOf(Integer.valueOf(
                             holder1.btnQuantity.getText().toString()) + 1));
                 }
             }
 
+            /**
+             * Sự kiện click button giảm số lượng một sản phẩm
+             * @param view điều khiển
+             * @param position vị trí được click
+             * @param isLongClick true nếu view được longclick, false đối với các trường hợp khác
+             */
             @Override
             public void decreaseClick(View view, int position, boolean isLongClick) {
-                if (Integer.valueOf(holder1.btnQuantity.getText().toString()) <= 0) {
-                    holder1.btnQuantity.setText(String.valueOf(0));
+                //Nếu số lượng là nhỏ hơn hoặc bằng 1, giữ nguyên số lượng
+                if (Integer.valueOf(holder1.btnQuantity.getText().toString()) <= 1) {
+                    holder1.btnQuantity.setText(String.valueOf(1));
                 } else {
+                    //ngược lại, giảm số lượng sản phẩm đi 1
                     holder1.btnQuantity.setText(String.valueOf(Integer.valueOf(
                             holder1.btnQuantity.getText().toString()) - 1));
                 }
@@ -138,14 +183,21 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
         });
 
 
-
     }
 
+    /**
+     * Lấy số lượng item
+     *
+     * @return số lượng
+     */
     @Override
     public int getItemCount() {
         return models.size();
     }
 
+    /**
+     * Lớp hỗ trợ khởi tạo item và giúp hoạt động nhanh hơn
+     */
     public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageView imgImage;
         public TextView txtName, txtPrice, txtDetail;
@@ -163,6 +215,7 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
             this.btnDecrease = itemView.findViewById(R.id.btn_HPDecrease);
             this.btnQuantity = itemView.findViewById(R.id.btn_HPQuantity);
             this.btnIncrease = itemView.findViewById(R.id.btn_HPIncrease);
+
 
             itemView.setOnClickListener(this);
             btnDecrease.setOnClickListener(this);

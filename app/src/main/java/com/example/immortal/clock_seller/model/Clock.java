@@ -3,8 +3,8 @@ package com.example.immortal.clock_seller.model;
 import java.io.Serializable;
 
 public class Clock implements Serializable{
-    private String name, date, image;
-    private Integer price, quantity, total;
+    private String name, date, image; //tên sản phẩm, ngày thanh toán, link hình ảnh
+    private Integer price, quantity, total; //giá, số lượng, tổng tiền của sản phẩm
 
     public Clock() {
     }

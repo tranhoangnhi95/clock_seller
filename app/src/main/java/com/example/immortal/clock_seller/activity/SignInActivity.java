@@ -203,6 +203,10 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
         }
     }
 
+    /**
+     * Hàm truyền email
+     * @param Email chuỗi email
+     */
     @Override
     public void PassingEmail(String Email) {
         //truyền dữ liệu sang cho frament đăng nhập

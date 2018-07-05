@@ -3,7 +3,6 @@ package com.example.immortal.clock_seller.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +34,16 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
     public Context context;
     public int resource;
     public ArrayList<Model> models;
-    public ArrayList<Model> tModels;
+    public ArrayList<Model> tModels; //danh sách phụ hỗ trợ tìm kiếm
     public ValueFilter valueFilter;
 
+    /**
+     * Hàm khởi tạo adapter mẫu sản phẩm
+     *
+     * @param context  context(ngữ cảnh)
+     * @param resource layout
+     * @param models   danh sách các mẫu
+     */
     public ModelAdapter(Context context, int resource, ArrayList<Model> models) {
         this.context = context;
         this.resource = resource;
@@ -46,6 +52,11 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
         tModels = new ArrayList<Model>();
     }
 
+    /**
+     * Trả về bộ lọc của adapter
+     *
+     * @return Filter
+     */
     @Override
     public Filter getFilter() {
         if (valueFilter == null) {
@@ -54,7 +65,9 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
         return valueFilter;
     }
 
-
+    /**
+     * Lớp hỗ trợ khởi tạo item và giúp hoạt động nhanh hơn
+     */
     public class ViewHolder {
         public ImageView imgImage;
         public TextView txtName, txtPrice, txtDetail;
@@ -63,16 +76,33 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
 
     }
 
+    /**
+     * Lấy số lượng item
+     *
+     * @return số lượng
+     */
     @Override
     public int getCount() {
         return models.size();
     }
 
+    /**
+     * Lấy item tại vị trí i
+     *
+     * @param i
+     * @return đối tượng Model
+     */
     @Override
     public Object getItem(int i) {
         return models.get(i);
     }
 
+    /**
+     * Lấy id của item tại vị trí i
+     *
+     * @param i vị trí
+     * @return id
+     */
     @Override
     public long getItemId(int i) {
         return i;
@@ -99,18 +129,13 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
         }
         final Model model = (Model) getItem(i);
         viewHolder.txtName.setText(model.getName());
+        //format giá trị của giá sản phẩm thành dạng 000.000.000
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-//        viewHolder.txtPrice.setText("Giá : " + decimalFormat.format(model.getPrice()) + " Đ");
         viewHolder.txtPrice.setText(String.format(context.getString(R.string.price), decimalFormat.format(model.getPrice())));
         viewHolder.txtDetail.setMaxLines(2);
         viewHolder.txtDetail.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txtDetail.setText(model.getDetail());
-//        Glide.with(context).load(model.getImage())
-//                .placeholder(R.drawable.noimage)
-//                .error(R.drawable.noimage)
-//                .centerCrop()
-//                .override(150,150)
-//                .into(viewHolder.imgImage);
+        //Load ảnh từ internet vào ImageView
         Glide.with(context)
                 .load(model.getImage())
                 .apply(
@@ -123,8 +148,8 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 )
                 .into(viewHolder.imgImage);
-//        viewHolder.imgImage.setImageResource(product.getImg());
         final ModelAdapter.ViewHolder finalViewHolder = viewHolder;
+        //sự kiện itemclick để xem thông tin chi tiết của một sản phẩm
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -133,46 +158,61 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
                 context.startActivity(i_ToProductDetail);
             }
         });
+
+        //sự kiện click button giảm số lượng sản phẩm
         viewHolder.btnDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) <= 0) {
-                    finalViewHolder.btnQuantity.setText(String.valueOf(0));
+                //Nếu số lượng là nhỏ hơn hoặc bằng 1, giữ nguyên số lượng
+                if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) <= 1) {
+                    finalViewHolder.btnQuantity.setText(String.valueOf(1));
                 } else {
+                    //ngược lại, giảm số lượng sản phẩm đi 1
                     finalViewHolder.btnQuantity.setText(String.valueOf(Integer.valueOf(
                             finalViewHolder.btnQuantity.getText().toString()) - 1));
                 }
             }
         });
-
+        //sự kiện click button tăng số lượng sản phẩm
         viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //nếu số lượng hiện tại là tối đa, giữ nguyên số lượng
                 if (Integer.valueOf(finalViewHolder.btnQuantity.getText().toString()) >= model.getQuantity()) {
                     finalViewHolder.btnQuantity.setText(String.valueOf(model.getQuantity()));
                 } else {
+                    //ngược lại tăng số lượng sản phẩm lên 1
                     finalViewHolder.btnQuantity.setText(String.valueOf(Integer.valueOf(
                             finalViewHolder.btnQuantity.getText().toString()) + 1));
                 }
             }
         });
 
+        //sự kiện click button thêm sản phẩm vào giỏ hàng
         viewHolder.btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*
+                Nếu giỏ hàng khác rỗng, kiểm tra tồn tại sản của mẫu tương ứng trong giỏ hàng
+                    nếu không tồn tại thêm sản phẩm vào giỏ hàng, ngược lại tăng số lượng tương ứng
+                 */
                 if (MainPageActivity.carts.size() > 0) {
                     int quantity1 = Integer.parseInt(finalViewHolder.btnQuantity.getText().toString());
-                    boolean exist = false;
+                    boolean exist = false; //biến xác định sản phẩm đã tồn tại trong giỏ hàng hay chưa
                     for (int i = 0; i < MainPageActivity.carts.size(); i++) {
+                        //kiểm tra sản phẩm có tồn tại trong giỏ hàng
                         if (MainPageActivity.carts.get(i).getName().equals(model.getName())) {
                             MainPageActivity.carts.get(i).setQuantity(MainPageActivity.carts.get(i).getQuantity() + quantity1);
+                            //kiểm tra số lượng đã đạt tối đa chưa, nếu tối đa giữ nguyên số lượng, ngược lại tăng số lượng tương ứng
                             if (MainPageActivity.carts.get(i).getQuantity() >= model.getQuantity()) {
                                 MainPageActivity.carts.get(i).setQuantity(model.getQuantity());
                             }
+                            //tính lại thành tiền cho sản phẩm vừa tăng số lượng
                             MainPageActivity.carts.get(i).setTotal(model.getPrice() * MainPageActivity.carts.get(i).getQuantity());
                             exist = true;
                         }
                     }
+                    //nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm vào giỏ hàng
                     if (!exist) {
                         int quantity = Integer.parseInt(finalViewHolder.btnQuantity.getText().toString());
                         long total = quantity * model.getPrice();
@@ -181,7 +221,7 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
                                 quantity, model.getQuantity(), model.getSold()
                         ));
                     }
-                } else {
+                } else {//nếu giỏ hàng rỗng thêm mẫu sản phẩm vào giỏ hàng
                     int quantity = Integer.parseInt(finalViewHolder.btnQuantity.getText().toString());
                     long total = quantity * model.getPrice();
                     MainPageActivity.carts.add(new Cart(model.getName(), model.getPrice(), (int) total,
@@ -197,34 +237,30 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
         return view;
     }
 
-//    // Filter Class
-//    public void filter(String charText) {
-//        charText = charText.toLowerCase(Locale.getDefault());
-//        Log.d("size", models.size() + "---------------------");
-//        models.clear();
-//        if (charText.length() == 0) {
-//            models.addAll(tModels);
-//        } else {
-//            for (Model model : tModels) {
-//                if (model.getName().toLowerCase(Locale.getDefault()).contains(charText)) {
-//                    models.add(model);
-//                }
-//            }
-//        }
-//        notifyDataSetChanged();
-//    }
-
+    //lớp hỗ trợ lọc sản phẩm trong adapter
     private class ValueFilter extends Filter {
+        /**
+         * Lọc trong danh sách với chuỗi lọc constraint
+         * @param constraint chuỗi dùng để lọc
+         * @return các kết quả tính toán và số lượng các giá trị
+         */
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
-            if (tModels.isEmpty())
+            //nếu đối tượng rỗng, thêm tất cả các phần tử vào từ danh sách chính
+            if (tModels.isEmpty()) {
                 tModels.addAll(models);
-
+            }
+            //nếu chuỗi lọc không rỗng hoặc khác null sử dụng chuỗi để lọc
             if (constraint != null && constraint.length() > 0) {
                 ArrayList<Model> filterList = new ArrayList<Model>();
+
                 for (int i = 0; i < tModels.size(); i++) {
                     if ((tModels.get(i).getName().toUpperCase())
+                            .contains(constraint.toString().toUpperCase()) //kiểm tra tên của sản phẩm chứa chuỗi lọc
+                            || (tModels.get(i).getDetail().toUpperCase())
+                            .contains(constraint.toString().toUpperCase()) //kiểm tra mô tả của sản phẩm chứa chuỗi lọc
+                            || (String.valueOf(tModels.get(i).getPrice()).toUpperCase()) //kiểm tra giá của sản phẩm chứa chuỗi lọc
                             .contains(constraint.toString().toUpperCase())) {
 
                         Model model = new Model(tModels.get(i).getName(),
@@ -232,9 +268,10 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
                                 tModels.get(i).getImage(), tModels.get(i).getPrice(),
                                 tModels.get(i).getQuantity(), tModels.get(i).getSold());
 
-                        filterList.add(model);
+                        filterList.add(model); //thêm mẫu sản phẩm vào danh sách đã lọc
                     }
                 }
+                //đưa danh sách bộ lọc vào kết quả
                 results.count = filterList.size();
                 results.values = filterList;
             } else {

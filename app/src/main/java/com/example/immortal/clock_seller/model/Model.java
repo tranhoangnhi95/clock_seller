@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 public class Model implements Serializable {
 
-    private String name, b_name, detail, image;
-    private Integer price, quantity, sold;
+    private String name, b_name, detail, image; //tên mẫu, tên nhãn hàng, chi tiết, link hình ảnh
+    private Integer price, quantity, sold; //giá, số lượng, số lượng đã bán
 
     public Model() {
 

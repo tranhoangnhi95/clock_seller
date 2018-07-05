@@ -94,7 +94,7 @@
 
                         <ImageButton
                             android:scaleType="center"
-                            android:src="@drawable/sub"
+                            android:src="@drawable/remove_24dp"
                             android:id="@+id/btn_HPDecrease"
                             android:layout_width="0dp"
                             android:layout_height="40dp"
@@ -116,7 +116,7 @@
 
                         <ImageButton
                             android:scaleType="center"
-                            android:src="@drawable/plus"
+                            android:src="@drawable/add_24dp"
                             android:id="@+id/btn_HPIncrease"
                             android:layout_width="0dp"
                             android:layout_height="40dp"

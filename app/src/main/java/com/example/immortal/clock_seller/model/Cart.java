@@ -3,13 +3,13 @@ package com.example.immortal.clock_seller.model;
 import java.io.Serializable;
 
 public class Cart implements Serializable {
-    private String name;
-    private Integer price;
-    private Integer total;
-    private String image;
-    private int quantity;
-    private int maxQuantity;
-    private int sold;
+    private String name; //Tên mẫu sản phẩm
+    private Integer price; //Giá mẫu sản phẩm
+    private Integer total; //Tổng tiền sản phẩm
+    private String image; //Chuỗi link hình ảnh
+    private int quantity; //Số lượng mẫu trong giỏ hàng
+    private int maxQuantity; //Số lượng tối đa có thể đặt mua
+    private int sold; //Số lượng đã bán của mẫu sản phẩm
 
 
     public Cart() {

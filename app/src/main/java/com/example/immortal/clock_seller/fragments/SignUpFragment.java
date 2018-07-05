@@ -55,6 +55,11 @@ public class SignUpFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Ánh xạ các view và tạo sự kiện
+     *
+     * @param view điều khiển
+     */
     private void inits(View view) {
         btnSignUp = view.findViewById(R.id.btn_SUSignUp);
         txtName = view.findViewById(R.id.txt_SUName);
@@ -63,79 +68,11 @@ public class SignUpFragment extends Fragment {
         txtAddress = view.findViewById(R.id.txt_SUAddress);
         txtPass = view.findViewById(R.id.txt_SUPass);
 
-        txtName.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(txtName) {
-            @Override
-            public boolean onDrawableClick() {
-                txtName.setText("");
-                return true;
-            }
-        });
-        txtPhone.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(txtPhone) {
-            @Override
-            public boolean onDrawableClick() {
-                txtPhone.setText("");
-                return true;
-            }
-        });
-        txtEmail.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(txtEmail) {
-            @Override
-            public boolean onDrawableClick() {
-                txtEmail.setText("");
-                return true;
-            }
-        });
-        txtAddress.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(txtAddress) {
-            @Override
-            public boolean onDrawableClick() {
-                txtAddress.setText("");
-                return true;
-            }
-        });
-
-        txtName.addTextChangedListener(new TextChangeListener() {
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0) {
-                    txtName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.person_24dp, 0, 0, 0);
-                } else {
-                    txtName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.person_24dp, 0, R.drawable.cancel_24dp, 0);
-                }
-                super.onTextChanged(charSequence, i, i1, i2);
-            }
-        });
-        txtPhone.addTextChangedListener(new TextChangeListener() {
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0) {
-                    txtPhone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.phone_24dp, 0, 0, 0);
-                } else {
-                    txtPhone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.phone_24dp, 0, R.drawable.cancel_24dp, 0);
-                }
-                super.onTextChanged(charSequence, i, i1, i2);
-            }
-        });
-        txtEmail.addTextChangedListener(new TextChangeListener() {
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0) {
-                    txtEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.email_24dp, 0, 0, 0);
-                } else {
-                    txtEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.email_24dp, 0, R.drawable.cancel_24dp, 0);
-                }
-                super.onTextChanged(charSequence, i, i1, i2);
-            }
-        });
-        txtAddress.addTextChangedListener(new TextChangeListener() {
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.length() == 0) {
-                    txtAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.location24dp, 0, 0, 0);
-                } else {
-                    txtAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.location24dp, 0, R.drawable.cancel_24dp, 0);
-                }
-                super.onTextChanged(charSequence, i, i1, i2);
-            }
-        });
+        //thêm các sự kiện rightDrawableClick
+        rightDrawableClick(txtName, R.drawable.person_24dp);
+        rightDrawableClick(txtPhone, R.drawable.phone_24dp);
+        rightDrawableClick(txtEmail, R.drawable.email_24dp);
+        rightDrawableClick(txtAddress, R.drawable.location24dp);
 
         txtPass.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(txtPass) {
             @Override
@@ -151,14 +88,12 @@ public class SignUpFragment extends Fragment {
             }
         });
 
-        txtName.setCompoundDrawablesWithIntrinsicBounds(R.drawable.person_24dp, 0, 0, 0);
-        txtPhone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.phone_24dp, 0, 0, 0);
-        txtEmail.setCompoundDrawablesWithIntrinsicBounds(R.drawable.email_24dp, 0, 0, 0);
-        txtAddress.setCompoundDrawablesWithIntrinsicBounds(R.drawable.location24dp, 0, 0, 0);
 
     }
 
+    //Sự kiện
     private void signUpEvents() {
+        //sự kiên click button đăng nhập
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -185,8 +120,9 @@ public class SignUpFragment extends Fragment {
         super.onPause();
     }
 
+    //Interface hỗ trợ giao tiếp fragment
     public interface FragmentCommuniCation {
-        void PassingEmail(String Email);
+        void PassingEmail(String Email); //Hàm hỗ trợ truyền email
     }
 
     @Override
@@ -199,4 +135,36 @@ public class SignUpFragment extends Fragment {
         }
     }
 
+    /**
+     * Thêm sự kiện rightDrawableClick xóa nội dung editText
+     *
+     * @param editText    edit text cần thêm sự kiện
+     * @param drawaleLeft drawable bên trái
+     */
+    private void rightDrawableClick(final EditText editText, final int drawaleLeft) {
+        //sự kiện RightDrawableClick xóa nội dung edittext
+        editText.setOnTouchListener(new DrawableClickListener.RightDrawableClickListener(editText) {
+            @Override
+            public boolean onDrawableClick() {
+                editText.setText("");
+                return true;
+            }
+        });
+        //Sự kiện khi chuỗi của editText thay đổi
+        editText.addTextChangedListener(new TextChangeListener() {
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                //nếu chuỗi rỗng sẽ ẩn drawable
+                if (charSequence.length() == 0) {
+                    editText.setCompoundDrawablesWithIntrinsicBounds(drawaleLeft, 0, 0, 0);
+                } else {
+                    //ngược lại hiển thị drawable
+                    editText.setCompoundDrawablesWithIntrinsicBounds(drawaleLeft, 0, R.drawable.cancel_24dp, 0);
+                }
+                super.onTextChanged(charSequence, i, i1, i2);
+            }
+        });
+        editText.setCompoundDrawablesWithIntrinsicBounds(drawaleLeft, 0, 0, 0);
+
+    }
 }

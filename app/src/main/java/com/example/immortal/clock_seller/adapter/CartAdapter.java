@@ -57,7 +57,7 @@ public class CartAdapter extends BaseAdapter {
      * Lấy item tại vị trí i
      *
      * @param i vị trí
-     * @return item
+     * @return đối tượng Cart
      */
     @Override
     public Object getItem(int i) {
