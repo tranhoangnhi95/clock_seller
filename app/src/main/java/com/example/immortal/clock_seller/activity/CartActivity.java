@@ -184,6 +184,11 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
                 //Clear giỏ hàng ở local và database
+                android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+                builder.setMessage(String.format(getString(R.string.payment_complete), txtTotal.getText().toString()));
+                builder.setCancelable(true);
+                android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.show();
                 MainPageActivity.carts.clear();
                 mDataBase.child("Cart").child(email).removeValue();
                 clocks.clear();

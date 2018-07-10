@@ -101,10 +101,7 @@ public class ProducstActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-//                Log.d("Text------", s + "------------");
-//                Log.d("Text size", models.size() + "--------------------");
                 modelAdapter.getFilter().filter(s.trim());
-//                modelAdapter.filter(s);
                 return true;
             }
         });

@@ -333,7 +333,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         } else if (id == R.id.nav_SignOut) {
             mAuth.signOut();
             Intent iToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
-            carts.clear();
+            carts.removeAll(carts);
             SignInActivity.user = null;
             startActivity(iToSignIn);
         }

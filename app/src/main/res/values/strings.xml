@@ -6,6 +6,9 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Xin chào</string>
     //cart string
+    <string name="payment_complete">Cảm ơn bạn đã thanh toán giỏ hàng. Số tiền bạn đã thanh toán là %s Đ.
+        Bạn có thể xem lại chi tiết ở lịch sử mua hàng!
+    </string>
     <string name="empty_cart">Giỏ hàng của bạn đang trống!</string>
     <string name="total_cart">Thành tiền:</string>
     <string name="currency">Đ</string>
