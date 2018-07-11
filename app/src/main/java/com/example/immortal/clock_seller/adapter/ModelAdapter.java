@@ -230,6 +230,7 @@ public class ModelAdapter extends BaseAdapter implements Filterable {
                     ));
                 }
                 notifyDataSetChanged();
+                finalViewHolder.btnQuantity.setText("1");
                 Toast.makeText(context, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
             }
         });

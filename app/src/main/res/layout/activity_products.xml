@@ -8,16 +8,15 @@
     tools:context=".activity.ProducstActivity">
     <include
         layout="@layout/layout_toolbar"
-
         android:id="@+id/tb_Products">
     </include>
     <SearchView
+        android:inputType="text"
         android:id="@+id/sv_PsSearch"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"></SearchView>
     <ListView
         android:longClickable="true"
-        android:listSelector="#FFEE58"
         android:id="@+id/lv_PsProducts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>

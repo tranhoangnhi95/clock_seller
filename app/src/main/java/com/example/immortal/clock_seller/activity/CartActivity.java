@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnPay, btnContinue;
     private TextView txtTotal, txtAnnouce;
     private CartAdapter cartAdapter;
-
     private Calendar calendar;
     public ArrayList<Clock> clocks;
 
@@ -64,8 +64,15 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         setTitle("Giỏ hàng");
         loadingActionBar();
 
-        cartAdapter = new CartAdapter(CartActivity.this, R.layout.layout_cart_item, MainPageActivity.carts, txtTotal);
-        lvCart.setAdapter(cartAdapter);
+        if (cartAdapter == null){
+            Log.d("dddđd","Create1");
+            cartAdapter = new CartAdapter(CartActivity.this, R.layout.layout_cart_item, MainPageActivity.carts, txtTotal);
+            lvCart.setAdapter(cartAdapter);
+            cartAdapter.notifyDataSetChanged();
+        }else {
+            Log.d("dddđd","Create2");
+            cartAdapter.notifyDataSetChanged();
+        }
         getCartTotal();
 //        Toast.makeText(this,MainPageActivity.carts.size()+"", Toast.LENGTH_LONG).show();
     }
@@ -187,7 +194,23 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                 android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
                 builder.setMessage(String.format(getString(R.string.payment_complete), txtTotal.getText().toString()));
                 builder.setCancelable(true);
-                android.app.AlertDialog alertDialog = builder.create();
+                builder.setPositiveButton(
+                        R.string.back,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                dialogInterface.cancel();
+                            }
+                        }
+                );
+                final android.app.AlertDialog alertDialog = builder.create();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(DialogInterface dialogInterface) {
+                alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.my_secondary));
+                    }
+                });
                 alertDialog.show();
                 MainPageActivity.carts.clear();
                 mDataBase.child("Cart").child(email).removeValue();
@@ -212,14 +235,14 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
                         }
                 );
 
-                final android.app.AlertDialog alertDialog = builder.create();
-                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                final android.app.AlertDialog alertDialog1 = builder.create();
+                alertDialog1.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
                     public void onShow(DialogInterface dialogInterface) {
-                        alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.my_secondary));
+                        alertDialog1.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.my_secondary));
                     }
                 });
-                alertDialog.show();
+                alertDialog1.show();
             }
         }
     }
@@ -233,7 +256,7 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mn_history:
+            case R.id.mn_History:
                 Intent i_History = new Intent(CartActivity.this, HistoryActivity.class);
                 startActivity(i_History);
                 break;
@@ -241,15 +264,6 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    protected void onPause() {
-//        pushCart(SignInActivity.user);
-//        MainPageActivity.carts.clear();
-//        super.onPause();
-//        ;
-//    }
-
 
     /**
      * Đưa các mẫu trong giỏ hàng mà người dùng chưa thanh toán lên database để sử dụng lại

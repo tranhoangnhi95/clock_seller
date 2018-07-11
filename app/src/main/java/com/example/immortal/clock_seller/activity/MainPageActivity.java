@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -126,13 +127,10 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
         rvNewProducts.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rvNewProducts.setAdapter(hotProductAdapter);
 
-//        if (myMenuItems == null) {
-//            myMenuItems = new ArrayList<>();
-//        }
 
         loadViewFlipper();
         loadingActionBar();
-//        loadHotModel();
+
     }
 
     @Override
@@ -205,7 +203,7 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mn_cart:
+            case R.id.mn_Cart:
                 Intent i_ToCart = new Intent(MainPageActivity.this, CartActivity.class);
                 startActivity(i_ToCart);
                 break;
@@ -332,10 +330,12 @@ public class MainPageActivity extends AppCompatActivity implements View.OnClickL
             startActivity(iToHistory);
         } else if (id == R.id.nav_SignOut) {
             mAuth.signOut();
-            Intent iToSignIn = new Intent(MainPageActivity.this, SignInActivity.class);
-            carts.removeAll(carts);
+            carts.clear();
             SignInActivity.user = null;
+            Intent iToSignIn = new Intent(getApplicationContext(), SignInActivity.class);
+            iToSignIn.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(iToSignIn);
+
         }
         drawerLayout = findViewById(R.id.dl_MainPageLayout);
         drawerLayout.closeDrawer(GravityCompat.START);

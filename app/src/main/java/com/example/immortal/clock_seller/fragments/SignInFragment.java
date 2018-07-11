@@ -124,5 +124,6 @@ public class SignInFragment extends Fragment {
      */
     public void DisplayEmail(String Email) {
         txtEmail.setText(Email);
+        txtPass.setText("");
     }
 }

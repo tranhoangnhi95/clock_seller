@@ -172,7 +172,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mn_history:
+            case R.id.mn_History:
                 Intent i_ToHistory = new Intent(ProfileActivity.this, HistoryActivity.class);
                 startActivity(i_ToHistory);
                 break;

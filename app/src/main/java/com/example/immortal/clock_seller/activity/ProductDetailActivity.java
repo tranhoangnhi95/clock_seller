@@ -11,11 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.immortal.clock_seller.model.Cart;
 import com.example.immortal.clock_seller.model.Model;
 import com.example.immortal.clock_seller.R;
 
@@ -68,19 +70,44 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.option_menu, menu);
+        getMenuInflater().inflate(R.menu.option_menu_add_to_cart, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mn_cart:
-                Intent i_ToCart = new Intent(ProductDetailActivity.this, CartActivity.class);
-                startActivity(i_ToCart);
+            case R.id.mn_Check:
+                addToCart();
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addToCart() {
+        if (MainPageActivity.carts.size() > 0) {
+            boolean exist = false; //biến xác định sản phẩm đã tồn tại trong giỏ hàng hay chưa
+            for (int i = 0; i < MainPageActivity.carts.size(); i++) {
+                //kiểm tra sản phẩm có tồn tại trong giỏ hàng
+                if (MainPageActivity.carts.get(i).getName().equals(model.getName())) {
+                    MainPageActivity.carts.get(i).setQuantity(MainPageActivity.carts.get(i).getQuantity() + 1);
+                    //kiểm tra số lượng đã đạt tối đa chưa, nếu tối đa giữ nguyên số lượng, ngược lại tăng số lượng tương ứng
+                    if (MainPageActivity.carts.get(i).getQuantity() >= model.getQuantity()) {
+                        MainPageActivity.carts.get(i).setQuantity(model.getQuantity());
+                    }
+                    //tính lại thành tiền cho sản phẩm vừa tăng số lượng
+                    MainPageActivity.carts.get(i).setTotal(model.getPrice() * MainPageActivity.carts.get(i).getQuantity());
+                    exist = true;
+                }
+            }
+            //nếu sản phẩm chưa tồn tại trong giỏ hàng, thêm sản phẩm vào giỏ hàng
+            if (!exist) {
+                MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),model.getPrice(),model.getImage(),1,model.getQuantity(), model.getSold()));
+            }
+        } else { //nếu giỏ hàng rỗng thêm mẫu sản phẩm vào giỏ hàng
+            MainPageActivity.carts.add(new Cart(model.getName(),model.getPrice(),model.getPrice(),model.getImage(),1,model.getQuantity(), model.getSold()));
+        }
+        Toast.makeText(ProductDetailActivity.this, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
     }
 
     /**

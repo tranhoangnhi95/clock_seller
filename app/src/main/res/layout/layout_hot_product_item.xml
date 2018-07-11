@@ -82,8 +82,8 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginLeft="5dp"
                             android:background="@drawable/radius_button_selector"
-                            android:scaleType="fitCenter"
-                            android:src="@drawable/icon_add" />
+                            android:scaleType="center"
+                            android:src="@drawable/add_shopping_cart_24dp" />
                     </LinearLayout>
 
                     <LinearLayout

@@ -68,11 +68,12 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
 
     /**
      * Đăng kí người dùng bằng Email
-     * @param Name Tên người dùng
-     * @param Phone Số điện thoại
-     * @param Email Email
+     *
+     * @param Name    Tên người dùng
+     * @param Phone   Số điện thoại
+     * @param Email   Email
      * @param Address Địa chỉ
-     * @param Pass Mật khẩu
+     * @param Pass    Mật khẩu
      */
     public void signUpFragment(String Name, String Phone, String Email, String Address, String Pass) {
         this.suName = Name;
@@ -90,25 +91,20 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
                             User user1 = new User(suName, suPhone, suEmail, suAddress);
                             String mail = suEmail.replace("@", "");
                             mail = mail.replace(".", "");
-                            mDatabase.child("User").child(mail).setValue(user1, new DatabaseReference.CompletionListener() {
-                                @Override
-                                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                                    if (databaseError == null) {
-                                        SignUpFragment signUpFragment = (SignUpFragment) myFragmentAdapter.getItem(1);
-                                        signUpFragment.fragmentCommuniCation.PassingEmail(suEmail);
-                                        tlSliding.getTabAt(0).select();
-                                        Toast.makeText(SignInActivity.this, "Đăng ký thành công, vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(SignInActivity.this, "Đăng ký người dùng không thành công", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
+                            mDatabase.child("User").child(mail).setValue(user1);
+                            SignUpFragment signUpFragment = (SignUpFragment) myFragmentAdapter.getItem(1);
+                            signUpFragment.fragmentCommuniCation.PassingEmail(suEmail);
+                            signUpFragment.txtName.setText("");
+                            signUpFragment.txtPhone.setText("");
+                            signUpFragment.txtEmail.setText("");
+                            signUpFragment.txtAddress.setText("");
+                            signUpFragment.txtPass.setText("");
+                            tlSliding.getTabAt(0).select();
+                            Toast.makeText(SignInActivity.this, "Đăng ký thành công, vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
                         } else {
                             // If sign in fails, display a message to the user.
-
                             Toast.makeText(SignInActivity.this, "Email đã trùng, vui lòng nhập email khác", Toast.LENGTH_SHORT).show();
                         }
-
                         // ...
                     }
                 });
@@ -116,8 +112,9 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
 
     /**
      * Đăng nhập vào ứng dụng bằng Email và mật khẩu
+     *
      * @param Email email
-     * @param Pass Mật khẩu
+     * @param Pass  Mật khẩu
      */
     public void signInFragment(String Email, String Pass) {
         this.siEmail = Email;
@@ -152,7 +149,7 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Toast.makeText(SignInActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignInActivity.this, "Email hoặc mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -181,6 +178,7 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
 
     /**
      * Thực hiện các khởi tạo cơ bản và chuyển màn hình khi người dùng trước đó tồn tại
+     *
      * @param user1
      */
     private void updateUI(FirebaseUser user1) {
@@ -205,6 +203,7 @@ public class SignInActivity extends AppCompatActivity implements SignUpFragment.
 
     /**
      * Hàm truyền email
+     *
      * @param Email chuỗi email
      */
     @Override

@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/empty_cart"
-                android:textSize="20sp" />
+                android:textSize="@dimen/annouce_text_size" />
 
             <ListView
                 android:id="@+id/lv_CCart"
@@ -39,7 +39,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/cart_layout_margin"
         android:layout_weight="1"
         android:orientation="horizontal"
         android:weightSum="10">
@@ -51,7 +51,7 @@
             android:gravity="center"
             android:text="@string/total_cart"
             android:textColor="@color/my_Black"
-            android:textSize="20sp" />
+            android:textSize="@dimen/annouce_text_size" />
 
         <TextView
             android:id="@+id/txt_CTotal"
@@ -61,7 +61,7 @@
             android:gravity="right|center"
             android:text="0"
             android:textColor="@color/my_secondary"
-            android:textSize="20sp"
+            android:textSize="@dimen/annouce_text_size"
             android:textStyle="bold" />
 
         <TextView
@@ -69,10 +69,10 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:gravity="left|center"
-            android:paddingLeft="5dp"
+            android:paddingLeft="@dimen/cart_padding_left"
             android:text="@string/currency"
             android:textColor="@color/my_secondary"
-            android:textSize="20sp"
+            android:textSize="@dimen/annouce_text_size"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -81,19 +81,21 @@
         android:id="@+id/btn_CPay"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/cart_layout_margin"
         android:layout_weight="1"
         android:background="@drawable/blue_radius_buttton_selector"
         android:text="@string/pay"
-        android:textColor="@color/my_white" />
+        android:textColor="@color/my_white"
+        android:textSize="@dimen/annouce_text_size" />
 
     <Button
         android:id="@+id/btn_CContinue"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/cart_layout_margin"
         android:layout_weight="1"
         android:background="@drawable/blue_radius_buttton_selector"
         android:text="@string/continue_cart"
-        android:textColor="@color/my_white" />
+        android:textColor="@color/my_white"
+        android:textSize="@dimen/annouce_text_size" />
 </LinearLayout>

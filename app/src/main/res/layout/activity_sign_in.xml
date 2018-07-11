@@ -10,8 +10,8 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="10dp"
+        android:layout_height="@dimen/signin_image_height"
+        android:layout_margin="@dimen/signin_layout_margin"
         android:scaleType="fitCenter"
         android:src="@drawable/logo1" />
 
@@ -19,8 +19,8 @@
         android:id="@+id/tl_SISliding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="@dimen/signin_tab_margin_left"
+        android:layout_marginRight="@dimen/signin_tab_margin_right"
         android:background="@color/my_secondary"
         app:tabIndicatorColor="@color/my_white"
         app:tabMode="fixed"
@@ -31,8 +31,8 @@
         android:id="@+id/vp_SIViewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginLeft="@dimen/signin_tab_margin_left"
+        android:layout_marginRight="@dimen/signin_tab_margin_right">
 
     </android.support.v4.view.ViewPager>
 

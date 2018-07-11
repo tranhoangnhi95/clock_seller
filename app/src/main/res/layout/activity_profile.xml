@@ -13,74 +13,52 @@
         layout="@layout/layout_toolbar"></include>
 
     <LinearLayout
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/profile_layout_margin"
         android:layout_weight="7"
+        android:gravity="center"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/small_horizontal_line_height"
             android:background="@color/line" />
 
         <TextView
             android:id="@+id/txt_PfName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/person_red_24dp"
-            android:drawablePadding="30dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/line" />
-        <TextView
-            android:id="@+id/txt_PfPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/phone_red_24dp"
-            android:drawablePadding="30dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp" />
+            style="@style/textview_information"
+            android:drawableLeft="@drawable/person_red_24dp" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/small_horizontal_line_height"
+            android:background="@color/line" />
+
+        <TextView
+            android:id="@+id/txt_PfPhone"
+            style="@style/textview_information"
+            android:drawableLeft="@drawable/phone_red_24dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/small_horizontal_line_height"
             android:background="@color/line" />
 
         <TextView
             android:id="@+id/txt_PfEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/mail_red_24dp"
-            android:drawablePadding="30dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp" />
+            style="@style/textview_information"
+            android:drawableLeft="@drawable/mail_red_24dp" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="@dimen/small_horizontal_line_height"
             android:background="@color/line" />
 
         <TextView
             android:id="@+id/txt_PfAdrress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:drawableLeft="@drawable/location_red_24dp"
-            android:drawablePadding="30dp"
-            android:gravity="center_vertical"
-            android:textSize="20sp" />
+            style="@style/textview_information"
+            android:drawableLeft="@drawable/location_red_24dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -89,13 +67,12 @@
 
         <Button
             android:id="@+id/btn_PfUpdate"
-            android:textColor="@color/my_white"
-            android:text="@string/update"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/blue_radius_buttton_selector"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/profile_layout_margin_top"
+            android:background="@drawable/blue_radius_buttton_selector"
+            android:text="@string/update"
+            android:textColor="@color/my_white"
+            android:textSize="@dimen/annouce_text_size" />
     </LinearLayout>
-
-
 </LinearLayout>

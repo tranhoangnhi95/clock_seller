@@ -129,6 +129,7 @@ public class HotProductAdapter extends RecyclerView.Adapter<HotProductAdapter.It
                     MainPageActivity.carts.add(new Cart(model1.getName(), model1.getPrice(), (int) total, model1.getImage(), quantity, model1.getQuantity(), model.getSold()));
                 }
                 Toast.makeText(context, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                holder1.btnQuantity.setText("1");
             }
 
             /**

@@ -6,7 +6,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/small_horizontal_line_height"
         android:background="@color/line" />
 
     <LinearLayout
@@ -17,14 +17,14 @@
 
         <ImageView
             android:id="@+id/img_HIImage"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="2dp"
+            android:layout_width="@dimen/history_item_image_width"
+            android:layout_height="@dimen/history_item_image_height"
+            android:layout_margin="@dimen/history_item_image_margin"
             android:adjustViewBounds="true"
             android:src="@drawable/democlock" />
 
         <TextView
-            android:layout_width="1dp"
+            android:layout_width="@dimen/small_vertical_line_width"
             android:layout_height="match_parent"
             android:background="@color/line" />
 
@@ -38,20 +38,20 @@
                 android:id="@+id/txt_HIProductName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/history_item_textview_margin"
                 android:gravity="left"
                 android:textColor="@color/my_Black"
-                android:textSize="20sp"
+                android:textSize="@dimen/annouce_text_size"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txt_HIPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/history_item_textview_margin"
                 android:gravity="left"
                 android:textColor="@color/my_secondary_dark"
-                android:textSize="20sp"
+                android:textSize="@dimen/annouce_text_size"
                 android:textStyle="bold" />
 
             <TextView
@@ -59,13 +59,13 @@
                 android:id="@+id/txt_HITotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/history_item_textview_margin"
                 android:gravity="left"
                 android:textColor="@color/my_secondary_dark"
-                android:textSize="20sp" />
+                android:textSize="@dimen/annouce_text_size" />
 
             <LinearLayout
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/history_layout_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -78,7 +78,7 @@
                     android:gravity="left"
                     android:text="@string/quantity_history"
                     android:textColor="@color/my_Black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/annouce_text_size" />
 
                 <TextView
                     android:id="@+id/txt_HIQuantity"
@@ -89,7 +89,7 @@
                     android:gravity="left"
                     android:text="@string/one"
                     android:textColor="@color/my_Black"
-                    android:textSize="20sp" />
+                    android:textSize="@dimen/annouce_text_size" />
             </LinearLayout>
 
 

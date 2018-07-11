@@ -19,9 +19,9 @@
         <ImageView
             android:scaleType="fitCenter"
             android:id="@+id/img_DtImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_margin="10dp"
+            android:layout_width="@dimen/detail_image_width"
+            android:layout_height="@dimen/detail_image_height"
+            android:layout_margin="@dimen/detai_image_layout_margin"
             android:adjustViewBounds="true" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,18 +32,18 @@
                 android:id="@+id/txt_DtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/detail_textview_layout_margin"
                 android:textColor="@color/my_Black"
-                android:textSize="20sp"
+                android:textSize="@dimen/annouce_text_size"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txt_DtPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_margin="@dimen/detail_textview_layout_margin"
                 android:textColor="@color/my_primary"
-                android:textSize="20sp"
+                android:textSize="@dimen/annouce_text_size"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -51,13 +51,13 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="5dp"
+        android:layout_height="@dimen/detail_line_height"
         android:background="@color/my_secondary_light" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/detail_layout_margin"
         android:orientation="vertical">
 
         <TextView
@@ -66,7 +66,7 @@
             android:layout_gravity="center"
             android:text="@string/product_detail"
             android:textColor="@color/my_primary"
-            android:textSize="30sp" />
+            android:textSize="@dimen/detail_title_text_size" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -77,8 +77,8 @@
                 android:id="@+id/txt_DtDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:textSize="20sp" />
+                android:layout_margin="@dimen/detail_textview_layout_margin"
+                android:textSize="@dimen/annouce_text_size" />
         </ScrollView>
     </LinearLayout>
 </LinearLayout>

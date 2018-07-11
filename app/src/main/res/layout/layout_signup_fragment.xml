@@ -30,6 +30,7 @@
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/name"
+                    android:inputType="textPersonName"
                     android:textColor="@color/my_white"
                     android:textColorHint="@color/my_white" />
             </android.support.design.widget.TextInputLayout>
@@ -84,6 +85,7 @@
                     android:drawablePadding="5dp"
                     android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/address"
+                    android:inputType="text"
                     android:textColor="@color/my_white"
                     android:textColorHint="@color/my_white" />
             </android.support.design.widget.TextInputLayout>

@@ -1,12 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="progressbar_margin_bot">140dp</dimen>
-    <dimen name="progressbar_width">30dp</dimen>
-    <dimen name="progressbar_height">30dp</dimen>
     <dimen name="radius_button_corner">10dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="small_horizontal_line_height">1dp</dimen>
+    <dimen name="small_vertical_line_width">1dp</dimen>
+
+    //annouce
+    <dimen name="annouce_text_size">20sp</dimen>
+    //cart
+    <dimen name="cart_layout_margin">5dp</dimen>
+    <dimen name="cart_padding_left">5dp</dimen>
+    <dimen name="cart_item_layout_margin">1dp</dimen>
+    <dimen name="cart_item_layout_margin_left">10dp</dimen>
+    <dimen name="cart_item_layout_margin_right">30dp</dimen>
+    <dimen name="cart_item_image_margin">2dp</dimen>
+    <dimen name="cart_item_image_height">100dp</dimen>
+    <dimen name="cart_item_textview_margin">5dp</dimen>
+    <dimen name="cart_item_button_text_size">30sp</dimen>
+    //history
+    <dimen name="history_layout_margin">5dp</dimen>
+    <dimen name="history_item_image_width">100dp</dimen>
+    <dimen name="history_item_image_height">100dp</dimen>
+    <dimen name="history_item_image_margin">2dp</dimen>
+    <dimen name="history_item_textview_margin">5dp</dimen>
+    //loading
+    <dimen name="progressbar_margin_bot">140dp</dimen>
+    <dimen name="progressbar_size">40dp</dimen>
+    //Main
+    <dimen name="view_flipper_height">200dp</dimen>
+    <dimen name="text_view_margin_top">10dp</dimen>
+    <dimen name="text_view_margin_bottom">10dp</dimen>
+    //catalogy
+    <dimen name="catalogy_title_text_size">30sp</dimen>
+    <dimen name="catalogy_title_margin_top">10dp</dimen>
+    <dimen name="catalogy_listview_margin_top">50dp</dimen>
+    //detail
+    <dimen name="detail_image_width">150dp</dimen>
+    <dimen name="detail_image_height">150dp</dimen>
+    <dimen name="detai_image_layout_margin">10dp</dimen>
+    <dimen name="detail_textview_layout_margin">5dp</dimen>
+    <dimen name="detail_line_height">5dp</dimen>
+    <dimen name="detail_layout_margin">10dp</dimen>
+    <dimen name="detail_title_text_size">30sp</dimen>
+    //profile
+    <dimen name="profile_layout_margin">10dp</dimen>
+    <dimen name="profile_layout_margin_top">5dp</dimen>
+    <dimen name="profile_textview_margin_top">10dp</dimen>
+    <dimen name="profile_textview_margin_bottom">10dp</dimen>
+    <dimen name="profile_drawable_padding">30dp</dimen>
+    //SignIn
+    <dimen name="signin_image_height">150dp</dimen>
+    <dimen name="signin_layout_margin">10dp</dimen>
+    <dimen name="signin_tab_margin_left">10dp</dimen>
+    <dimen name="signin_tab_margin_right">10dp</dimen>
+    //hot product
 </resources>

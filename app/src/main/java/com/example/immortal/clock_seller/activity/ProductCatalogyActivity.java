@@ -116,7 +116,7 @@ public class ProductCatalogyActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.mn_cart:
+            case R.id.mn_Cart:
                 Intent i_ToCart = new Intent(ProductCatalogyActivity.this, CartActivity.class);
                 startActivity(i_ToCart);
                 break;
