@@ -55,19 +55,19 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:textStyle="bold|italic"
                 android:id="@+id/txt_HITotal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/history_item_textview_margin"
                 android:gravity="left"
                 android:textColor="@color/my_secondary_dark"
-                android:textSize="@dimen/annouce_text_size" />
+                android:textSize="@dimen/annouce_text_size"
+                android:textStyle="bold|italic" />
 
             <LinearLayout
-                android:layout_margin="@dimen/history_layout_margin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/history_layout_margin"
                 android:orientation="horizontal"
                 android:weightSum="7">
 
@@ -94,10 +94,10 @@
 
 
             <TextView
-                android:layout_marginLeft="5dp"
                 android:id="@+id/txt_HIDateOfPay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:gravity="left"
                 android:textColor="@color/my_Black"
                 android:textSize="20sp" />

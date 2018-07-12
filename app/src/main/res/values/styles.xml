@@ -16,4 +16,11 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/annouce_text_size</item>
     </style>
+    <style name="textview_signup_information">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">@dimen/signin_drawable_padding</item>
+        <item name="android:textColor">@color/my_white</item>
+        <item name="android:textColorHint">@color/my_white</item>
+    </style>
 </resources>

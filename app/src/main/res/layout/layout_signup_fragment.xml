@@ -15,7 +15,7 @@
             android:layout_height="0dp"
             android:layout_weight="8"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="@dimen/signin_padding">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -24,15 +24,11 @@
 
                 <EditText
                     android:id="@+id/txt_SUName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/textview_signup_information"
                     android:drawableLeft="@drawable/person_24dp"
-                    android:drawablePadding="5dp"
                     android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/name"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/my_white"
-                    android:textColorHint="@color/my_white" />
+                    android:inputType="textPersonName" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -42,16 +38,12 @@
 
                 <EditText
                     android:id="@+id/txt_SUPhone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/textview_signup_information"
                     android:drawableLeft="@drawable/phone_24dp"
-                    android:drawablePadding="5dp"
                     android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/phone"
                     android:inputType="phone"
-                    android:maxLength="10"
-                    android:textColor="@color/my_white"
-                    android:textColorHint="@color/my_white" />
+                    android:maxLength="10" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -61,15 +53,11 @@
 
                 <EditText
                     android:id="@+id/txt_SUEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/textview_signup_information"
                     android:drawableLeft="@drawable/email_24dp"
-                    android:drawablePadding="5dp"
                     android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/hint_email"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/my_white"
-                    android:textColorHint="@color/my_white" />
+                    android:inputType="textEmailAddress" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -79,15 +67,11 @@
 
                 <EditText
                     android:id="@+id/txt_SUAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/textview_signup_information"
                     android:drawableLeft="@drawable/location24dp"
-                    android:drawablePadding="5dp"
                     android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/address"
-                    android:inputType="text"
-                    android:textColor="@color/my_white"
-                    android:textColorHint="@color/my_white" />
+                    android:inputType="text" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -97,15 +81,11 @@
 
                 <EditText
                     android:id="@+id/txt_SUPass"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/textview_signup_information"
                     android:drawableLeft="@drawable/lock_24dp"
-                    android:drawablePadding="5dp"
                     android:drawableRight="@drawable/visibility_off_24dp"
                     android:hint="@string/password"
-                    android:inputType="textPassword"
-                    android:textColor="@color/my_white"
-                    android:textColorHint="@color/my_white" />
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
             <Button
@@ -113,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="@dimen/signin_button_margin_bottom"
                 android:background="@drawable/radius_button_selector"
                 android:text="@string/sign_up"
                 android:textColor="@color/my_white" />

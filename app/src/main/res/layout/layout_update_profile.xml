@@ -8,30 +8,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/update_textview_title_margin_top"
         android:text="@string/information_update"
         android:textColor="@color/my_primary"
-        android:textSize="30sp" />
+        android:textSize="@dimen/update_textview_title_text_size" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="@dimen/update_padding">
 
         <com.wrapp.floatlabelededittext.FloatLabeledEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:inputType="text"
-                android:drawablePadding="5dp"
                 android:id="@+id/txt_UdName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/person_red_24dp"
+                android:drawablePadding="@dimen/update_drawable_padding"
                 android:hint="@string/name"
+                android:inputType="text"
                 android:textColor="@color/my_Black" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
 
@@ -40,13 +40,13 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:inputType="phone"
-                android:drawablePadding="5dp"
                 android:id="@+id/txt_UdPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/phone_red_24dp"
+                android:drawablePadding="@dimen/update_drawable_padding"
                 android:hint="@string/phone"
+                android:inputType="phone"
                 android:maxLength="10"
                 android:textColor="@color/my_Black" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
@@ -56,13 +56,13 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:inputType="text"
-                android:drawablePadding="5dp"
                 android:id="@+id/txt_UdAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/location_red_24dp"
+                android:drawablePadding="@dimen/update_drawable_padding"
                 android:hint="@string/address"
+                android:inputType="text"
                 android:textColor="@color/my_Black" />
         </com.wrapp.floatlabelededittext.FloatLabeledEditText>
     </LinearLayout>

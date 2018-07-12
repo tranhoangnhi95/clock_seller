@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:orientation="vertical"
-android:layout_width="match_parent"
-android:layout_height="match_parent">
-<TextView
     android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@color/line" />
-<LinearLayout
-    android:gravity="center"
-    android:layout_margin="3dp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:scaleType="fitCenter"
-        android:id="@+id/img_MIImage"
-        android:layout_width="60dp"
-        android:layout_height="60dp" />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <TextView
-        android:textColor="@color/my_Black"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:id="@+id/txt_MIName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="1dp"
-    android:background="@color/line" />
+        android:layout_height="1dp"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/menu_item_layout_margin"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_MIImage"
+            android:layout_width="@dimen/menu_item_image_button_width"
+            android:layout_height="@dimen/menu_item_image_button_height"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/txt_MIName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/menu_item_textview_padding_left"
+            android:paddingRight="@dimen/menu_item_textview_padding_right"
+            android:textColor="@color/my_Black"
+            android:textSize="@dimen/annouce_text_size"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line" />
 </LinearLayout>

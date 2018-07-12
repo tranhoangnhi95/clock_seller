@@ -7,15 +7,15 @@
     tools:context=".activity.LoadingActivity">
 
     <ImageView
-        android:background="@color/my_Black"
-        android:src="@raw/future"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="@color/my_Black"
+        android:src="@raw/future" />
 
     <ProgressBar
-        android:theme="@style/AppTheme"
+        android:layout_width="@dimen/progressbar_size"
+        android:layout_height="@dimen/progressbar_size"
         android:layout_gravity="bottom|center"
         android:layout_marginBottom="@dimen/progressbar_margin_bot"
-        android:layout_width="@dimen/progressbar_size"
-        android:layout_height="@dimen/progressbar_size" />
+        android:theme="@style/AppTheme" />
 </FrameLayout>

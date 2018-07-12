@@ -17,8 +17,8 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="@dimen/signin_textview_margin_left"
+                android:layout_marginRight="@dimen/signin_textview_margin_right"
                 android:textColorHint="@color/my_white">
 
                 <EditText
@@ -26,7 +26,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/email_24dp"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="@dimen/signin_drawable_padding"
                     android:drawableRight="@drawable/cancel_24dp"
                     android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
@@ -37,8 +37,8 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="@dimen/signin_textview_margin_left"
+                android:layout_marginRight="@dimen/signin_textview_margin_right"
                 android:textColorHint="@color/my_white">
 
                 <EditText
@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/lock_24dp"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="@dimen/signin_drawable_padding"
                     android:drawableRight="@drawable/visibility_off_24dp"
                     android:hint="@string/hint_pass_word"
                     android:inputType="textPassword"
@@ -58,9 +58,9 @@
                 android:id="@+id/btn_SISignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginLeft="@dimen/signin_button_margin_left"
+                android:layout_marginRight="@dimen/signin_button_margin_right"
+                android:layout_marginTop="@dimen/signin_button_margin_top"
                 android:background="@drawable/radius_button_selector"
                 android:text="@string/sign_in"
                 android:textAllCaps="false"

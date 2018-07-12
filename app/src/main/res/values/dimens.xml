@@ -57,5 +57,49 @@
     <dimen name="signin_layout_margin">10dp</dimen>
     <dimen name="signin_tab_margin_left">10dp</dimen>
     <dimen name="signin_tab_margin_right">10dp</dimen>
+    <dimen name="signin_textview_margin_left">20dp</dimen>
+    <dimen name="signin_textview_margin_right">20dp</dimen>
+    <dimen name="signin_button_margin_top">20dp</dimen>
+    <dimen name="signin_button_margin_left">20dp</dimen>
+    <dimen name="signin_button_margin_right">20dp</dimen>
+    <dimen name="signin_button_margin_bottom">5dp</dimen>
+    <dimen name="signin_drawable_padding">5dp</dimen>
+    <dimen name="signin_padding">10dp</dimen>
     //hot product
+    <dimen name="hot_product_layout_width">180dp</dimen>
+    <dimen name="hot_product_layout_margin">2dp</dimen>
+    <dimen name="hot_product_layout_margin_top">5dp</dimen>
+    <dimen name="hot_product_layout_margin_bottom">5dp</dimen>
+    <dimen name="hot_product_layout_margin_left">5dp</dimen>
+    <dimen name="hot_product_layout_margin_right">5dp</dimen>
+    <dimen name="hot_product_layout_radius">5dp</dimen>
+    <dimen name="hot_product_image_width">100dp</dimen>
+    <dimen name="hot_product_image_height">100dp</dimen>
+    <dimen name="hot_product_detail_text_size">15sp</dimen>
+    <dimen name="hot_product_image_button_width">40dp</dimen>
+    <dimen name="hot_product_image_button_height">40dp</dimen>
+    //menu
+    <dimen name="menu_item_layout_margin">3dp</dimen>
+    <dimen name="menu_item_image_button_width">60dp</dimen>
+    <dimen name="menu_item_image_button_height">60dp</dimen>
+    <dimen name="menu_item_textview_padding_left">10dp</dimen>
+    <dimen name="menu_item_textview_padding_right">10dp</dimen>
+    //product
+    <dimen name="product_layout_margin">1dp</dimen>
+    <dimen name="product_layout_radius">5dp</dimen>
+    <dimen name="product_image_width">100dp</dimen>
+    <dimen name="product_image_height">100dp</dimen>
+    <dimen name="product_image_layout_margin">2dp</dimen>
+    <dimen name="product_textview_layout_margin">5dp</dimen>
+    <dimen name="product_detail_text_size">15sp</dimen>
+    <dimen name="product_image_button_layout_margin">5dp</dimen>
+    <dimen name="product_image_button_layout_margin_right">5dp</dimen>
+    <dimen name="product_image_button_width">40dp</dimen>
+    <dimen name="product_image_button_height">40dp</dimen>
+    <dimen name="product_image_button_text_size">30sp</dimen>
+    //update
+    <dimen name="update_textview_title_margin_top">10dp</dimen>
+    <dimen name="update_textview_title_text_size">30sp</dimen>
+    <dimen name="update_padding">10dp</dimen>
+    <dimen name="update_drawable_padding">5dp</dimen>
 </resources>
